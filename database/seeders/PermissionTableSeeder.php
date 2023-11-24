@@ -29,37 +29,110 @@ class PermissionTableSeeder extends Seeder
            'permission-create',
            'permission-edit',
            'permission-delete',
-           'journalcategory-list',
-           'journalcategory-create',
-           'journalcategory-edit',
-           'journalcategory-delete',
-           'journalvolume-list',
-           'journalvolume-create',
-           'journalvolume-edit',
-           'journalvolume-delete',
-           'journalyear-list',
-           'journalyear-create',
-           'journalyear-edit',
-           'journalyear-delete',
-           'author-list',
-           'author-create',
-           'author-edit',
-           'author-delete',
-           'myjournals-list',
-           'myjournals-create',
-           'myjournals-edit',
-           'myjournals-delete',
+
 
            'dashboard-list',
            'usermanagement-link',
            'staffmanagement-link',
-           'academicmanagement-link',
-           'nonacademicmanagement-link',
-           'leavemanagement-link',
-           'appraisalmanagement-link',
-           'journalmanagement-link',
            'basicsettingsmanagement-link',
            'apps-link',
+
+           'class_operation-list',
+           'class_operation-create',
+           'class_operation-edit',
+           'class_operation-delete',
+
+           'myclass-list',
+           'mysubject-list',
+
+           'class_teacher-list',
+           'class_teacher-create',
+           'class_teacher-edit',
+           'class_teacher-delete',
+
+           'myresultroom-list',
+           'myresultroom-creat',
+           'myresultroom-edit',
+           'myresultroom-delete',
+
+           'parent-list',
+           'parent-create',
+           'parent-edit',
+           'parent-delete',
+
+           'school_arm-list',
+           'school_arm-create',
+           'school-arm-edit',
+           'school_arm-delete',
+
+           'school_class-list',
+           'school_class-create',
+           'school_class-edit',
+           'school_class-delete',
+
+           'session-list',
+           'session-create',
+           'session-edit',
+           'session-delete',
+
+           'term-list',
+           'term-create',
+           'term-edit',
+           'term-delete',
+
+           'staff-list',
+           'staff-create',
+           'staff-edit',
+           'staff-delete',
+
+           'student-list',
+           'student-create',
+           'student-edit',
+           'student-delete',
+           'student_edit-edit',
+           'student_delete-delete',
+
+           'studentresults-list',
+
+           'subject_class-list',
+           'subject_class-create',
+           'subject_class-edit',
+           'subject_class-delete',
+
+           'subject_operation-list',
+           'subject_operation-create',
+           'subject_operation-edit',
+           'subject_operation-delete',
+
+           'subject-list',
+           'subject-create',
+           'subject-edit',
+           'subject-delete',
+
+           'subject_teacher-list',
+           'subject_teacher-assign',
+           'subject_teachcer-edit',
+           'subject_teacher-delete',
+
+           'view_student-list',
+
+           'academic_operations-list',
+
+           'student_picture-upload',
+
+           'schoolhouse-list',
+           'schoolhouse-create',
+           'schoolhouse-edit',
+           'schoolhouse-delete',
+
+           'classcategory-list',
+           'classcategory-create',
+           'classcategory-edit',
+           'classcategory-delete',
+
+           'studenthouse-create',
+           'classsettings-create',
+           'classsettings-delete',
 
         ];
 
@@ -81,46 +154,75 @@ class PermissionTableSeeder extends Seeder
                 if($word == "dashboard")
                 Permission::create(['name' => $permission,'title'=>"Dashboard Pages"]);
 
-                if($word == "journalcategory")
-                Permission::create(['name' => $permission,'title'=>"Journal Category Management"]);
+                if($word == "class_operation")
+                Permission::create(['name' => $permission,'title'=>"Class Operation Management"]);
 
 
-                if($word == "author")
-                Permission::create(['name' => $permission,'title'=>"Author Management"]);
+                if($word == "myclass")
+                Permission::create(['name' => $permission,'title'=>"User Class Management"]);
 
-                if($word == "journalvolume")
-                Permission::create(['name' => $permission,'title'=>"Journal Volume Management"]);
+                if($word == "mysubject")
+                Permission::create(['name' => $permission,'title'=>"User Subject Management"]);
 
-                if($word == "journalyear")
-                Permission::create(['name' => $permission,'title'=>"Journal Year Management"]);
+                if($word == "class_teacher")
+                Permission::create(['name' => $permission,'title'=>"Class Teacher Management"]);
 
-                if($word == "myjournals")
-                Permission::create(['name' => $permission,'title'=>"User Journals Management"]);
+                if($word == "myresultroom")
+                Permission::create(['name' => $permission,'title'=>"User Result Room Management"]);
 
-                if($word == "usermanagement")
-                Permission::create(['name' => $permission,'title'=>"User Management Link"]);
+                if($word == "parent")
+                Permission::create(['name' => $permission,'title'=>"Parent Management"]);
 
-                if($word == "staffmanagement")
-                Permission::create(['name' => $permission,'title'=>"Staff Management Link"]);
+                if($word == "school_arm")
+                Permission::create(['name' => $permission,'title'=>"School Arm Management"]);
 
-                if($word == "academicmanagement")
-                Permission::create(['name' => $permission,'title'=>"Academic Management Link"]);
+                if($word == "school_class")
+                Permission::create(['name' => $permission,'title'=>"School ClassManagement"]);
 
-                if($word == "nonacademicmanagement")
-                Permission::create(['name' => $permission,'title'=>"Non academic Management Link"]);
+                if($word == "session")
+                Permission::create(['name' => $permission,'title'=>"School Session Management"]);
 
-                if($word == "leavemanagement")
-                Permission::create(['name' => $permission,'title'=>"Leave Management Link"]);
+                if($word == "term")
+                Permission::create(['name' => $permission,'title'=>"School Term Management "]);
 
-                if($word == "appraisalmanagement")
-                Permission::create(['name' => $permission,'title'=>"Appraisal Management Link"]);
+                if($word == "student")
+                Permission::create(['name' => $permission,'title'=>"Student Management"]);
 
-                if($word == "journalmanagement")
-                Permission::create(['name' => $permission,'title'=>"Journal Management Link"]);
+                if($word == "studentresults")
+                Permission::create(['name' => $permission,'title'=>"Student Results Management"]);
 
-                if($word == "basicsettingsmanagement")
+                if($word == "subject_class")
+                Permission::create(['name' => $permission,'title'=>"Subject Class Management"]);
+
+                if($word == "subject_operation")
+                Permission::create(['name' => $permission,'title'=>"Subject Operations Management"]);
+
+                if($word == "subject")
+                Permission::create(['name' => $permission,'title'=>"Subject Management"]);
+
+                if($word == "subject_teacher")
+                Permission::create(['name' => $permission,'title'=>"Subject Teacher Management"]);
+
+                if($word == "view_student")
+                Permission::create(['name' => $permission,'title'=>"View Student Management "]);
+
+                if($word == "academic_operations")
                 Permission::create(['name' => $permission,'title'=>"Basic Settings Management Link"]);
 
+                if($word == "student_picture")
+                Permission::create(['name' => $permission,'title'=>"Student Picture Management"]);
+
+                if($word == "schoolhouse")
+                Permission::create(['name' => $permission,'title'=>"School House Management"]);
+
+                if($word == "classcategory")
+                Permission::create(['name' => $permission,'title'=>"Class Category Management"]);
+
+                if($word == "studenthouse")
+                Permission::create(['name' => $permission,'title'=>"Student house Management"]);
+
+                if($word == "classsettings")
+                Permission::create(['name' => $permission,'title'=>"Class Settings Management "]);
 
             }
             //  Permission::create(['name' => $permission]);

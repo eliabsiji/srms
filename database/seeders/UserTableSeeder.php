@@ -44,13 +44,13 @@ class UserTableSeeder extends Seeder
 
         // $role = Role::find(1);
         $role = Role::create(['name' => 'Admin','badge'=>'badge badge-light']);
-        $role2 = Role::create(['name' => 'Author','badge'=>'badge badge-primary']);
+        // $role2 = Role::create(['name' => 'Author','badge'=>'badge badge-primary']);
         $permissions = Permission::pluck('id', 'id')->all();
         $role->syncPermissions($permissions);
         $user->assignRole([$role->id]);
 
-        $role2->syncPermissions($permissions);
-        $user->assignRole([$role2->id]);
+        // $role2->syncPermissions($permissions);
+        // $user->assignRole([$role2->id]);
 
     }
 }
