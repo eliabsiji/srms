@@ -35,10 +35,10 @@
              <?php echo $__env->make('layouts.pages-assets.css.permission-list-css', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
         <?php endif; ?>
 
-        <?php if(Route::is('journalcategory.*')): ?>
+        <?php if(Route::is('session.*')): ?>
            <?php echo $__env->make('layouts.pages-assets.css.users-list-css', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
        <?php endif; ?>
-       <?php if(Route::is('journalvolume.*')): ?>
+       <?php if(Route::is('term.*')): ?>
            <?php echo $__env->make('layouts.pages-assets.css.users-list-css', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
        <?php endif; ?>
        <?php if(Route::is('journalyear.*')): ?>
@@ -221,11 +221,11 @@
              <?php echo $__env->make('layouts.pages-assets.js.permissions-list-js', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
         <?php endif; ?>
 
-        <?php if(Route::is('journalcategory.*')): ?>
+        <?php if(Route::is('session.*')): ?>
              <?php echo $__env->make('layouts.pages-assets.js.journalcategory-list-js', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
         <?php endif; ?>
 
-        <?php if(Route::is('journalvolume.*')): ?>
+        <?php if(Route::is('term.*')): ?>
              <?php echo $__env->make('layouts.pages-assets.js.journalvolume-list-js', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
         <?php endif; ?>
         <?php if(Route::is('journalyear.*')): ?>

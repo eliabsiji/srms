@@ -35,10 +35,10 @@
              @include('layouts.pages-assets.css.permission-list-css')
         @endif
 
-        @if (Route::is('journalcategory.*'))
+        @if (Route::is('session.*'))
            @include('layouts.pages-assets.css.users-list-css')
        @endif
-       @if (Route::is('journalvolume.*'))
+       @if (Route::is('term.*'))
            @include('layouts.pages-assets.css.users-list-css')
        @endif
        @if (Route::is('journalyear.*'))
@@ -221,11 +221,11 @@
              @include('layouts.pages-assets.js.permissions-list-js')
         @endif
 
-        @if (Route::is('journalcategory.*'))
+        @if (Route::is('session.*'))
              @include('layouts.pages-assets.js.journalcategory-list-js')
         @endif
 
-        @if (Route::is('journalvolume.*'))
+        @if (Route::is('term.*'))
              @include('layouts.pages-assets.js.journalvolume-list-js')
         @endif
         @if (Route::is('journalyear.*'))
