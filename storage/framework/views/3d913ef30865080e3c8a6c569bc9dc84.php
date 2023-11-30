@@ -1,222 +1,411 @@
-
 <?php $__env->startSection('content'); ?>
+<?php
+use Spatie\Permission\Models\Permission;
+use App\Models\User;
+use Spatie\Permission\Models\Role;
+?>
+            <!--begin::Main-->
+            <div class="app-main flex-column flex-row-fluid" id="kt_app_main">
+                <!--begin::Content wrapper-->
+                <div class="d-flex flex-column flex-column-fluid">
 
-     <!-- Start Page title and tab -->
-     <div class="section-body">
-        <div class="container-fluid">
-            <div class="d-flex justify-content-between align-items-center ">
-                <div class="header-action">
-                    <h1 class="page-title">School</h1>
-                    <ol class="breadcrumb page-breadcrumb">
-                        <li class="breadcrumb-item"><a href="#">Session</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Session</li>
-                    </ol>
-                </div>
-                <ul class="nav nav-tabs page-header-tab">
-                    <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('session-list')): ?>
-                        <li class="nav-item"><a class="nav-link " data-toggle="tab" href="#session">List View</a></li>
-                    <?php endif; ?>
+                <!--begin::Toolbar-->
+                <div id="kt_app_toolbar" class="app-toolbar  py-3 py-lg-6 ">
 
-                    <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('add-session')): ?>
-                    <li class="nav-item"><a class="nav-link" id="Library-tab-Boot" data-toggle="tab" href="#session-add"></a></li>
-                    <?php endif; ?>
-                    <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('session-list')): ?>
-                    <li class="nav-item"><a class="nav-link " data-toggle="tab" href="#session"></a></li>
-                <?php endif; ?>
+                            <!--begin::Toolbar container-->
+                        <div id="kt_app_toolbar_container" class="app-container  container-xxl d-flex flex-stack ">
 
-                <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('add-session')): ?>
-                <li class="nav-item"><a class="nav-link" id="Library-tab-Boot" data-toggle="tab" href="#session-add">Add Session </a></li>
-                <?php endif; ?>
-                <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('session-list')): ?>
-                <li class="nav-item"><a class="nav-link " data-toggle="tab" href="#session"></a></li>
-            <?php endif; ?>
+                            <!--begin::Page title-->
+                            <div  class="page-title d-flex flex-column justify-content-center flex-wrap me-3 ">
+                                <!--begin::Title-->
+                                <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">
+                                School Session and Term
+                                        </h1>
+                                <!--end::Title-->
 
-            <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('add-session')): ?>
-            <li class="nav-item"><a class="nav-link" id="Library-tab-Boot" data-toggle="tab" href="#session-add"></a></li>
-            <?php endif; ?>
+
+                                    <!--begin::Breadcrumb-->
+                                    <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
+                                                        <!--begin::Item-->
+                                                        <li class="breadcrumb-item text-muted">
+                                                            <a href="<?php echo e(route('session.index')); ?>" class="text-muted text-hover-primary">School Session </a>
+                                                                        </li>
+                                                            <!--end::Item-->
+                                                                <!--begin::Item-->
+                                                <li class="breadcrumb-item">
+                                                    <span class="bullet bg-gray-400 w-5px h-2px"></span>
+                                                </li>
+                                                <!--end::Item-->
+
+                                                        <!--begin::Item-->
+                                                                <li class="breadcrumb-item text-muted">Session</li>
+                                                            <!--end::Item-->
+
+                                                </ul>
+                                    <!--end::Breadcrumb-->
+                                </div>
+                            <!--end::Page title-->
+                                <?php if($errors->any()): ?>
+                                <div class="alert alert-danger">
+                                    <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                                    <ul>
+                                        <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            <li><?php echo e($error); ?></li>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                    </ul>
+                                </div>
+                                <?php endif; ?>
+
+                                <?php if(\Session::has('status')): ?>
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <?php echo e(\Session::get('status')); ?>
+
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                                <?php endif; ?>
+                                <?php if(\Session::has('success')): ?>
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <?php echo e(\Session::get('success')); ?>
+
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                                <?php endif; ?>
+
+                            </div>
+                            <!--end::Toolbar container-->
+                        </div>
+                    <!--end::Toolbar-->
+
+
+                    <div id="kt_app_content" class="app-content  flex-column-fluid " >
+                        <!--begin::Content container-->
+                        <div id="kt_app_content_container" class="app-container  container-xxl ">
+
+                   <!--begin::Toolbar-->
+                        <div class="d-flex flex-wrap flex-stack my-5">
+                            <!--begin::Heading-->
+                            <h2 class="fs-2 fw-semibold my-2">
+                                Session
+                                <span class="fs-6 text-gray-400 ms-1">Database</span>
+                            </h2>
+                            <!--end::Heading-->
+
+
+                        </div>
+                    <!--end::Toolbar-->
+
+
+
+        <!--begin::Card-->
+    <div class="card">
+            <!--begin::Card header-->
+            <div class="card-header border-0 pt-6">
+
+                  <!--begin::Card toolbar-->
+                    <div class="card-toolbar">
+                              <!--begin::Toolbar-->
+                                    <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
+                                        <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('session-create')): ?>
+                                                <!--begin::Add user-->
+                                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
+                                                    <i class="ki-duotone ki-plus fs-2"></i>        Create New Session
+                                                </button>
+                                                <!--end::Add user-->
+                                        <?php endif; ?>
+                                    </div>
+
+                                     <!--begin::Modal - Add task-->
+                                        <div class="modal fade" id="kt_modal_add_user" tabindex="-1" aria-hidden="true">
+                                            <!--begin::Modal dialog-->
+                                            <div class="modal-dialog modal-dialog-centered mw-650px">
+                                                <!--begin::Modal content-->
+                                                <div class="modal-content">
+                                                    <!--begin::Modal header-->
+                                                    <div class="modal-header" id="kt_modal_add_user_header">
+                                                        <!--begin::Modal title-->
+                                                        <h2 class="fw-bold">Create New Session</h2>
+                                                        <!--end::Modal title-->
+
+                                                        <!--begin::Close-->
+                                                        <div class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-users-modal-action="close">
+                                                            <i class="ki-duotone ki-cross fs-1"><span class="path1"></span><span class="path2"></span></i>                </div>
+                                                        <!--end::Close-->
+                                                    </div>
+                                                    <!--end::Modal header-->
+
+
+                                                    <!--begin::Modal body-->
+                                                    <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
+                                                        <!--begin::Form-->
+                                                        <form id="kt_modal_add_user_form" class="form" action="<?php echo e(route('session.store')); ?>" method="POST">
+                                                            <?php echo csrf_field(); ?>
+                                                            <!--begin::Scroll-->
+                                                            <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_add_user_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_user_header" data-kt-scroll-wrappers="#kt_modal_add_user_scroll" data-kt-scroll-offset="300px">
+
+
+                                                                <!--begin::Input group-->
+                                                                <div class="fv-row mb-7">
+                                                                    <!--begin::Label-->
+                                                                    <label class="required fw-semibold fs-6 mb-2">Session Name</label>
+                                                                    <!--end::Label-->
+
+                                                                    <!--begin::Input-->
+                                                                    <input type="text" name="session" id="session" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Session"  />
+                                                                    <!--end::Input-->
+                                                                </div>
+                                                                <!--end::Input group-->
+
+
+                                                                <!--begin::Input group-->
+                                                                <div class="mb-7">
+                                                                    <!--begin::Label-->
+                                                                    <label class="required fw-semibold fs-6 mb-5">Select Status</label>
+                                                                    <!--end::Label-->
+                                                                            <!--begin::Input row-->
+                                                                            <div class="fv-row mb-7">
+
+                                                                                    <!--begin::Input-->
+                                                                                    <select name ="status" id="status" class="form-control form-control-solid mb-3 mb-lg-0"  >
+                                                                                        <option value="" selected>Select Session Status</option>
+                                                                                        <option value="Current">Current</option>
+                                                                                        <option value="Past">Past</option>
+                                                                                    </select>
+                                                                                    <!--end::Input-->
+
+                                                                            </div>
+                                                                            <!--end::Input row-->
+                                                                        </div>
+                                                                        <!--end::Input group-->
+
+
+
+
+                                                            </div>
+                                                            <!--end::Scroll-->
+
+                                                            <!--begin::Actions-->
+                                                            <div class="text-center pt-15">
+                                                                <button type="reset" class="btn btn-light me-3" data-kt-users-modal-action="cancel">
+                                                                    Discard
+                                                                </button>
+
+                                                                <button type="submit" class="btn btn-primary" data-kt-users-modal-action="submit">
+                                                                    <span class="indicator-label">
+                                                                        Submit
+                                                                    </span>
+                                                                    <span class="indicator-progress">
+                                                                        Please wait... <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                                                                    </span>
+                                                                </button>
+                                                            </div>
+                                                            <!--end::Actions-->
+                                                        </form>
+                                                        <!--end::Form-->
+                                                    </div>
+                                                    <!--end::Modal body-->
+                                                </div>
+                                                <!--end::Modal content-->
+                                            </div>
+                                            <!--end::Modal dialog-->
+                                            </div>
+                                    <!--end::Modal - Add task-->
+
+                               <!--begin::Modal - Update role-->
+                                     <div class="modal fade" id="kt_modal_update_role" tabindex="-1" aria-hidden="true">
+                                        <!--begin::Modal dialog-->
+                                            <div class="modal-dialog modal-dialog-centered mw-750px">
+                                                <!--begin::Modal content-->
+                                                <div class="modal-content">
+                                                    <!--begin::Modal header-->
+                                                    <div class="modal-header">
+                                                        <!--begin::Modal title-->
+                                                        <h2 class="fw-bold">Update Session</h2>
+                                                        <!--end::Modal title-->
+
+                                                        <!--begin::Close-->
+                                                        <div class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-roles-modal-action="close">
+                                                            <i class="ki-duotone ki-cross fs-1"><span class="path1"></span><span class="path2"></span></i>                </div>
+                                                        <!--end::Close-->
+                                                    </div>
+                                                    <!--end::Modal header-->
+
+                                                    <!--begin::Modal body-->
+                                                    <div id="formcontent" class="modal-body scroll-y mx-5 my-7">
+                                                        <!--begin::Form-->
+                                                        <form id="kt_modal_update_role_form" class="form" action="<?php echo e(route('session.updatesession')); ?>" method="POST">
+                                                            <?php echo csrf_field(); ?>
+
+                                                            <!--begin::Scroll-->
+                                                            <div id="content">
+                                                                    
+                                                            </div>
+
+
+
+                                                            <!--end::Scroll-->
+
+                                                            <!--begin::Actions-->
+                                                            <div class="text-center pt-15">
+                                                                <button type="reset" class="btn btn-light me-3" data-kt-roles-modal-action="cancel">
+                                                                    Discard
+                                                                </button>
+
+                                                                <button type="submit" class="btn btn-primary" data-kt-roles-modal-action="submit">
+                                                                    <span class="indicator-label">
+                                                                        Submit
+                                                                    </span>
+                                                                    <span class="indicator-progress">
+                                                                        Please wait... <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                                                                    </span>
+                                                                </button>
+                                                            </div>
+                                                            <!--end::Actions-->
+                                                        </form>
+                                                        <!--end::Form-->
+                                                    </div>
+                                                    <!--end::Modal body-->
+                                                </div>
+                                                <!--end::Modal content-->
+                                            </div>
+                                        <!--end::Modal dialog-->
+                                    </div>
+                                    <!--end::Modal - Update role--><!--end::Modal-->
+
+
+
+                                    </div>
+                                <!--end::Card toolbar-->
+                                            <!--begin::Card toolbar-->
+                                            <div class="card-toolbar">
+                                                <!--begin::Search-->
+                                                <div class="d-flex align-items-center position-relative my-1"  data-kt-view-roles-table-toolbar="base">
+                                                    <i class="ki-duotone ki-magnifier fs-1 position-absolute ms-6"><span class="path1"></span><span class="path2"></span></i>                <input type="text" data-kt-roles-table-filter="search" class="form-control form-control-solid w-250px ps-15" placeholder="Search ..." />
+                                                </div>
+                                                <!--end::Search-->
+
+                                                <!--begin::Group actions-->
+                                                <div class="d-flex justify-content-end align-items-center d-none" data-kt-view-roles-table-toolbar="selected">
+                                                    <div class="fw-bold me-5">
+                                                        <span class="me-2" data-kt-view-roles-table-select="selected_count"></span> Selected
+                                                    </div>
+
+                                                    <button type="button" class="btn btn-danger" data-kt-view-roles-table-select="delete_selected">
+                                                        Delete Selected
+                                                    </button>
+                                                </div>
+                                                <!--end::Group actions-->
+                                            </div>
+                                            <!--end::Card toolbar-->
+            </div>
+            <!--end::Card header-->
+
+            <?php if(count($errors) > 0): ?>
+            <div class="row animated fadeInUp">
+                <?php if(count($errors) > 0): ?>
+            <div class="alert alert-warning fade in">
+            <a href="#" class="close" data-dismiss="alert">&times;</a>
+                <strong>Opps!</strong> Something went wrong, please check below errors.<br><br>
+                <ul>
+                    <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <li><?php echo e($error); ?></li>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </ul>
             </div>
-        </div>
-        <?php if(\Session::has('status')): ?>
-           <div class="alert alert-success alert-dismissible">
-            <button type="button" class="close" data-dismiss="alert"></button>
-                <p><?php echo e(\Session::get('status')); ?></p>
+            <?php endif; ?>
             </div>
-        <?php endif; ?>
-        <?php if(\Session::has('success')): ?>
-           <div class="alert alert-success alert-dismissible">
-            <button type="button" class="close" data-dismiss="alert"></button>
-                <p><?php echo e(\Session::get('success')); ?></p>
-            </div>
-        <?php endif; ?>
-        <?php if(\Session::has('danger')): ?>
-        <div class="alert alert-danger alert-dismissible">
-         <button type="button" class="close" data-dismiss="alert"></button>
-             <p><?php echo e(\Session::get('danger')); ?></p>
-         </div>
-     <?php endif; ?>
-
-
-    </div>
-    <div class="section-body mt-4">
-        <div class="container-fluid">
-            <div class="tab-content">
-                <div class="tab-pane active" id="session">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-hover js-basic-example dataTable table-striped table_custom   ">
-                                    <thead>
-                                        <tr>
-
-                                                <th>SN</th>
-                                                <th>Session</th>
-                                                <th>Status</th>
-                                                <th>Action</th>
-                                                <th>Date Registered</th>
-                                                <th>Date Updated</th>
-
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php $sn = 1; ?>
-                                     <?php $__currentLoopData = $sessions; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $session): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-
-                                     <tr id="sid<?php echo e($session->id); ?>">
-                                         <td><?php echo e($sn++); ?></td>
-                                         <td><?php echo e($session->session); ?></td>
-                                         <td><?php echo e($session->status); ?></td>
-
-                                         <td>
-                                             <div class="btn-group">
-                                             <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('edit-session')): ?>
-                                             <a href="<?php echo e(route('session.edit',$session->id)); ?>" class="btn fa fa-pencil" data-toggle="tooltip" title="Edit Session"></a>
-                                             <?php endif; ?>
-                                             </div>
-                                             <div class="btn-group">
-                                             <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('delete-session')): ?>
-                                             <a href="javascript:void(0)" class="btn fa fa-trash delete"
-                                             data-toggle="tooltip" title="Delete Session " onClick="check(<?php echo e($session->id); ?>)"></a>
-                                         <?php endif; ?>
-                                         </div></td>
-                                         <td><?php echo e($session->created_at); ?></td>
-                                         <td><?php echo e($session->updated_at); ?></td>
-                                     </tr>
-                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                     </tbody>
-                                </table>
-                            </div>
+            <?php endif; ?>
+            <!--begin::Card body-->
+            <div class="card-body py-4">
+             <!--begin::Table-->
+        <table class="table align-middle table-row-dashed fs-6 gy-5 mb-0" id="kt_roles_view_table">
+            <thead>
+                <tr class="text-start text-muted fw-bold fs-7 text-uppercase gs-0">
+                    <th class="w-10px pe-2">
+                        <div class="form-check form-check-sm form-check-custom form-check-solid me-3">
+                            <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_roles_view_table .form-check-input" value="1" />
                         </div>
-                    </div>
-                </div>
+                    </th>
+                    <th class="min-w-125px">SN</th>
+                    <th class="min-w-125px">Session</th>
+                    <th class="min-w-125px">Status</th>
+                    <th class="min-w-125px">Date Updated</th>
+                    <th class="min-w-100px">Actions</th>
+                </tr>
+            </thead>
+            <tbody class="fw-semibold text-gray-600">
+                <?php
+                 $i = 0
+               ?>
+            <?php $__currentLoopData = $sessions; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $session): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 
-                <div class="tab-pane" id="session-add">
-                    <div class="card">
 
-                        <div class="card-header">
-
-                            <h3 class="card-title">Add Session</h3>
-
-                            <?php if(count($errors) > 0): ?>
-                            <div class="alert alert-success alert-dismissible">
-                                <button type="button" class="close" data-dismiss="alert"></button>
-                                <strong>Opps!</strong> Something went wrong, please check below errors.<br><br>
-                                <ul>
-                                    <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                        <li><?php echo e($error); ?></li>
-                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                </ul>
+                    <tr data-url="<?php echo e(route('session.destroy',$session->id)); ?>">
+                        <td>
+                            <div class="form-check form-check-sm form-check-custom form-check-solid">
+                                <input class="form-check-input" type="checkbox" value="1" />
                             </div>
-                        <?php endif; ?>
-                            <div class="card-options ">
-                                <a href="#" class="card-options-collapse" data-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a>
-                                <a href="#" class="card-options-remove" data-toggle="card-remove"><i class="fe fe-x"></i></a>
-                            </div>
-                        </div>
-                        <form  role="form" id="inline-validation" class="form-horizontal form-stripe" action="<?php echo e(route('session.store')); ?>" method="POST">
-                            <?php echo csrf_field(); ?>
-                            <div class="form-group row">
-                                <label class="col-md-3 col-form-label">Session Name <span class="text-danger">*</span></label>
-                                <div class="col-md-7">
-                                    <input type="text" class="form-control" id="session" name="session" placeholder="Session" required>
+                        </td>
+                        <td class="sessionid">  <input type="hidden" id="sessid"  value="<?php echo e($session->id); ?>" /><?php echo e(++$i); ?></td>
+                        <td id="session" class="d-flex align-items-center session">
+                            <?php echo e($session->session); ?>
+
+                        </td>
+
+                        <td id="status" class="status">
+                            <?php echo e($session->status); ?>
+
+                        </td>
+                        <td>
+                            <?php echo e($session->updated_at); ?>
+
+                        </td>
+                        <td >
+                            <a href="#" class="btn btn-light btn-active-light-primary btn-flex btn-center btn-sm" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
+                                Actions
+                                <i class="ki-duotone ki-down fs-5 ms-1"></i>                    </a>
+                            <!--begin::Menu-->
+                                <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-125px py-4" data-kt-menu="true">
+                                    <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('session-edit')): ?>
+                                        <!--begin::Menu item-->
+                                        <div class="menu-item px-3">
+
+                                            <button type="button" class="sel-session btn btn-light btn-active-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_update_role">Edit</button>
+                                        </div>
+                                        <!--end::Menu item-->
+                                    <?php endif; ?>
+                                    <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('session-delete')): ?>
+                                    <div class="menu-item px-3" >
+                                        
+                                        <a
+                                        href="javascript:void(0)"
+                                        id="show-user"
+                                        data-kt-roles-table-filter="delete_row"
+                                        data-url="<?php echo e(route('session.deletesession', ['sessionid'=>$session->id])); ?>"
+                                        class="btn btn-danger btn-sm">Delete</a>
+                                    </div>
+                                    <!--end::Menu item-->
+                                    <?php endif; ?>
+
                                 </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-3 col-form-label">Select Session Status <span class="text-danger">*</span></label>
-                                <div class="col-md-7">
-                                    <select name ="status" id="status"  class="form-control" >
-                                        <option value="" selected>Select Session Status</option>
-                                        <option value="Current">Current</option>
-                                        <option value="Past">Past</option>
-                                         </select>
-                                </div>
-                            </div>
+                                    <!--end::Menu-->
+                        </td>
 
-
-                            <div class="form-group row">
-                                <label class="col-md-3 col-form-label"></label>
-                                <div class="col-md-7">
-                                    <button type="submit" class="btn btn-primary">Submit</button>
-
-                                </div>
-                            </div>
-                            <?php echo Form::close(); ?>
-
-                    </div>
-                </div>
+             </tr>
+             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                            </tbody>
+        </table>
+        <!--end::Table-->
             </div>
-        </div>
+            <!--end::Card body-->
+      </div>
+            <!--end::Card-->
     </div>
 
+            <!--end::Content container-->
+</div>
+        <!--end::Content-->
 
-    <script>
 
-        function check(id){
-
-            var id = id;
-            var spinner = $('#loader');
-
-          Swal.fire({
-          title: 'Are you sure?',
-          text: "Deleting this record will affect other associated records (e.g Any Record where this Session is featured)",
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonColor: '#3085d6',
-          cancelButtonColor: '#d33',
-          confirmButtonText: 'Yes, delete it!'
-        }).then((result) => {
-          if (result.isConfirmed) {
-            spinner.show();
-            $.ajax({
-
-                url: 'ajaxsession/'+id,
-                async: false,
-                type: "DELETE",
-                cache: false,
-                data:{
-                    _token:'<?php echo e(csrf_token()); ?>',
-                   id: id
-                },
-                dataType: 'JSON',
-
-            }).done(function(resp) {
-          spinner.hide();
-
-            });
-            Swal.fire(
-              'Deleted!',
-              'This Session Record Has Been Deleted!',
-              'success'
-            )
-
-            var myobj = document.getElementById("sid"+id);
-             myobj.remove();
-
-          }
-        })
-
-        }
-        </script>
-    <?php $__env->stopSection(); ?>
+<?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\srms\resources\views/session/index.blade.php ENDPATH**/ ?>

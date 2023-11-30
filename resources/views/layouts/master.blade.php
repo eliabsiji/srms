@@ -35,13 +35,17 @@
              @include('layouts.pages-assets.css.permission-list-css')
         @endif
 
+        @if (Route::is('student.*'))
+           @include('layouts.pages-assets.css.users-list-css')
+       @endif
+
         @if (Route::is('session.*'))
            @include('layouts.pages-assets.css.users-list-css')
        @endif
        @if (Route::is('term.*'))
            @include('layouts.pages-assets.css.users-list-css')
        @endif
-       @if (Route::is('journalyear.*'))
+       @if (Route::is('schoolhouse.*'))
            @include('layouts.pages-assets.css.users-list-css')
        @endif
        @if (Route::is('authors.*') || Route::is('author.review') || Route::is('author.journal')  )
@@ -222,14 +226,14 @@
         @endif
 
         @if (Route::is('session.*'))
-             @include('layouts.pages-assets.js.journalcategory-list-js')
+             @include('layouts.pages-assets.js.session-list-js')
         @endif
 
         @if (Route::is('term.*'))
-             @include('layouts.pages-assets.js.journalvolume-list-js')
+             @include('layouts.pages-assets.js.term-list-js')
         @endif
-        @if (Route::is('journalyear.*'))
-             @include('layouts.pages-assets.js.journalvolume-list-js')
+        @if (Route::is('schoolhouse.*'))
+             @include('layouts.pages-assets.js.house-list-js')
         @endif
         @if (Route::is('authors.*') || Route::is('author.review') || Route::is('author.journal'))
             @include('layouts.pages-assets.js.journal-list-js')

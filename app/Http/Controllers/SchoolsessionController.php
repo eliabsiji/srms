@@ -12,10 +12,10 @@ class SchoolsessionController extends Controller
 
     function __construct()
     {
-         $this->middleware('permission:session-list|add-session|edit-session|delete-session', ['only' => ['index','store']]);
-         $this->middleware('permission:add-session', ['only' => ['create','store']]);
-         $this->middleware('permission:edit-session', ['only' => ['edit','update']]);
-         $this->middleware('permission:delete-session', ['only' => ['destroy']]);
+         $this->middleware('permission:session-list|session-create|session-edit|session-delete', ['only' => ['index','store']]);
+         $this->middleware('permission:session-create', ['only' => ['create','store']]);
+         $this->middleware('permission:session-edit', ['only' => ['edit','update','updatesession']]);
+         $this->middleware('permission:session-delete', ['only' => ['destroy','deletesession']]);
     }
     /**
      * Display a listing of the resource.
@@ -155,6 +155,71 @@ class SchoolsessionController extends Controller
 
 
     }
+
+    public function updatesession(Request $request)
+    {
+
+
+        $checkCurrent = "Current";
+        $cid = "";
+        $session = Schoolsession::find($request->id);
+        $input= $request->all();
+
+        $sessionchk = Schoolsession::where('status',$checkCurrent)->get();
+
+            foreach($sessionchk as $s){
+          $cid =  $s-> id;
+            }
+        if ($request->id == $cid){
+            $session = Schoolsession::find($request->id);
+            $input= $request->all();
+             $session->update($input);
+
+            return redirect()->route('session.index')
+             ->with('success', 'School Session has been updated successfully.');
+
+
+        }else{
+            $schk = Schoolsession::where('status',$checkCurrent)->exists();
+            if ($schk){
+                return redirect()->route('session.index')
+                ->with('danger', 'School Session with CURRENT status already exists.');
+            }else{
+                $session = Schoolsession::find($request->id);
+                $input= $request->all();
+                 $session->update($input);
+                return redirect()->route('session.index')
+                ->with('success', 'School Session has been updated successfully.');
+            }
+
+        }
+
+
+
+
+    }
+
+
+    public function deletesession(Request $request)
+    {
+        Schoolsession::find($request->sessionid)->delete();
+        //check data deleted or not
+        if ($request->sessionid) {
+            $success = true;
+            $message = "Seesion has been removed";
+        } else {
+            $success = true;
+            $message = "Session not found";
+        }
+
+        //  return response
+        return response()->json([
+            'success' => $success,
+            'message' => $message,
+        ]);
+
+    }
+
 
     /**
      * Remove the specified resource from storage.

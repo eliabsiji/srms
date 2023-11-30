@@ -19,10 +19,10 @@ class SubjectOperationController extends Controller
 
     function __construct()
     {
-         $this->middleware('permission:subject-operation-list|add-subject-operation|edit-subject-operation|delete-subject-operation', ['only' => ['index','store']]);
-         $this->middleware('permission:add-subject-operation', ['only' => ['create','store']]);
-         $this->middleware('permission:edit-subject-operation', ['only' => ['edit','update']]);
-         $this->middleware('permission:delete-subject-operation', ['only' => ['destroy']]);
+         $this->middleware('permission:subject_operation-list|subject_operation-create|subject_operation-edit|subject_operation-delete', ['only' => ['index','store']]);
+         $this->middleware('permission:subject_operation-create', ['only' => ['create','store']]);
+         $this->middleware('permission:subject_operation-edit', ['only' => ['edit','update']]);
+         $this->middleware('permission:subject_operation-delete', ['only' => ['destroy']]);
     }
 
     /**

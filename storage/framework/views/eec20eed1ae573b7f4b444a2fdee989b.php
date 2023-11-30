@@ -148,6 +148,9 @@
                                             <!--end:Menu link-->
                                         </div>
                                         <!--end:Menu item-->
+                                        <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('role-list')): ?>
+
+
                                         <!--begin:Menu item-->
                                         <div  class="menu-item" >
                                             <!--begin:Menu link-->
@@ -165,6 +168,7 @@
                                                 <!--end:Menu link-->
                                         </div>
                                             <!--end:Menu item-->
+                                            <?php endif; ?>
                                             <!--begin:Menu item-->
                                          <div  class="menu-item" >
                                                 <!--begin:Menu link-->
@@ -262,29 +266,6 @@
             <!--end:Menu item-->
 
 
-             <!--begin:Menu item-->
-             <div  data-kt-menu-trigger="click"  class="menu-item <?php echo e(request()->is('authors*') ||
-                request()->is('roles*') ||
-                request()->is('permissions*')
-                ? ' here show menu-accordion' : ''); ?>" >
-            <!--begin:Menu link-->
-            <span class="menu-link" >
-                <span  class="menu-icon" >
-                    <i class="ki-duotone ki-element-11 fs-2">
-                        <span class="path1">
-                            </span><span class="path2">
-                            </span><span class="path3">
-                            </span><span class="path4">
-                            </span></i></span>
-                            <span  class="menu-title" >
-                              E-learning Management
-                            </span>
-                            <span  class="menu-arrow" >
-                                </span></span>
-                                <!--end:Menu link-->
-                                
-        </div>
-        <!--end:Menu item-->
 
 
 
@@ -301,643 +282,529 @@
             </div>
             <!--end:Menu item-->
 
-                       <!--begin:Menu item-->
-                       <div  data-kt-menu-trigger="click"  class="menu-item <?php echo e(request()->is('myjournals*') ||
-                        request()->is('journalvolume*')  ||
-                        request()->is('journalyear*')
-                        ? ' here show menu-accordion' : ''); ?>" >
-                        <!--begin:Menu link-->
-                        <span class="menu-link" >
-                            <span  class="menu-icon" >
-                                <i class="ki-duotone ki-element-11 fs-2">
-                                    <span class="path1">
-                                        </span><span class="path2">
-                                        </span><span class="path3">
-                                        </span><span class="path4">
-                                        </span></i></span>
-                                        <span  class="menu-title" >
-                                          School  Staff
-                                        </span>
-                                        <span  class="menu-arrow" >
-                                            </span></span>
-                                            <!--end:Menu link-->
-                                            <!--begin:Menu sub-->
-                                        <div  class="menu-sub menu-sub-accordion" >
-
-                                                <!--begin:Menu item-->
-                                                <div  class="menu-item" >
-                                                    <!--begin:Menu link-->
-                                                    <a class="menu-link  <?php echo e(request()->is('myjournals*')
-                                                        ? ' active' : ''); ?>"  href="<?php echo e(route('myjournals.index')); ?>" >
-                                                        <span  class="menu-bullet" >
-                                                            <span class="bullet bullet-dot">
-                                                                </span>
-                                                            </span>
-                                                            <span  class="menu-title" >
-                                                              Staff Management
-                                                            </span>
-                                                    </a>
-                                                    <!--end:Menu link-->
-                                                </div>
-                                                <!--end:Menu item-->
-                                                <!--begin:Menu item-->
-                                                <div  class="menu-item" >
-                                                    <!--begin:Menu link-->
-                                                    <a class="menu-link  <?php echo e(request()->is('journalvolume*')
-                                                        ? ' active' : ''); ?>"  href="<?php echo e(route('journalvolume.index')); ?>" >
-                                                        <span  class="menu-bullet" >
-                                                            <span class="bullet bullet-dot">
-                                                                </span>
-                                                            </span>
-                                                            <span  class="menu-title" >
-                                                               My Subjects
-                                                            </span>
-                                                    </a>
-                                                    <!--end:Menu link-->
-                                                </div>
-                                                <!--end:Menu item-->
 
 
-                                        </div>
-                                        <!--end:Menu sub-->
-                       </div>
-                       <!--end:Menu item-->
-
-
-
-                       <!--begin:Menu item-->
-                       <div  data-kt-menu-trigger="click"  class="menu-item <?php echo e(request()->is('myjournals*') ||
-                        request()->is('journalvolume*')  ||
-                        request()->is('journalyear*')
-                        ? ' here show menu-accordion' : ''); ?>" >
-                        <!--begin:Menu link-->
-                        <span class="menu-link" >
-                            <span  class="menu-icon" >
-                                <i class="ki-duotone ki-element-11 fs-2">
-                                    <span class="path1">
-                                        </span><span class="path2">
-                                        </span><span class="path3">
-                                        </span><span class="path4">
-                                        </span></i></span>
-                                        <span  class="menu-title" >
-                                         Students & Parents
-                                        </span>
-                                        <span  class="menu-arrow" >
-                                            </span></span>
-                                            <!--end:Menu link-->
-                                            <!--begin:Menu sub-->
-                                        <div  class="menu-sub menu-sub-accordion" >
-
-                                                <!--begin:Menu item-->
-                                                <div  class="menu-item" >
-                                                    <!--begin:Menu link-->
-                                                    <a class="menu-link  <?php echo e(request()->is('myjournals*')
-                                                        ? ' active' : ''); ?>"  href="<?php echo e(route('myjournals.index')); ?>" >
-                                                        <span  class="menu-bullet" >
-                                                            <span class="bullet bullet-dot">
-                                                                </span>
-                                                            </span>
-                                                            <span  class="menu-title" >
-                                                                  Student Management
-                                                            </span>
-                                                    </a>
-                                                    <!--end:Menu link-->
-                                                </div>
-                                                <!--end:Menu item-->
-                                                <!--begin:Menu item-->
-                                                <div  class="menu-item" >
-                                                    <!--begin:Menu link-->
-                                                    <a class="menu-link  <?php echo e(request()->is('journalvolume*')
-                                                        ? ' active' : ''); ?>"  href="<?php echo e(route('journalvolume.index')); ?>" >
-                                                        <span  class="menu-bullet" >
-                                                            <span class="bullet bullet-dot">
-                                                                </span>
-                                                            </span>
-                                                            <span  class="menu-title" >
-                                                              Parent Management
-                                                            </span>
-                                                    </a>
-                                                    <!--end:Menu link-->
-                                                </div>
-                                                <!--end:Menu item-->
-
-
-                                        </div>
-                                        <!--end:Menu sub-->
-                       </div>
-                       <!--end:Menu item-->
-
-
-                       <!--begin:Menu item-->
-                       <div  data-kt-menu-trigger="click"  class="menu-item <?php echo e(request()->is('myjournals*') ||
-                        request()->is('journalvolume*')  ||
-                        request()->is('journalyear*')
-                        ? ' here show menu-accordion' : ''); ?>" >
-                        <!--begin:Menu link-->
-                        <span class="menu-link" >
-                            <span  class="menu-icon" >
-                                <i class="ki-duotone ki-element-11 fs-2">
-                                    <span class="path1">
-                                        </span><span class="path2">
-                                        </span><span class="path3">
-                                        </span><span class="path4">
-                                        </span></i></span>
-                                        <span  class="menu-title" >
-                                           Class Operations
-                                        </span>
-                                        <span  class="menu-arrow" >
-                                            </span></span>
-                                            <!--end:Menu link-->
-                                            <!--begin:Menu sub-->
-                                        <div  class="menu-sub menu-sub-accordion" >
-
-                                                <!--begin:Menu item-->
-                                                <div  class="menu-item" >
-                                                    <!--begin:Menu link-->
-                                                    <a class="menu-link  <?php echo e(request()->is('myjournals*')
-                                                        ? ' active' : ''); ?>"  href="<?php echo e(route('myjournals.index')); ?>" >
-                                                        <span  class="menu-bullet" >
-                                                            <span class="bullet bullet-dot">
-                                                                </span>
-                                                            </span>
-                                                            <span  class="menu-title" >
-                                                              Subjects Registration
-                                                            </span>
-                                                    </a>
-                                                    <!--end:Menu link-->
-                                                </div>
-                                                <!--end:Menu item-->
-                                                <!--begin:Menu item-->
-                                                <div  class="menu-item" >
-                                                    <!--begin:Menu link-->
-                                                    <a class="menu-link  <?php echo e(request()->is('journalvolume*')
-                                                        ? ' active' : ''); ?>"  href="<?php echo e(route('journalvolume.index')); ?>" >
-                                                        <span  class="menu-bullet" >
-                                                            <span class="bullet bullet-dot">
-                                                                </span>
-                                                            </span>
-                                                            <span  class="menu-title" >
-                                                               My Subjects
-                                                            </span>
-                                                    </a>
-                                                    <!--end:Menu link-->
-                                                </div>
-                                                <!--end:Menu item-->
-
-
-                                        </div>
-                                        <!--end:Menu sub-->
-                       </div>
-                       <!--end:Menu item-->
-
-
-                       <!--begin:Menu item-->
-                       <div  data-kt-menu-trigger="click"  class="menu-item <?php echo e(request()->is('myjournals*') ||
-                        request()->is('journalvolume*')  ||
-                        request()->is('journalyear*')
-                        ? ' here show menu-accordion' : ''); ?>" >
-                        <!--begin:Menu link-->
-                        <span class="menu-link" >
-                            <span  class="menu-icon" >
-                                <i class="ki-duotone ki-element-11 fs-2">
-                                    <span class="path1">
-                                        </span><span class="path2">
-                                        </span><span class="path3">
-                                        </span><span class="path4">
-                                        </span></i></span>
-                                        <span  class="menu-title" >
-                                           Staff Classes & subjects
-                                        </span>
-                                        <span  class="menu-arrow" >
-                                            </span></span>
-                                            <!--end:Menu link-->
-                                            <!--begin:Menu sub-->
-                                        <div  class="menu-sub menu-sub-accordion" >
-
-                                                <!--begin:Menu item-->
-                                                <div  class="menu-item" >
-                                                    <!--begin:Menu link-->
-                                                    <a class="menu-link  <?php echo e(request()->is('myjournals*')
-                                                        ? ' active' : ''); ?>"  href="<?php echo e(route('myjournals.index')); ?>" >
-                                                        <span  class="menu-bullet" >
-                                                            <span class="bullet bullet-dot">
-                                                                </span>
-                                                            </span>
-                                                            <span  class="menu-title" >
-                                                               My Classes
-                                                            </span>
-                                                    </a>
-                                                    <!--end:Menu link-->
-                                                </div>
-                                                <!--end:Menu item-->
-                                                <!--begin:Menu item-->
-                                                <div  class="menu-item" >
-                                                    <!--begin:Menu link-->
-                                                    <a class="menu-link  <?php echo e(request()->is('journalvolume*')
-                                                        ? ' active' : ''); ?>"  href="<?php echo e(route('journalvolume.index')); ?>" >
-                                                        <span  class="menu-bullet" >
-                                                            <span class="bullet bullet-dot">
-                                                                </span>
-                                                            </span>
-                                                            <span  class="menu-title" >
-                                                               My Subjects
-                                                            </span>
-                                                    </a>
-                                                    <!--end:Menu link-->
-                                                </div>
-                                                <!--end:Menu item-->
-
-
-                                        </div>
-                                        <!--end:Menu sub-->
-                       </div>
-                       <!--end:Menu item-->
-
-
-
-                       <!--begin:Menu item-->
-                       <div  data-kt-menu-trigger="click"  class="menu-item <?php echo e(request()->is('myjournals*') ||
-                        request()->is('journalvolume*')  ||
-                        request()->is('journalyear*')
-                        ? ' here show menu-accordion' : ''); ?>" >
-                        <!--begin:Menu link-->
-                        <span class="menu-link" >
-                            <span  class="menu-icon" >
-                                <i class="ki-duotone ki-element-11 fs-2">
-                                    <span class="path1">
-                                        </span><span class="path2">
-                                        </span><span class="path3">
-                                        </span><span class="path4">
-                                        </span></i></span>
-                                        <span  class="menu-title" >
-                                        Records and Results
-                                        </span>
-                                        <span  class="menu-arrow" >
-                                            </span></span>
-                                            <!--end:Menu link-->
-                                            <!--begin:Menu sub-->
-                                        <div  class="menu-sub menu-sub-accordion" >
-
-                                                <!--begin:Menu item-->
-                                                <div  class="menu-item" >
-                                                    <!--begin:Menu link-->
-                                                    <a class="menu-link  <?php echo e(request()->is('myjournals*')
-                                                        ? ' active' : ''); ?>"  href="<?php echo e(route('myjournals.index')); ?>" >
-                                                        <span  class="menu-bullet" >
-                                                            <span class="bullet bullet-dot">
-                                                                </span>
-                                                            </span>
-                                                            <span  class="menu-title" >
-                                                              My Record sheets
-                                                            </span>
-                                                    </a>
-                                                    <!--end:Menu link-->
-                                                </div>
-                                                <!--end:Menu item-->
-                                                <!--begin:Menu item-->
-                                                <div  class="menu-item" >
-                                                    <!--begin:Menu link-->
-                                                    <a class="menu-link  <?php echo e(request()->is('journalvolume*')
-                                                        ? ' active' : ''); ?>"  href="<?php echo e(route('journalvolume.index')); ?>" >
-                                                        <span  class="menu-bullet" >
-                                                            <span class="bullet bullet-dot">
-                                                                </span>
-                                                            </span>
-                                                            <span  class="menu-title" >
-                                                              Students Results
-                                                            </span>
-                                                    </a>
-                                                    <!--end:Menu link-->
-                                                </div>
-                                                <!--end:Menu item-->
-
-
-                                        </div>
-                                        <!--end:Menu sub-->
-                       </div>
-                       <!--end:Menu item-->
-
-
-
-                       <!--begin:Menu item-->
-                       <div  data-kt-menu-trigger="click"  class="menu-item <?php echo e(request()->is('myjournals*') ||
-                        request()->is('journalvolume*')  ||
-                        request()->is('journalyear*')
-                        ? ' here show menu-accordion' : ''); ?>" >
-                        <!--begin:Menu link-->
-                        <span class="menu-link" >
-                            <span  class="menu-icon" >
-                                <i class="ki-duotone ki-element-11 fs-2">
-                                    <span class="path1">
-                                        </span><span class="path2">
-                                        </span><span class="path3">
-                                        </span><span class="path4">
-                                        </span></i></span>
-                                        <span  class="menu-title" >
-                                        Bursary & Finance
-                                        </span>
-                                        <span  class="menu-arrow" >
-                                            </span></span>
-                                            <!--end:Menu link-->
-                                            <!--begin:Menu sub-->
-                                        <div  class="menu-sub menu-sub-accordion" >
-
-                                                
-
-
-                                        </div>
-                                        <!--end:Menu sub-->
-                       </div>
-                       <!--end:Menu item-->
-                        <!--begin:Menu item-->
-                        <div  data-kt-menu-trigger="click"  class="menu-item <?php echo e(request()->is('myjournals*') ||
-                            request()->is('journalvolume*')  ||
-                            request()->is('journalyear*')
-                            ? ' here show menu-accordion' : ''); ?>" >
-                            <!--begin:Menu link-->
-                            <span class="menu-link" >
-                                <span  class="menu-icon" >
-                                    <i class="ki-duotone ki-element-11 fs-2">
-                                        <span class="path1">
-                                            </span><span class="path2">
-                                            </span><span class="path3">
-                                            </span><span class="path4">
-                                            </span></i></span>
-                                            <span  class="menu-title" >
-                                           E-Learning System
-                                            </span>
-                                            <span  class="menu-arrow" >
-                                                </span></span>
-                                                <!--end:Menu link-->
-                                                <!--begin:Menu sub-->
-                                            <div  class="menu-sub menu-sub-accordion" >
-
-                                                    
-
-
-                                            </div>
-                                            <!--end:Menu sub-->
-                           </div>
-                           <!--end:Menu item-->
-
-
-
-
-
-            <!--begin:Menu item-->
-            <div  class="menu-item pt-5" >
-                <!--begin:Menu content-->
-                <div  class="menu-content" >
-                    <span class="menu-heading fw-bold text-uppercase fs-7">
-                        SCHOOL BASIC SETTINGS
+               <!--begin:Menu item-->
+   <div  data-kt-menu-trigger="click"  class="menu-item <?php echo e(request()->is('student*') ||
+    request()->is('parent*')
+    ? ' here show menu-accordion' : ''); ?>" >
+    <!--begin:Menu link-->
+    <span class="menu-link" >
+        <span  class="menu-icon" >
+            <i class="ki-duotone ki-element-11 fs-2">
+                <span class="path1">
+                    </span><span class="path2">
+                    </span><span class="path3">
+                    </span><span class="path4">
+                    </span></i></span>
+                    <span  class="menu-title" >
+                     Students & Parents
                     </span>
+                    <span  class="menu-arrow" >
+                        </span></span>
+                        <!--end:Menu link-->
+                        <!--begin:Menu sub-->
+                    <div  class="menu-sub menu-sub-accordion" >
+                        <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('student-list')): ?>
+                            <!--begin:Menu item-->
+                            <div  class="menu-item" >
+                                <!--begin:Menu link-->
+                                <a class="menu-link  <?php echo e(request()->is('student*')
+                                    ? ' active' : ''); ?>"  href="<?php echo e(route('student.index')); ?>" >
+                                    <span  class="menu-bullet" >
+                                        <span class="bullet bullet-dot">
+                                            </span>
+                                        </span>
+                                        <span  class="menu-title" >
+                                              Student Management
+                                        </span>
+                                </a>
+                                <!--end:Menu link-->
+                            </div>
+                            <!--end:Menu item-->
+                            <?php endif; ?>
+                            <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('parent-list')): ?>
+                            <!--begin:Menu item-->
+                            <div  class="menu-item" >
+                                <!--begin:Menu link-->
+                                <a class="menu-link  <?php echo e(request()->is('parent*')
+                                    ? ' active' : ''); ?>"  href="<?php echo e(route('parent.index')); ?>" >
+                                    <span  class="menu-bullet" >
+                                        <span class="bullet bullet-dot">
+                                            </span>
+                                        </span>
+                                        <span  class="menu-title" >
+                                          Parent Management
+                                        </span>
+                                </a>
+                                <!--end:Menu link-->
+                            </div>
+                            <!--end:Menu item-->
+                            <?php endif; ?>
+
+
                     </div>
-                    <!--end:Menu content-->
-            </div>
-            <!--end:Menu item-->
+                    <!--end:Menu sub-->
+   </div>
+   <!--end:Menu item-->
 
-            <!--begin:Menu item-->
-            <div  data-kt-menu-trigger="click"  class="menu-item <?php echo e(request()->is('journalcategory*') ||
-                request()->is('journalvolume*')  ||
-                request()->is('journalyear*')
-                ? ' here show menu-accordion' : ''); ?>" >
-                <!--begin:Menu link-->
-                <span class="menu-link" >
-                    <span  class="menu-icon" >
-                        <i class="ki-duotone ki-element-11 fs-2">
-                            <span class="path1">
-                                </span><span class="path2">
-                                </span><span class="path3">
-                                </span><span class="path4">
-                                </span></i></span>
-                                <span  class="menu-title" >
-                                   School Session & Term & House
-                                </span>
-                                <span  class="menu-arrow" >
-                                    </span></span>
-                                    <!--end:Menu link-->
-                                    <!--begin:Menu sub-->
-                                <div  class="menu-sub menu-sub-accordion" >
-                                        <!--begin:Menu item-->
-                                        <div  class="menu-item" >
-                                            <!--begin:Menu link-->
-                                            <a class="menu-link  <?php echo e(request()->is('journalcategory*')
-                                                ? ' active' : ''); ?>"  href="<?php echo e(route('journalcategory.index')); ?>" >
-                                                <span  class="menu-bullet" >
-                                                    <span class="bullet bullet-dot">
-                                                        </span>
-                                                    </span>
-                                                    <span  class="menu-title" >
-                                                       School Session
-                                                    </span>
-                                            </a>
-                                            <!--end:Menu link-->
-                                        </div>
-                                        <!--end:Menu item-->
-                                        <!--begin:Menu item-->
-                                        <div  class="menu-item" >
-                                            <!--begin:Menu link-->
-                                            <a class="menu-link  <?php echo e(request()->is('journalvolume*')
-                                                ? ' active' : ''); ?>"  href="<?php echo e(route('journalvolume.index')); ?>" >
-                                                <span  class="menu-bullet" >
-                                                    <span class="bullet bullet-dot">
-                                                        </span>
-                                                    </span>
-                                                    <span  class="menu-title" >
-                                                    School Term
-                                                    </span>
-                                            </a>
-                                            <!--end:Menu link-->
-                                        </div>
-                                        <!--end:Menu item-->
-                                            <!--begin:Menu item-->
-                                        <div  class="menu-item" >
-                                                <!--begin:Menu link-->
-                                                <a class="menu-link <?php echo e(request()->is('journalyear*')
-                                                    ? ' active' : ''); ?>"
-                                                href="<?php echo e(route('journalyear.index')); ?>" >
-                                                    <span  class="menu-bullet" >
-                                                        <span class="bullet bullet-dot">
-                                                            </span></span>
-                                                            <span  class="menu-title" >
-                                                                School House
-                                                            </span>
-                                                </a>
-                                                <!--end:Menu link-->
-                                        </div>
-                                            <!--end:Menu item-->
-                                </div>
-                                <!--end:Menu sub-->
-            </div>
-            <!--end:Menu item-->
-
-             <!--begin:Menu item-->
-             <div  data-kt-menu-trigger="click"  class="menu-item <?php echo e(request()->is('journalcategory*') ||
-                request()->is('journalvolume*')  ||
-                request()->is('journalyear*')
-                ? ' here show menu-accordion' : ''); ?>" >
-                <!--begin:Menu link-->
-                <span class="menu-link" >
-                    <span  class="menu-icon" >
-                        <i class="ki-duotone ki-element-11 fs-2">
-                            <span class="path1">
-                                </span><span class="path2">
-                                </span><span class="path3">
-                                </span><span class="path4">
-                                </span></i></span>
-                                <span  class="menu-title" >
-                                  Class Settings
-                                </span>
-                                <span  class="menu-arrow" >
-                                    </span></span>
-                                    <!--end:Menu link-->
-                                    <!--begin:Menu sub-->
-                                <div  class="menu-sub menu-sub-accordion" >
-                                        <!--begin:Menu item-->
-                                        <div  class="menu-item" >
-                                            <!--begin:Menu link-->
-                                            <a class="menu-link  <?php echo e(request()->is('journalcategory*')
-                                                ? ' active' : ''); ?>"  href="<?php echo e(route('journalcategory.index')); ?>" >
-                                                <span  class="menu-bullet" >
-                                                    <span class="bullet bullet-dot">
-                                                        </span>
-                                                    </span>
-                                                    <span  class="menu-title" >
-                                                      Class Arm
-                                                    </span>
-                                            </a>
-                                            <!--end:Menu link-->
-                                        </div>
-                                        <!--end:Menu item-->
-                                        <!--begin:Menu item-->
-                                        <div  class="menu-item" >
-                                            <!--begin:Menu link-->
-                                            <a class="menu-link  <?php echo e(request()->is('journalvolume*')
-                                                ? ' active' : ''); ?>"  href="<?php echo e(route('journalvolume.index')); ?>" >
-                                                <span  class="menu-bullet" >
-                                                    <span class="bullet bullet-dot">
-                                                        </span>
-                                                    </span>
-                                                    <span  class="menu-title" >
-                                                  Class Name
-                                                    </span>
-                                            </a>
-                                            <!--end:Menu link-->
-                                        </div>
-                                        <!--end:Menu item-->
-                                            <!--begin:Menu item-->
-                                        <div  class="menu-item" >
-                                                <!--begin:Menu link-->
-                                                <a class="menu-link <?php echo e(request()->is('journalyear*')
-                                                    ? ' active' : ''); ?>"
-                                                href="<?php echo e(route('journalyear.index')); ?>" >
-                                                    <span  class="menu-bullet" >
-                                                        <span class="bullet bullet-dot">
-                                                            </span></span>
-                                                            <span  class="menu-title" >
-                                                                Class Category
-                                                            </span>
-                                                </a>
-                                                <!--end:Menu link-->
-                                        </div>
-                                            <!--end:Menu item-->
-
-                                            <div  class="menu-item" >
-                                                <!--begin:Menu link-->
-                                                <a class="menu-link <?php echo e(request()->is('journalyear*')
-                                                    ? ' active' : ''); ?>"
-                                                href="<?php echo e(route('journalyear.index')); ?>" >
-                                                    <span  class="menu-bullet" >
-                                                        <span class="bullet bullet-dot">
-                                                            </span></span>
-                                                            <span  class="menu-title" >
-                                                                Class Teacher
-                                                            </span>
-                                                </a>
-                                                <!--end:Menu link-->
-                                        </div>
-                                            <!--end:Menu item-->
-                                </div>
-                                <!--end:Menu sub-->
-            </div>
-            <!--end:Menu item-->
-
-              <!--begin:Menu item-->
-              <div  data-kt-menu-trigger="click"  class="menu-item <?php echo e(request()->is('journalcategory*') ||
-                request()->is('journalvolume*')  ||
-                request()->is('journalyear*')
-                ? ' here show menu-accordion' : ''); ?>" >
-                <!--begin:Menu link-->
-                <span class="menu-link" >
-                    <span  class="menu-icon" >
-                        <i class="ki-duotone ki-element-11 fs-2">
-                            <span class="path1">
-                                </span><span class="path2">
-                                </span><span class="path3">
-                                </span><span class="path4">
-                                </span></i></span>
-                                <span  class="menu-title" >
-                                 Subject Settings
-                                </span>
-                                <span  class="menu-arrow" >
-                                    </span></span>
-                                    <!--end:Menu link-->
-                                    <!--begin:Menu sub-->
-                                <div  class="menu-sub menu-sub-accordion" >
-                                        <!--begin:Menu item-->
-                                        <div  class="menu-item" >
-                                            <!--begin:Menu link-->
-                                            <a class="menu-link  <?php echo e(request()->is('journalcategory*')
-                                                ? ' active' : ''); ?>"  href="<?php echo e(route('journalcategory.index')); ?>" >
-                                                <span  class="menu-bullet" >
-                                                    <span class="bullet bullet-dot">
-                                                        </span>
-                                                    </span>
-                                                    <span  class="menu-title" >
-                                                      School Subject
-                                                    </span>
-                                            </a>
-                                            <!--end:Menu link-->
-                                        </div>
-                                        <!--end:Menu item-->
-                                        <!--begin:Menu item-->
-                                        <div  class="menu-item" >
-                                            <!--begin:Menu link-->
-                                            <a class="menu-link  <?php echo e(request()->is('journalvolume*')
-                                                ? ' active' : ''); ?>"  href="<?php echo e(route('journalvolume.index')); ?>" >
-                                                <span  class="menu-bullet" >
-                                                    <span class="bullet bullet-dot">
-                                                        </span>
-                                                    </span>
-                                                    <span  class="menu-title" >
-                                                  Subject Teacher
-                                                    </span>
-                                            </a>
-                                            <!--end:Menu link-->
-                                        </div>
-                                        <!--end:Menu item-->
-                                            <!--begin:Menu item-->
-                                        <div  class="menu-item" >
-                                                <!--begin:Menu link-->
-                                                <a class="menu-link <?php echo e(request()->is('journalyear*')
-                                                    ? ' active' : ''); ?>"
-                                                href="<?php echo e(route('journalyear.index')); ?>" >
-                                                    <span  class="menu-bullet" >
-                                                        <span class="bullet bullet-dot">
-                                                            </span></span>
-                                                            <span  class="menu-title" >
-                                                               Subject Class
-                                                            </span>
-                                                </a>
-                                                <!--end:Menu link-->
-                                        </div>
-                                            <!--end:Menu item-->
+ <!--begin:Menu item-->
+ <div  data-kt-menu-trigger="click"  class="menu-item <?php echo e(request()->is('subjectoperation*')
+    ? ' here show menu-accordion' : ''); ?>" >
+    <!--begin:Menu link-->
+    <span class="menu-link" >
+        <span  class="menu-icon" >
+            <i class="ki-duotone ki-element-11 fs-2">
+                <span class="path1">
+                    </span><span class="path2">
+                    </span><span class="path3">
+                    </span><span class="path4">
+                    </span></i></span>
+                    <span  class="menu-title" >
+                       Class Operations
+                    </span>
+                    <span  class="menu-arrow" >
+                        </span></span>
+                        <!--end:Menu link-->
+                        <!--begin:Menu sub-->
+                    <div  class="menu-sub menu-sub-accordion" >
+                        <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('subject_operation-list')): ?>
+                            <!--begin:Menu item-->
+                            <div  class="menu-item" >
+                                <!--begin:Menu link-->
+                                <a class="menu-link  <?php echo e(request()->is('subjectoperation*')
+                                    ? ' active' : ''); ?>"  href="<?php echo e(route('subjectoperation.index')); ?>" >
+                                    <span  class="menu-bullet" >
+                                        <span class="bullet bullet-dot">
+                                            </span>
+                                        </span>
+                                        <span  class="menu-title" >
+                                          Subjects Registration
+                                        </span>
+                                </a>
+                                <!--end:Menu link-->
+                            </div>
+                            <!--end:Menu item-->
+                        <?php endif; ?>
+                            <!--begin:Menu item-->
+                            
+                            <!--end:Menu item-->
 
 
-                                </div>
-                                <!--end:Menu sub-->
-            </div>
-            <!--end:Menu item-->
+                    </div>
+                    <!--end:Menu sub-->
+   </div>
+   <!--end:Menu item-->
+
+
+                        <!--begin:Menu item-->
+   <div  data-kt-menu-trigger="click"  class="menu-item <?php echo e(request()->is('myclass*') ||
+    request()->is('mysubject*')
+    ? ' here show menu-accordion' : ''); ?>" >
+    <!--begin:Menu link-->
+    <span class="menu-link" >
+        <span  class="menu-icon" >
+            <i class="ki-duotone ki-element-11 fs-2">
+                <span class="path1">
+                    </span><span class="path2">
+                    </span><span class="path3">
+                    </span><span class="path4">
+                    </span></i></span>
+                    <span  class="menu-title" >
+                       Staff Classes & subjects
+                    </span>
+                    <span  class="menu-arrow" >
+                        </span></span>
+                        <!--end:Menu link-->
+                        <!--begin:Menu sub-->
+                    <div  class="menu-sub menu-sub-accordion" >
+                        <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('myclass-list')): ?>
+                            <!--begin:Menu item-->
+                            <div  class="menu-item" >
+                                <!--begin:Menu link-->
+                                <a class="menu-link  <?php echo e(request()->is('myclass*')
+                                    ? ' active' : ''); ?>"  href="<?php echo e(route('myclass.index')); ?>" >
+                                    <span  class="menu-bullet" >
+                                        <span class="bullet bullet-dot">
+                                            </span>
+                                        </span>
+                                        <span  class="menu-title" >
+                                           My Classes
+                                        </span>
+                                </a>
+                                <!--end:Menu link-->
+                            </div>
+                            <!--end:Menu item-->
+                        <?php endif; ?>
+                        <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('mysubject-list')): ?>
+                            <!--begin:Menu item-->
+                            <div  class="menu-item" >
+                                <!--begin:Menu link-->
+                                <a class="menu-link  <?php echo e(request()->is('mysubject*')
+                                    ? ' active' : ''); ?>"  href="<?php echo e(route('mysubject.index')); ?>" >
+                                    <span  class="menu-bullet" >
+                                        <span class="bullet bullet-dot">
+                                            </span>
+                                        </span>
+                                        <span  class="menu-title" >
+                                           My Subjects
+                                        </span>
+                                </a>
+                                <!--end:Menu link-->
+                            </div>
+                            <!--end:Menu item-->
+                        <?php endif; ?>
+
+
+                    </div>
+                    <!--end:Menu sub-->
+   </div>
+   <!--end:Menu item-->
+
+
+
+<!--begin:Menu item-->
+<div  data-kt-menu-trigger="click"  class="menu-item <?php echo e(request()->is('myresultroom*') ||
+    request()->is('studentresults*')
+    ? ' here show menu-accordion' : ''); ?>" >
+    <!--begin:Menu link-->
+    <span class="menu-link" >
+        <span  class="menu-icon" >
+            <i class="ki-duotone ki-element-11 fs-2">
+                <span class="path1">
+                    </span><span class="path2">
+                    </span><span class="path3">
+                    </span><span class="path4">
+                    </span></i></span>
+                    <span  class="menu-title" >
+                    Records and Results
+                    </span>
+                    <span  class="menu-arrow" >
+                        </span></span>
+                        <!--end:Menu link-->
+                        <!--begin:Menu sub-->
+                    <div  class="menu-sub menu-sub-accordion" >
+                        <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('myresultroom-list')): ?>
+                            <!--begin:Menu item-->
+                            <div  class="menu-item" >
+                                <!--begin:Menu link-->
+                                <a class="menu-link  <?php echo e(request()->is('myresultroom*')
+                                    ? ' active' : ''); ?>"  href="<?php echo e(route('myresultroom.index')); ?>" >
+                                    <span  class="menu-bullet" >
+                                        <span class="bullet bullet-dot">
+                                            </span>
+                                        </span>
+                                        <span  class="menu-title" >
+                                          My Record sheets
+                                        </span>
+                                </a>
+                                <!--end:Menu link-->
+                            </div>
+                            <!--end:Menu item-->
+                        <?php endif; ?>
+                        <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('studentresults-list')): ?>
+                            <!--begin:Menu item-->
+                            <div  class="menu-item" >
+                                <!--begin:Menu link-->
+                                <a class="menu-link  <?php echo e(request()->is('studentresults*')
+                                    ? ' active' : ''); ?>"  href="<?php echo e(route('studentresults.index')); ?>" >
+                                    <span  class="menu-bullet" >
+                                        <span class="bullet bullet-dot">
+                                            </span>
+                                        </span>
+                                        <span  class="menu-title" >
+                                          Students Results
+                                        </span>
+                                </a>
+                                <!--end:Menu link-->
+                            </div>
+                            <!--end:Menu item-->
+                        <?php endif; ?>
+
+                    </div>
+                    <!--end:Menu sub-->
+   </div>
+   <!--end:Menu item-->
+
+
+
+<!--begin:Menu item-->
+<div  class="menu-item pt-5" >
+    <!--begin:Menu content-->
+    <div  class="menu-content" >
+    <span class="menu-heading fw-bold text-uppercase fs-7">
+        SCHOOL BASIC SETTINGS
+    </span>
+    </div>
+    <!--end:Menu content-->
+    </div>
+    <!--end:Menu item-->
+
+    <!--begin:Menu item-->
+    <div  data-kt-menu-trigger="click"  class="menu-item <?php echo e(request()->is('session*') ||
+    request()->is('term*')  ||
+    request()->is('schoolhouse*')
+    ? ' here show menu-accordion' : ''); ?>" >
+    <!--begin:Menu link-->
+    <span class="menu-link" >
+    <span  class="menu-icon" >
+        <i class="ki-duotone ki-element-11 fs-2">
+            <span class="path1">
+                </span><span class="path2">
+                </span><span class="path3">
+                </span><span class="path4">
+                </span></i></span>
+                <span  class="menu-title" >
+                   School Session & Term & House
+                </span>
+                <span  class="menu-arrow" >
+                    </span></span>
+                    <!--end:Menu link-->
+                    <!--begin:Menu sub-->
+                <div  class="menu-sub menu-sub-accordion" >
+                    <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('session-list')): ?>
+                        <!--begin:Menu item-->
+                        <div  class="menu-item" >
+                            <!--begin:Menu link-->
+                            <a class="menu-link  <?php echo e(request()->is('session*')
+                                ? ' active' : ''); ?>"  href="<?php echo e(route('session.index')); ?>" >
+                                <span  class="menu-bullet" >
+                                    <span class="bullet bullet-dot">
+                                        </span>
+                                    </span>
+                                    <span  class="menu-title" >
+                                       School Session
+                                    </span>
+                            </a>
+                            <!--end:Menu link-->
+                        </div>
+                        <!--end:Menu item-->
+                    <?php endif; ?>
+                    <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('term-list')): ?>
+                        <!--begin:Menu item-->
+                        <div  class="menu-item" >
+                            <!--begin:Menu link-->
+                            <a class="menu-link  <?php echo e(request()->is('term*')
+                                ? ' active' : ''); ?>"  href="<?php echo e(route('term.index')); ?>" >
+                                <span  class="menu-bullet" >
+                                    <span class="bullet bullet-dot">
+                                        </span>
+                                    </span>
+                                    <span  class="menu-title" >
+                                    School Term
+                                    </span>
+                            </a>
+                            <!--end:Menu link-->
+                        </div>
+                        <!--end:Menu item-->
+                    <?php endif; ?>
+                    <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('schoolhouse-list')): ?>
+                            <!--begin:Menu item-->
+                        <div  class="menu-item" >
+                                <!--begin:Menu link-->
+                                <a class="menu-link <?php echo e(request()->is('schoolhouse*')
+                                    ? ' active' : ''); ?>"
+                                href="<?php echo e(route('schoolhouse.index')); ?>" >
+                                    <span  class="menu-bullet" >
+                                        <span class="bullet bullet-dot">
+                                            </span></span>
+                                            <span  class="menu-title" >
+                                                School House
+                                            </span>
+                                </a>
+                                <!--end:Menu link-->
+                        </div>
+                            <!--end:Menu item-->
+                    <?php endif; ?>
+                </div>
+                <!--end:Menu sub-->
+    </div>
+    <!--end:Menu item-->
+
+    <!--begin:Menu item-->
+    <div  data-kt-menu-trigger="click"  class="menu-item <?php echo e(request()->is('schoolarm*') ||
+    request()->is('schoolclass*')  ||
+    request()->is('classcategory*') ||
+    request()->is('classteacher*')
+    ? ' here show menu-accordion' : ''); ?>" >
+    <!--begin:Menu link-->
+    <span class="menu-link" >
+    <span  class="menu-icon" >
+        <i class="ki-duotone ki-element-11 fs-2">
+            <span class="path1">
+                </span><span class="path2">
+                </span><span class="path3">
+                </span><span class="path4">
+                </span></i></span>
+                <span  class="menu-title" >
+                  Class Settings
+                </span>
+                <span  class="menu-arrow" >
+                    </span></span>
+                    <!--end:Menu link-->
+                    <!--begin:Menu sub-->
+                <div  class="menu-sub menu-sub-accordion" >
+                    <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('school_arm-list')): ?>
+                        <!--begin:Menu item-->
+                        <div  class="menu-item" >
+                            <!--begin:Menu link-->
+                            <a class="menu-link  <?php echo e(request()->is('schoolarm*')
+                                ? ' active' : ''); ?>"  href="<?php echo e(route('schoolarm.index')); ?>" >
+                                <span  class="menu-bullet" >
+                                    <span class="bullet bullet-dot">
+                                        </span>
+                                    </span>
+                                    <span  class="menu-title" >
+                                      Class Arm
+                                    </span>
+                            </a>
+                            <!--end:Menu link-->
+                        </div>
+                        <!--end:Menu item-->
+                    <?php endif; ?>
+                    <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('school_class-list')): ?>
+                        <!--begin:Menu item-->
+                        <div  class="menu-item" >
+                            <!--begin:Menu link-->
+                            <a class="menu-link  <?php echo e(request()->is('schoolclass*')
+                                ? ' active' : ''); ?>"  href="<?php echo e(route('schoolclass.index')); ?>" >
+                                <span  class="menu-bullet" >
+                                    <span class="bullet bullet-dot">
+                                        </span>
+                                    </span>
+                                    <span  class="menu-title" >
+                                  Class Name
+                                    </span>
+                            </a>
+                            <!--end:Menu link-->
+                        </div>
+                        <!--end:Menu item-->
+                    <?php endif; ?>
+                    <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('classcategory-list')): ?>
+                            <!--begin:Menu item-->
+                        <div  class="menu-item" >
+                                <!--begin:Menu link-->
+                                <a class="menu-link <?php echo e(request()->is('classcategory*')
+                                    ? ' active' : ''); ?>"
+                                href="<?php echo e(route('classcategories.index')); ?>" >
+                                    <span  class="menu-bullet" >
+                                        <span class="bullet bullet-dot">
+                                            </span></span>
+                                            <span  class="menu-title" >
+                                                Class Category
+                                            </span>
+                                </a>
+                                <!--end:Menu link-->
+                        </div>
+                            <!--end:Menu item-->
+                    <?php endif; ?>
+                    <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('class_teacher-list')): ?>
+                            <div  class="menu-item" >
+                                <!--begin:Menu link-->
+                                <a class="menu-link <?php echo e(request()->is('classteacher*')
+                                    ? ' active' : ''); ?>"
+                                href="<?php echo e(route('classteacher.index')); ?>" >
+                                    <span  class="menu-bullet" >
+                                        <span class="bullet bullet-dot">
+                                            </span></span>
+                                            <span  class="menu-title" >
+                                                Class Teacher
+                                            </span>
+                                </a>
+                                <!--end:Menu link-->
+                        </div>
+                            <!--end:Menu item-->
+                    <?php endif; ?>
+                </div>
+                <!--end:Menu sub-->
+    </div>
+    <!--end:Menu item-->
+
+    <!--begin:Menu item-->
+    <div  data-kt-menu-trigger="click"  class="menu-item <?php echo e(request()->is('subject*') ||
+    request()->is('subjectteacher*')  ||
+    request()->is('subjectclass*')
+    ? ' here show menu-accordion' : ''); ?>" >
+    <!--begin:Menu link-->
+    <span class="menu-link" >
+    <span  class="menu-icon" >
+        <i class="ki-duotone ki-element-11 fs-2">
+            <span class="path1">
+                </span><span class="path2">
+                </span><span class="path3">
+                </span><span class="path4">
+                </span></i></span>
+                <span  class="menu-title" >
+                 Subject Settings
+                </span>
+                <span  class="menu-arrow" >
+                    </span></span>
+                    <!--end:Menu link-->
+                    <!--begin:Menu sub-->
+                <div  class="menu-sub menu-sub-accordion" >
+                    <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('subject-list')): ?>
+                        <!--begin:Menu item-->
+                        <div  class="menu-item" >
+                            <!--begin:Menu link-->
+                            <a class="menu-link  <?php echo e(request()->is('subject*')
+                                ? ' active' : ''); ?>"  href="<?php echo e(route('subject.index')); ?>" >
+                                <span  class="menu-bullet" >
+                                    <span class="bullet bullet-dot">
+                                        </span>
+                                    </span>
+                                    <span  class="menu-title" >
+                                      School Subject
+                                    </span>
+                            </a>
+                            <!--end:Menu link-->
+                        </div>
+                        <!--end:Menu item-->
+                    <?php endif; ?>
+                    <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('subject_teacher-list')): ?>
+                        <!--begin:Menu item-->
+                        <div  class="menu-item" >
+                            <!--begin:Menu link-->
+                            <a class="menu-link  <?php echo e(request()->is('subjectteacher*')
+                                ? ' active' : ''); ?>"  href="<?php echo e(route('subjectteacher.index')); ?>" >
+                                <span  class="menu-bullet" >
+                                    <span class="bullet bullet-dot">
+                                        </span>
+                                    </span>
+                                    <span  class="menu-title" >
+                                  Subject Teacher
+                                    </span>
+                            </a>
+                            <!--end:Menu link-->
+                        </div>
+                        <!--end:Menu item-->
+                    <?php endif; ?>
+                    <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('subject_class-list')): ?>
+                            <!--begin:Menu item-->
+                        <div  class="menu-item" >
+                                <!--begin:Menu link-->
+                                <a class="menu-link <?php echo e(request()->is('subjectclass*')
+                                    ? ' active' : ''); ?>"
+                                href="<?php echo e(route('subjectclass.index')); ?>" >
+                                    <span  class="menu-bullet" >
+                                        <span class="bullet bullet-dot">
+                                            </span></span>
+                                            <span  class="menu-title" >
+                                               Subject Class
+                                            </span>
+                                </a>
+                                <!--end:Menu link-->
+                        </div>
+                            <!--end:Menu item-->
+                    <?php endif; ?>
+
+                </div>
+                <!--end:Menu sub-->
+    </div>
+    <!--end:Menu item-->
+
+
+
+
 
 
                 </div>

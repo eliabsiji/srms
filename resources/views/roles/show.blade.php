@@ -355,7 +355,9 @@ use Spatie\Permission\Models\Role;
     </div>
     <!--end::Modal dialog-->
 </div>
-<!--end::Modal - Update role--><!--end::Modal-->    </div>
+<!--end::Modal - Update role--><!--end::Modal-->
+
+</div>
     <!--end::Sidebar-->
 
     <!--begin::Content-->

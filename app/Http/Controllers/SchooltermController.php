@@ -11,10 +11,10 @@ class SchooltermController extends Controller
 
     function __construct()
     {
-         $this->middleware('permission:term-list|add-term|edit-term|delete-term', ['only' => ['index','store']]);
-         $this->middleware('permission:add-term', ['only' => ['create','store']]);
-         $this->middleware('permission:edit-term', ['only' => ['edit','update']]);
-         $this->middleware('permission:delete-term', ['only' => ['destroy']]);
+         $this->middleware('permission:term-list|term-create|term-edit|term-delete', ['only' => ['index','store']]);
+         $this->middleware('permission:term-create', ['only' => ['create','store']]);
+         $this->middleware('permission:term-edit', ['only' => ['edit','update','updateterm']]);
+         $this->middleware('permission:term-delete', ['only' => ['destroy','deleteterm']]);
     }
     /**
      * Display a listing of the resource.
@@ -114,8 +114,31 @@ class SchooltermController extends Controller
 
 
 
+
     }
 
+
+    public function updateterm(Request $request)
+    {
+
+            echo $request->id;
+        $checkterm = Schoolterm::where('term',$request->input('term'))->exists();
+        if($checkterm){
+            return redirect()->route('term.index')
+            ->with('danger', 'Ooops, Term is already taken');
+
+        }else{
+
+            $term = Schoolterm::find($request->id);
+            $input= $request->all();
+            $term->update($input);
+            return redirect()->route('term.index')
+            ->with('success', 'Term has been Edited Successfuly');
+        }
+
+
+
+    }
     /**
      * Remove the specified resource from storage.
      *
@@ -129,5 +152,26 @@ class SchooltermController extends Controller
 
         return redirect()->route('term.index')
             ->with('success', 'School Term deleted successfully.');
+    }
+
+
+    public function deleteterm(Request $request)
+    {
+        Schoolterm::find($request->termid)->delete();
+        //check data deleted or not
+        if ($request->termid) {
+            $success = true;
+            $message = "Term has been removed";
+        } else {
+            $success = true;
+            $message = "Term not found";
+        }
+
+        //  return response
+        return response()->json([
+            'success' => $success,
+            'message' => $message,
+        ]);
+
     }
 }

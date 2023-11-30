@@ -35,13 +35,17 @@
              <?php echo $__env->make('layouts.pages-assets.css.permission-list-css', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
         <?php endif; ?>
 
+        <?php if(Route::is('student.*')): ?>
+           <?php echo $__env->make('layouts.pages-assets.css.users-list-css', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+       <?php endif; ?>
+
         <?php if(Route::is('session.*')): ?>
            <?php echo $__env->make('layouts.pages-assets.css.users-list-css', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
        <?php endif; ?>
        <?php if(Route::is('term.*')): ?>
            <?php echo $__env->make('layouts.pages-assets.css.users-list-css', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
        <?php endif; ?>
-       <?php if(Route::is('journalyear.*')): ?>
+       <?php if(Route::is('schoolhouse.*')): ?>
            <?php echo $__env->make('layouts.pages-assets.css.users-list-css', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
        <?php endif; ?>
        <?php if(Route::is('authors.*') || Route::is('author.review') || Route::is('author.journal')  ): ?>
@@ -222,14 +226,14 @@
         <?php endif; ?>
 
         <?php if(Route::is('session.*')): ?>
-             <?php echo $__env->make('layouts.pages-assets.js.journalcategory-list-js', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+             <?php echo $__env->make('layouts.pages-assets.js.session-list-js', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
         <?php endif; ?>
 
         <?php if(Route::is('term.*')): ?>
-             <?php echo $__env->make('layouts.pages-assets.js.journalvolume-list-js', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+             <?php echo $__env->make('layouts.pages-assets.js.term-list-js', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
         <?php endif; ?>
-        <?php if(Route::is('journalyear.*')): ?>
-             <?php echo $__env->make('layouts.pages-assets.js.journalvolume-list-js', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+        <?php if(Route::is('schoolhouse.*')): ?>
+             <?php echo $__env->make('layouts.pages-assets.js.house-list-js', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
         <?php endif; ?>
         <?php if(Route::is('authors.*') || Route::is('author.review') || Route::is('author.journal')): ?>
             <?php echo $__env->make('layouts.pages-assets.js.journal-list-js', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>

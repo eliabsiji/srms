@@ -102,24 +102,6 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('myjournals', MyJournalsController::class);
 
 
-    Route::resource('academic_aper_part_a', AcademicAperAController::class);
-    Route::resource('academic_aper_part_b', AcademicAperBController::class);
-    Route::resource('academic_aper_part_c', AcademicAperCController::class);
-    Route::resource('academic_aper_part_d', AcademicAperDController::class);
-    Route::resource('academic_aper_part_e', AcademicAperEController::class);
-
-    Route::resource('senior_aper_part_a', SeniorAperAController::class);
-    Route::resource('senior_aper_part_b', SeniorAperBController::class);
-    Route::resource('senior_aper_part_c', SeniorAperCController::class);
-    Route::resource('senior_aper_part_d', SeniorAperDController::class);
-    Route::resource('senior_aper_part_e', SeniorAperEController::class);
-
-    Route::resource('junior_aper_part_a', JuniorAperAController::class);
-    Route::resource('junior_aper_part_b', JuniorAperBController::class);
-    Route::resource('junior_aper_part_c', JuniorAperCController::class);
-    Route::resource('junior_aper_part_d', JuniorAperDController::class);
-    Route::resource('junior_aper_part_e', JuniorAperEController::class);
-
 
 
 
@@ -133,7 +115,11 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('subjectteacher', SubjectTeacherController::class);
     Route::resource('classteacher', ClassTeacherController::class);
     Route::resource('session', SchoolsessionController::class);
+    Route::get('/sessionid/{sessionid}',[SchoolsessionController::class, 'deletesession'])->name('session.deletesession');
+    Route::post('updatesessionid',[SchoolsessionController::class, 'updatesession'])->name('session.updatesession');
     Route::resource('term', SchooltermController::class);
+    Route::post('updatetermid',[SchooltermController::class, 'updateterm'])->name('term.updateterm');
+    Route::get('/termid/{termid}',[SchooltermController::class, 'deleteterm'])->name('term.deleteterm');
     Route::resource('student', StudentController::class);
     Route::resource('classoperation', ClassOperationController::class);
     Route::resource('classcategories', ClasscategoryController::class);
@@ -146,6 +132,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('studentresults', StudentResultsController::class);
     Route::resource('subjectscoresheet', MyScoreSheetController::class);
     Route::resource('schoolhouse',SchoolHouseController::class);
+    Route::post('houseid',[SchoolHouseController::class, 'updatehouse'])->name('schoolhouse.updatehouse');
+    Route::get('/houseid/{houseid}',[SchoolHouseController::class, 'deletehouse'])->name('schoolhouse.deletehouse');
     Route::resource('studenthouse',StudentHouseController::class);
     //Route::resource('studentpersonalityprofile',StudentpersonalityprofileController::class);
     Route::get('/viewstudent/{id}/{termid}/{sessionid}',[ViewStudentController::class, 'show']);

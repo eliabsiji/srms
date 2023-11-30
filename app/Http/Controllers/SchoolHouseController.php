@@ -14,10 +14,10 @@ class SchoolHouseController extends Controller
 
     function __construct()
     {
-         $this->middleware('permission:schoolhouse-list|schoolhouse-add|schoolhouse-edit|schoolhouse-delete', ['only' => ['index','store']]);
-         $this->middleware('permission:schoolhouse-add', ['only' => ['create','store']]);
-         $this->middleware('permission:schoolhouse-edit', ['only' => ['edit','update']]);
-         $this->middleware('permission:schoolhouse-delete', ['only' => ['destroy']]);
+         $this->middleware('permission:schoolhouse-list|schoolhouse-create|schoolhouse-edit|schoolhouse-delete', ['only' => ['index','store']]);
+         $this->middleware('permission:schoolhouse-create', ['only' => ['create','store']]);
+         $this->middleware('permission:schoolhouse-edit', ['only' => ['edit','update','updatehouse']]);
+         $this->middleware('permission:schoolhouse-delete', ['only' => ['destroy','deletehouse']]);
     }
 
 
@@ -153,6 +153,7 @@ class SchoolHouseController extends Controller
         return redirect()->back()->with('success', 'Record has been successfully updated!');
     }
 
+ 
     /**
      * Remove the specified resource from storage.
      *
@@ -163,4 +164,44 @@ class SchoolHouseController extends Controller
     {
         //
     }
-}
+
+
+       
+    public function updateterm(Request $request)
+    {
+
+            echo $request->id;
+            $input = $request->all();
+
+
+            $sclass = Schoolhouse::find($request->id);
+            $sclass->update($input);
+    
+            return redirect()->back()->with('success', 'School House been successfully updated!');
+        }
+
+
+
+        
+    public function deletehouse(Request $request)
+    {
+        Schoolterm::find($request->houseid)->delete();
+        //check data deleted or not
+        if ($request->houseid) {
+            $success = true;
+            $message = "Term has been removed";
+        } else {
+            $success = true;
+            $message = "Term not found";
+        }
+
+        //  return response
+        return response()->json([
+            'success' => $success,
+            'message' => $message,
+        ]);
+
+    }
+
+    }
+
