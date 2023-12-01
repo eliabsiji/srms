@@ -8,6 +8,7 @@ use App\Models\Schoolterm;
 use App\Models\Schoolsession;
 use App\Models\Staff;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 class SchoolHouseController extends Controller
 {
@@ -153,7 +154,20 @@ class SchoolHouseController extends Controller
         return redirect()->back()->with('success', 'Record has been successfully updated!');
     }
 
- 
+    public function updatehouse(Request $request)
+    {
+        DB::table('schoolhouses')->updateOrInsert(
+            ['id'=>$request->id],
+            ['house'=>$request->house,
+                    'housecolour'=>$request->housecolour,
+                    'housemasterid'=>$request->update_houemasterid,
+                    'termid'=>$request->update_termid,
+                    'sessionid'=>$request->update_sessionid,]);
+
+        return redirect()->back()->with('success', 'Record has been successfully updated!');
+    }
+
+
     /**
      * Remove the specified resource from storage.
      *
@@ -166,23 +180,10 @@ class SchoolHouseController extends Controller
     }
 
 
-       
-    public function updateterm(Request $request)
-    {
-
-            echo $request->id;
-            $input = $request->all();
-
-
-            $sclass = Schoolhouse::find($request->id);
-            $sclass->update($input);
-    
-            return redirect()->back()->with('success', 'School House been successfully updated!');
-        }
 
 
 
-        
+
     public function deletehouse(Request $request)
     {
         Schoolterm::find($request->houseid)->delete();

@@ -83,6 +83,7 @@ var KTUsersUpdatePermissions = function () {
             }).then(function (result) {
                 if (result.value) {
                     modal.hide(); // Hide modal
+                    removeitems();
                 }
             });
         });
@@ -214,58 +215,46 @@ KTUtil.onDOMContentLoaded(function () {
 
 $(function () {
 
-
-        var arr = [];
-        $("#elmt").find('option').each(function() {
-            arr.push($(this).text());
-        });
-
     // ON SELECTING ROW
     $(".sel-house").click(function () {
       //FINDING ELEMENTS OF ROWS AND STORING THEM IN VARIABLES
-        var id = $(this).parents("tr").find("#tid").val();
-        var a = $.trim($(this).parents("tr").find(".schoolhouse").text());
-        var b = $.trim($(this).parents("tr").find(".housecolour").text());
-        var c = $(this).parents("tr").find("#housemaster").val();
-        var d = $.trim($(this).parents("tr").find(".termid").text());
-        var e = $.trim($(this).parents("tr").find(".sessionid").text());
-
-     var term_options = $('#termid option');
-     var term_values = $('#termid option');
-     var option_term = $.map(term_options, e=>$(e).val());
-     var value_term = $.map(term_values, e=>$(e).text());
-        alert(option_term);
-        alert(value_term);
+    var id = $(this).parents("tr").find("#tid").val();
+    var a = $.trim($(this).parents("tr").find(".schoolhouse").text());
+    var b = $.trim($(this).parents("tr").find(".housecolour").text());
 
 
-        function createAssociativeArray(arr1, arr2) {
-            var arr = new Object();
-            for(var i = 0, ii = arr1.length; i<ii; i++) {
-                arr[arr1[i]] = arr2[i];
+    var housemaster_options_v = $.map($('#housemasterid option'), e=>$(e).val());
+    var housemaster_values_v = $.map($('#housemasterid option'), e=>$(e).text());
+   populate(update_housemasterid,housemaster_options_v,housemaster_values_v);
+
+     var term_options_v = $.map($('#termid option'), e=>$(e).val());
+     var term_values_v = $.map($('#termid option'), e=>$(e).text());
+    populate(update_termid,term_options_v,term_values_v);
+
+    var session_options_v = $.map($('#sessionid option'), e=>$(e).val());
+    var session_values_v = $.map($('#sessionid option'), e=>$(e).text());
+   populate(update_sessionid,session_options_v,session_values_v);
+
+
+
+
+     function populate(selectid,valuearr,optionarr,){;
+            for (var i = 0, ii = optionarr.length; i<ii; i++) {
+                let optn = optionarr[i];
+                let el = document.createElement("option");
+                el.textContent = optn;
+                el.value = valuearr[i];
+                selectid.appendChild(el);
             }
-            return arr;
         }
 
-        function getObjectPropertiesLength(obj) {
-            var propNum = 0;
-            for(prop in obj) {
-                if(obj.hasOwnProperty(prop)) propNum++;
-            }
-            return propNum;
-        }
-
-        var p = getObjectPropertiesLength(associativeArray);
-        var array1 = ["key1", "Key2", "Key3"];
-        var array2 = ["Value1", "Value2", "Value3"];
-        var associativeArray = createAssociativeArray(array1, array2);
-        // getting keys using getOwnPropertyNames
-        const keys = Object.getOwnPropertyNames(associativeArray);
-        console.log("Keys are listed below ");
-
-        // Display output
-        console.log(keys);
 
 
+        $("#kt_modal_update_role").on('hide.bs.modal', function(){
+            $("#update_termid").find("option").remove().end().append('');
+            $("#update_housemasterid").find("option").remove().end().append('');
+             $("#update_sessionid").find("option").remove().end().append('');
+          });
 
         // CREATING DATA TO SHOW ON MODEL
 
@@ -301,44 +290,15 @@ $(function () {
         +'</div>'
 
 
-
-
-        +'<div class="mb-7">'
-
-        +'<label class="required fw-semibold fs-6 mb-5">Select House Master</label>'
-
-        +'<div class="fv-row mb-7">'
-
-
-        +' <select name ="housemasterid" id="housemasterid" class="form-control form-control-solid mb-3 mb-lg-0"  >'
-        +'<option value="" selected>Select House master</option>'
-        +'@foreach ($staff as $st => $name )'
-        +' <option value="{{$name->userid}}">{{ $name->name }}  </option>'
-        +' @endforeach'
-        +'</select>'
-
-        +'<input class="form-control form-control-solid"  value="'+c+'" readonly/>'
-        +' </div>'
-
-        +' </div>'
-
-
-
                     +'  </div>';
 
-        var sel= "";
-            sel += '<select name ="sessionid" id="sessionid" class="form-control form-control-solid mb-3 mb-lg-0">'
-            +'<option value="" selected>Select Session </option>'
-            +'<?php print_r($staff);?>'
-            +' @foreach ($schoolsession as $schoolsession => $name )'
-            +' <option value="{{$name->id}}">{{ $name->session}}</option>'
-            +' @endforeach'
-            +'</select>';
+
         //CLEARING THE PREFILLED DATA
-        //$("#content").empty();
+
+        $("#content").empty();
 
         //WRITING THE DATA ON MODEL
-        $("#content").append(sel);
+        $("#content").append(content);
 
 
     });

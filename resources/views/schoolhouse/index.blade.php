@@ -231,18 +231,6 @@
 
 
 
-                                                                                <select id="elmt">
-                                                                                    <option value="v1"> YEW </option>
-                                                                                    <option value="v4"> ZAC </option>
-                                                                                    <option value="v2"> ABC </option>
-                                                                                    <option value="v3"> DFG </option>
-                                                                                    <option value="v5"> MNO </option>
-                                                                                    <option value="v9"> STU </option>
-                                                                                </select>
-
-
-
-
                                                             </div>
                                                             <!--end::Scroll-->
 
@@ -274,7 +262,7 @@
                                     <!--end::Modal - Add task-->
 
                                <!--begin::Modal - Update role-->
-                                     <div class="modal fade" id="kt_modal_update_role" tabindex="-1" aria-hidden="true">
+                                     <div class="modal fade" id="kt_modal_update_role" tabindex="-1" aria-hidden="true" aria-labelledby="entity_request_modal">
                                         <!--begin::Modal dialog-->
                                             <div class="modal-dialog modal-dialog-centered mw-750px">
                                                 <!--begin::Modal content-->
@@ -297,16 +285,58 @@
                                                         <!--begin::Form-->
                                                         <form id="kt_modal_update_role_form" class="form" action="{{ route('schoolhouse.updatehouse') }}" method="POST">
                                                             @csrf
-                                                                <@php
-                                                                    print_r($schsess)
-                                                                @endphp>
+
                                                             <!--begin::Scroll-->
                                                             <div id="content">
 
                                                             </div>
 
 
+                                                             <!--begin::Input row-->
+                                                             <div class="fv-row mb-7">
+                                                                <!--begin::Label-->
+                                                                <label class="required fw-semibold fs-6 mb-5">Select Housemaster</label>
+                                                                <!--end::Label-->
+                                                                <!--begin::Input-->
+                                                                <select name ="update_housemasterid" id="update_housemasterid" class="sel-housemaster form-control form-control-solid mb-3 mb-lg-0"  >
 
+
+                                                                </select>
+                                                                <!--end::Input-->
+
+                                                            </div>
+                                                            <!--end::Input row-->
+
+
+                                                             <!--begin::Input row-->
+                                                             <div class="fv-row mb-7">
+                                                                <!--begin::Label-->
+                                                                <label class="required fw-semibold fs-6 mb-5">Select Term</label>
+                                                                <!--end::Label-->
+                                                                <!--begin::Input-->
+                                                                <select name ="update_termid" id="update_termid" class="sel-term form-control form-control-solid mb-3 mb-lg-0"  >
+
+
+                                                                </select>
+                                                                <!--end::Input-->
+
+                                                            </div>
+                                                            <!--end::Input row-->
+
+                                                                <!--begin::Input row-->
+                                                                <div class="fv-row mb-7">
+                                                                        <!--begin::Label-->
+                                                                        <label class="required fw-semibold fs-6 mb-5">Select Session</label>
+                                                                        <!--end::Label-->
+                                                                    <!--begin::Input-->
+                                                                    <select name ="update_sessionid" id="update_sessionid" class="sel-sesson form-control form-control-solid mb-3 mb-lg-0"  >
+
+
+                                                                    </select>
+                                                                    <!--end::Input-->
+
+                                                                </div>
+                                                                <!--end::Input row-->
                                                             <!--end::Scroll-->
 
                                                             <!--begin::Actions-->
@@ -315,9 +345,9 @@
                                                                     Discard
                                                                 </button>
 
-                                                                <button type="submit" class="btn btn-primary" data-kt-roles-modal-action="submit">
+                                                                <button type="submit" onclick="getOption()" class="btn btn-primary" data-kt-roles-modal-action="submit">
                                                                     <span class="indicator-label">
-                                                                        Submit
+                                                                        Update
                                                                     </span>
                                                                     <span class="indicator-progress">
                                                                         Please wait... <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
@@ -381,34 +411,7 @@
             @endif
             <!--begin::Card body-->
             <div class="card-body py-4">
-                <select id="arr">
-                    <option>Dropdown Items</option>
-                </select>
-                <br><br>
 
-                <button onclick="GFG_Fun();">
-                    Click Here
-                </button>
-
-                <h2 id="GFG" style="color: green;"></h2>
-
-                <script>
-                    let res = document.getElementById('GFG');
-                    let select = document.getElementById("arr");
-                    let elmts = ["HTML", "CSS", "JS", "PHP", "jQuery"];
-
-                    // Main function
-                    function GFG_Fun() {
-                        for (let i = 0; i < elmts.length; i++) {
-                            let optn = elmts[i];
-                            let el = document.createElement("option");
-                            el.textContent = optn;
-                            el.value = optn;
-                            select.appendChild(el);
-                        }
-                        res.innerHTML = "Elements Added";
-                    }
-                </script>
              <!--begin::Table-->
         <table class="table align-middle table-row-dashed fs-6 gy-5 mb-0" id="kt_roles_view_table">
             <thead>
@@ -451,21 +454,21 @@
                                                                                 <div class="symbol-label">
                                             <?php $image = "";?>
                                             <?php
-                                            if ($sc->avatar == NULL || !isset($sc->avatar) ){
+                                            if ($sc->pic == NULL || !isset($sc->pic) ){
                                                 $image =  'unnamed.png';
                                             }else {
-                                            $image =  $sc->avatar;
+                                            $image =  $sc->pic;
                                             }
                                             ?>
-                                                        <img src="{{ Storage::url('images/staffavatar/'.$image)}}" alt="{{ $sc->name }}" class="w-100" />
+                                                        <img src="{{ Storage::url('images/staffavatar/'.$image)}}" alt="{{ $sc->housemaster }}" class="w-100" />
                                                     </div>
                                                                         </a>
                                         </div>
                                         <!--end::Avatar-->
                                         <!--begin::User details-->
                                         <div class="d-flex flex-column">
-                                            <a href="{{ route('users.show',$sc->id) }}" class="text-gray-800 text-hover-primary mb-1">{{ $sc->name }}</a>
-                                            <span>{{ $sc->name }}</span>
+                                            <a href="{{ route('users.show',$sc->id) }}" class="text-gray-800 text-hover-primary mb-1">{{ $sc->housemaster }}</a>
+                                            <span>{{ $sc->housemaster }}</span>
                                         </div>
 
 
@@ -483,7 +486,7 @@
                                         <!--begin::Menu item-->
                                         <div class="menu-item px-3">
 
-                                            <button type="button" class="sel-house btn btn-light btn-active-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_update_role">Edit</button>
+                                            <button type="button" onClick="return removeThenAdd();" class="sel-house btn btn-light btn-active-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_update_role">Edit</button>
                                         </div>
                                         <!--end::Menu item-->
                                     @endcan
