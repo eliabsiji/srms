@@ -156,6 +156,12 @@ class SchoolHouseController extends Controller
 
     public function updatehouse(Request $request)
     {
+
+         $this->validate($request, [
+            'house' => 'required',
+            'housecolour' => 'required'
+        ]);
+
         DB::table('schoolhouses')->updateOrInsert(
             ['id'=>$request->id],
             ['house'=>$request->house,

@@ -15,35 +15,35 @@ var KTUsersUpdatePermissions = function () {
             form,
             {
                 fields: {
-                    'house': {
+                    'update_house': {
                         validators: {
                             notEmpty: {
                                 message: 'House name is required'
                             }
                         }
                     },
-                    'housecolour': {
+                    'update_housecolour': {
                         validators: {
                             notEmpty: {
                                 message: 'House Colour  is required'
                             }
                         }
                     },
-                    'housemasterid': {
+                    'update_housemasterid': {
                         validators: {
                             notEmpty: {
                                 message: 'House master  is required'
                             }
                         }
                     },
-                    'termid': {
+                    'update_termid': {
                         validators: {
                             notEmpty: {
                                 message: 'Term is required'
                             }
                         }
                     },
-                    'sessionid': {
+                    'update_sessionid': {
                         validators: {
                             notEmpty: {
                                 message: 'Session is required'
@@ -272,7 +272,7 @@ $(function () {
 
 
 
-        +'<input type="text" name="house" id="house" value="'+a+'" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="House Name ..."  />'
+        +'<input type="text" name="house" id="update_house" value="'+a+'" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="House Name ..." required  />'
 
         +'</div>'
 
@@ -285,7 +285,7 @@ $(function () {
 
 
 
-        +'<input type="text" name="housecolour" id="housecolour" value="'+b+'" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="House Colour ..."  />'
+        +'<input type="text" name="housecolour" id="update_housecolour" value="'+b+'" class="form-control form-control-solid mb-3 mb-lg-0" required placeholder="House Colour ..."  />'
 
         +'</div>'
 
