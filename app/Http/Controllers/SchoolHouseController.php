@@ -166,7 +166,7 @@ class SchoolHouseController extends Controller
             ['id'=>$request->id],
             ['house'=>$request->house,
                     'housecolour'=>$request->housecolour,
-                    'housemasterid'=>$request->update_houemasterid,
+                    'housemasterid'=>$request->update_housemasterid,
                     'termid'=>$request->update_termid,
                     'sessionid'=>$request->update_sessionid,]);
 
@@ -196,10 +196,10 @@ class SchoolHouseController extends Controller
         //check data deleted or not
         if ($request->houseid) {
             $success = true;
-            $message = "Term has been removed";
+            $message = "House has been removed";
         } else {
             $success = true;
-            $message = "Term not found";
+            $message = "House not found";
         }
 
         //  return response

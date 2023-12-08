@@ -303,7 +303,9 @@
 
                                                                 </select>
                                                                 <!--end::Input-->
+                                                                <div id="prev_housemaster">
 
+                                                                </div>
                                                             </div>
                                                             <!--end::Input row-->
 
@@ -315,11 +317,11 @@
                                                                 <!--end::Label-->
                                                                 <!--begin::Input-->
                                                                 <select name ="update_termid" id="update_termid" class="sel-term form-control form-control-solid mb-3 mb-lg-0"  >
-
-
                                                                 </select>
                                                                 <!--end::Input-->
+                                                                <div id="prev_term">
 
+                                                                </div>
                                                             </div>
                                                             <!--end::Input row-->
 
@@ -329,12 +331,15 @@
                                                                         <label class="required fw-semibold fs-6 mb-5">Select Session</label>
                                                                         <!--end::Label-->
                                                                     <!--begin::Input-->
-                                                                    
+
                                                                     <select name ="update_sessionid" id="update_sessionid" class="sel-sesson form-control form-control-solid mb-3 mb-lg-0"  >
 
 
                                                                     </select>
                                                                     <!--end::Input-->
+                                                                    <div id="prev_session">
+
+                                                                    </div>
 
                                                                 </div>
                                                                 <!--end::Input row-->
@@ -449,27 +454,10 @@
                         <td class="schoolhouse">{{ $sc->house }} </td>
                         <td class="housecolour">{{ $sc->housecolour }}</td>
                         <td class="housemaster"><input type="hidden" id="housemaster"  value="{{ $sc->name }}" />{{ $sc->name }}
-                                        <!--begin:: Avatar -->
-                                        <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
-                                            <a href="{{ route('users.show',$sc->id) }}">
-                                                                                <div class="symbol-label">
-                                            <?php $image = "";?>
-                                            <?php
-                                            if ($sc->pic == NULL || !isset($sc->pic) ){
-                                                $image =  'unnamed.png';
-                                            }else {
-                                            $image =  $sc->pic;
-                                            }
-                                            ?>
-                                                        <img src="{{ Storage::url('images/staffavatar/'.$image)}}" alt="{{ $sc->housemaster }}" class="w-100" />
-                                                    </div>
-                                                                        </a>
-                                        </div>
-                                        <!--end::Avatar-->
+
                                         <!--begin::User details-->
                                         <div class="d-flex flex-column">
-                                            <a href="{{ route('users.show',$sc->id) }}" class="text-gray-800 text-hover-primary mb-1">{{ $sc->housemaster }}</a>
-                                            <span>{{ $sc->housemaster }}</span>
+                                            <a href="#" class="text-gray-800 text-hover-primary mb-1">{{ $sc->housemaster }}</a>
                                         </div>
 
 

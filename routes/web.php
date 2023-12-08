@@ -106,23 +106,44 @@ Route::group(['middleware' => ['auth']], function() {
 
 
     Route::resource('academicoperations', AcademicOperationsController::class);
+
     Route::resource('subject', SubjectController::class);
+
     Route::resource('schoolclass', SchoolClassController::class);
+
     Route::resource('schoolarm', SchoolArmController::class);
+    Route::get('/schoolclassid/{schoolclassid}',[SchoolClassController::class, 'deleteschoolclass'])->name('schoolclass.deleteschoolclass');
+    Route::post('schoolclassid',[SchoolClassController::class, 'updateschoolclass'])->name('schoolclass.updateschoolclass');
+
+    Route::get('/armid/{armid}',[SchoolArmController::class, 'deletearm'])->name('schoolarm.deletearm');
+    Route::post('armid',[SchoolArmController::class, 'updatearm'])->name('schoolarm.updatearm');
+
     Route::resource('subjectclass', SubjectclassController::class);
+
     Route::resource('staff', StaffController::class);
+
     Route::resource('staffacademicinfo', AcademicinfoController::class);
+
     Route::resource('subjectteacher', SubjectTeacherController::class);
+
     Route::resource('classteacher', ClassTeacherController::class);
+
     Route::resource('session', SchoolsessionController::class);
     Route::get('/sessionid/{sessionid}',[SchoolsessionController::class, 'deletesession'])->name('session.deletesession');
     Route::post('updatesessionid',[SchoolsessionController::class, 'updatesession'])->name('session.updatesession');
+
     Route::resource('term', SchooltermController::class);
     Route::post('updatetermid',[SchooltermController::class, 'updateterm'])->name('term.updateterm');
     Route::get('/termid/{termid}',[SchooltermController::class, 'deleteterm'])->name('term.deleteterm');
+
     Route::resource('student', StudentController::class);
+
     Route::resource('classoperation', ClassOperationController::class);
+
     Route::resource('classcategories', ClasscategoryController::class);
+    Route::get('/classcategoryid/{classcategoryid}',[ClasscategoryController::class, 'deleteclasscategory'])->name('classcategory.deleteclasscategory');
+    Route::post('updateclasscategoryid',[SchoolsessionController::class, 'updateclasscategory'])->name('classcategory.updateclasscategory');
+
     Route::resource('subjectoperation', SubjectOperationController::class);
     Route::resource('parent', ParentController::class);
     Route::resource('studentImageUpload', StudentImageUploadController::class);

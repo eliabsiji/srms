@@ -1,230 +1,459 @@
 @extends('layouts.master')
 @section('content')
 
-     <!-- Start Page title and tab -->
-     <div class="section-body">
-        <div class="container-fluid">
-            <div class="d-flex justify-content-between align-items-center ">
-                <div class="header-action">
-                    <h1 class="page-title">School</h1>
-                    <ol class="breadcrumb page-breadcrumb">
-                        <li class="breadcrumb-item"><a href="#">Class</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Class</li>
-                    </ol>
-                </div>
-                <ul class="nav nav-tabs page-header-tab">
-                    @can('school-class-list')
-                        <li class="nav-item"><a class="nav-link " data-toggle="tab" href="#class">List View</a></li>
-                    @endcan
+            <!--begin::Main-->
+            <div class="app-main flex-column flex-row-fluid" id="kt_app_main">
+                <!--begin::Content wrapper-->
+                <div class="d-flex flex-column flex-column-fluid">
 
-                    @can('add-school-class')
-                    <li class="nav-item"><a class="nav-link" id="Library-tab-Boot" data-toggle="tab" href="#class-add"></a></li>
-                    @endcan
+                <!--begin::Toolbar-->
+                <div id="kt_app_toolbar" class="app-toolbar  py-3 py-lg-6 ">
 
-                    @can('school-class-list')
-                    <li class="nav-item"><a class="nav-link " data-toggle="tab" href="#class"></a></li>
-                @endcan
+                            <!--begin::Toolbar container-->
+                        <div id="kt_app_toolbar_container" class="app-container  container-xxl d-flex flex-stack ">
 
-                @can('add-school-class')
-                <li class="nav-item"><a class="nav-link" id="Library-tab-Boot" data-toggle="tab" href="#class-add">Add Class </a></li>
-                @endcan
+                            <!--begin::Page title-->
+                            <div  class="page-title d-flex flex-column justify-content-center flex-wrap me-3 ">
+                                <!--begin::Title-->
+                                <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">
+                                School Class
+                                        </h1>
+                                <!--end::Title-->
 
-                @can('school-class-list')
-                <li class="nav-item"><a class="nav-link " data-toggle="tab" href="#class"></a></li>
-            @endcan
 
-            @can('add-school-class')
-            <li class="nav-item"><a class="nav-link" id="Library-tab-Boot" data-toggle="tab" href="#class-add"></a></li>
-            @endcan
+                                    <!--begin::Breadcrumb-->
+                                    <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
+                                                        <!--begin::Item-->
+                                                        <li class="breadcrumb-item text-muted">
+                                                            <a href="{{ route('schoolclass.index') }}" class="text-muted text-hover-primary">School House </a>
+                                                                        </li>
+                                                            <!--end::Item-->
+                                                                <!--begin::Item-->
+                                                <li class="breadcrumb-item">
+                                                    <span class="bullet bg-gray-400 w-5px h-2px"></span>
+                                                </li>
+                                                <!--end::Item-->
+
+                                                        <!--begin::Item-->
+                                                                <li class="breadcrumb-item text-muted">School Class</li>
+                                                            <!--end::Item-->
+
+                                                </ul>
+                                    <!--end::Breadcrumb-->
+                                </div>
+                            <!--end::Page title-->
+                                @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                                @endif
+
+                                @if (\Session::has('status'))
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                {{ \Session::get('status') }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                                @endif
+                                @if (\Session::has('success'))
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                {{ \Session::get('success') }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                                @endif
+
+                            </div>
+                            <!--end::Toolbar container-->
+                        </div>
+                    <!--end::Toolbar-->
+
+
+                    <div id="kt_app_content" class="app-content  flex-column-fluid " >
+                        <!--begin::Content container-->
+                        <div id="kt_app_content_container" class="app-container  container-xxl ">
+
+                   <!--begin::Toolbar-->
+                        <div class="d-flex flex-wrap flex-stack my-5">
+                            <!--begin::Heading-->
+                            <h2 class="fs-2 fw-semibold my-2">
+                                School Class
+                                <span class="fs-6 text-gray-400 ms-1">Database</span>
+                            </h2>
+                            <!--end::Heading-->
+
+
+                        </div>
+                    <!--end::Toolbar-->
+
+
+
+        <!--begin::Card-->
+    <div class="card">
+            <!--begin::Card header-->
+            <div class="card-header border-0 pt-6">
+
+                  <!--begin::Card toolbar-->
+                    <div class="card-toolbar">
+                              <!--begin::Toolbar-->
+                                    <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
+                                                <!--begin::Add user-->
+                                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
+                                                    <i class="ki-duotone ki-plus fs-2"></i>       Create New Class
+                                                </button>
+                                                <!--end::Add user-->
+                                    </div>
+
+                                     <!--begin::Modal - Add task-->
+                                        <div class="modal fade" id="kt_modal_add_user" tabindex="-1" aria-hidden="true">
+                                            <!--begin::Modal dialog-->
+                                            <div class="modal-dialog modal-dialog-centered mw-650px">
+                                                <!--begin::Modal content-->
+                                                <div class="modal-content">
+                                                    <!--begin::Modal header-->
+                                                    <div class="modal-header" id="kt_modal_add_user_header">
+                                                        <!--begin::Modal title-->
+                                                        <h2 class="fw-bold">Create New Class</h2>
+                                                        <!--end::Modal title-->
+
+                                                        <!--begin::Close-->
+                                                        <div class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-users-modal-action="close">
+                                                            <i class="ki-duotone ki-cross fs-1"><span class="path1"></span><span class="path2"></span></i>                </div>
+                                                        <!--end::Close-->
+                                                    </div>
+                                                    <!--end::Modal header-->
+
+
+                                                    <!--begin::Modal body-->
+                                                    <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
+                                                        <!--begin::Form-->
+                                                        <form id="kt_modal_add_user_form" class="form" action="{{ route('schoolclass.store') }}" method="POST">
+                                                            @csrf
+                                                            <!--begin::Scroll-->
+                                                            <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_add_user_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_user_header" data-kt-scroll-wrappers="#kt_modal_add_user_scroll" data-kt-scroll-offset="300px">
+
+
+                                                                <!--begin::Input group-->
+                                                                <div class="fv-row mb-7">
+                                                                    <!--begin::Label-->
+                                                                    <label class="required fw-semibold fs-6 mb-2">Class Name</label>
+                                                                    <!--end::Label-->
+
+                                                                    <!--begin::Input-->
+                                                                    <input type="text" id="schoolclass" name="schoolclass" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="House Name ..."  />
+                                                                    <!--end::Input-->
+                                                                </div>
+                                                                <!--end::Input group-->
+
+
+
+
+
+                                                                  <!--begin::Input group-->
+                                                                  <div class="mb-7">
+                                                                    <!--begin::Label-->
+                                                                    <label class="required fw-semibold fs-6 mb-5">Select House Master</label>
+                                                                    <!--end::Label-->
+                                                                            <!--begin::Input row-->
+                                                                            <div class="fv-row mb-7">
+
+                                                                                    <!--begin::Input-->
+                                                                                    <select name ="arm" id="arm"  class="form-control form-control-solid mb-3 mb-lg-0">
+                                                                                        <option value="0">Select Class Arm </option>
+                                                                                        @foreach ($arms as $arms => $name )
+                                                                                         <option value="{{$name->arm}}">{{ $name->arm }}</option>
+                                                                                        @endforeach
+                                                                                      </select>
+                                                                                    <!--end::Input-->
+
+                                                                            </div>
+                                                                            <!--end::Input row-->
+                                                                        </div>
+                                                                        <!--end::Input group-->
+
+
+                                                                          <!--begin::Input group-->
+                                                                  <div class="mb-7">
+                                                                    <!--begin::Label-->
+                                                                    <label class="required fw-semibold fs-6 mb-5">Select Class Category</label>
+                                                                    <!--end::Label-->
+                                                                            <!--begin::Input row-->
+                                                                            <div class="fv-row mb-7">
+                                                                                    <!--begin::Input-->
+                                                                                    <select name ="classcategoryid" id="classcategoryid" class="form-control form-control-solid mb-3 mb-lg-0"  >
+                                                                                        <option value="0">Select Class Category </option>
+                                                                                        @foreach ($classcategories as $cat => $name )
+                                                                                         <option value="{{$name->id}}">{{ $name->category }}</option>
+                                                                                        @endforeach
+                                                                                        <option value="1">Junior School</option>
+                                                                                        <option value="2">Senior School</option>
+                                                                                      </select>
+                                                                                    </select>
+                                                                                    <!--end::Input-->
+                                                                            </div>
+                                                                            <!--end::Input row-->
+                                                                        </div>
+                                                                        <!--end::Input group-->
+
+
+
+
+
+                                                            </div>
+                                                            <!--end::Scroll-->
+
+                                                            <!--begin::Actions-->
+                                                            <div class="text-center pt-15">
+                                                                <button type="reset" class="btn btn-light me-3" data-kt-users-modal-action="cancel">
+                                                                    Discard
+                                                                </button>
+
+                                                                <button type="submit" class="btn btn-primary" data-kt-users-modal-action="submit">
+                                                                    <span class="indicator-label">
+                                                                        Submit
+                                                                    </span>
+                                                                    <span class="indicator-progress">
+                                                                        Please wait... <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                                                                    </span>
+                                                                </button>
+                                                            </div>
+                                                            <!--end::Actions-->
+                                                        </form>
+                                                        <!--end::Form-->
+                                                    </div>
+                                                    <!--end::Modal body-->
+                                                </div>
+                                                <!--end::Modal content-->
+                                            </div>
+                                            <!--end::Modal dialog-->
+                                            </div>
+                                    <!--end::Modal - Add task-->
+
+                               <!--begin::Modal - Update role-->
+                                     <div class="modal fade" id="kt_modal_update_role" tabindex="-1" aria-hidden="true" aria-labelledby="entity_request_modal">
+                                        <!--begin::Modal dialog-->
+                                            <div class="modal-dialog modal-dialog-centered mw-750px">
+                                                <!--begin::Modal content-->
+                                                <div class="modal-content">
+                                                    <!--begin::Modal header-->
+                                                    <div class="modal-header">
+                                                        <!--begin::Modal title-->
+                                                        <h2 class="fw-bold">Update School House</h2>
+                                                        <!--end::Modal title-->
+
+                                                        <!--begin::Close-->
+                                                        <div class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-roles-modal-action="close">
+                                                            <i class="ki-duotone ki-cross fs-1"><span class="path1"></span><span class="path2"></span></i>                </div>
+                                                        <!--end::Close-->
+                                                    </div>
+                                                    <!--end::Modal header-->
+
+                                                    <!--begin::Modal body-->
+                                                    <div id="formcontent" class="modal-body scroll-y mx-5 my-7">
+                                                        <!--begin::Form-->
+                                                        <form id="kt_modal_update_role_form" class="form" action="{{ route('schoolclass.updateschoolclass') }}" method="POST">
+                                                            @csrf
+
+                                                            <!--begin::Scroll-->
+                                                            <div id="content">
+
+                                                            </div>
+
+
+                                                             <!--begin::Input row-->
+                                                             <div class="fv-row mb-7">
+                                                                <!--begin::Label-->
+                                                                <label class="required fw-semibold fs-6 mb-5">Select Arm</label>
+                                                                <!--end::Label-->
+                                                                <!--begin::Input-->
+                                                                <select name ="update_armid" id="update_armid" class="sel-arm form-control form-control-solid mb-3 mb-lg-0"  >
+
+
+                                                                </select>
+                                                                <!--end::Input-->
+                                                                <div id="prev_arm">
+
+                                                                </div>
+                                                            </div>
+                                                            <!--end::Input row-->
+
+
+                                                             <!--begin::Input row-->
+                                                             <div class="fv-row mb-7">
+                                                                <!--begin::Label-->
+                                                                <label class="required fw-semibold fs-6 mb-5">Select Class Category</label>
+                                                                <!--end::Label-->
+                                                                <!--begin::Input-->
+                                                                <select name ="update_classcateoryid" id="update_classcategoryid" class="sel-classcategory form-control form-control-solid mb-3 mb-lg-0"  >
+                                                                </select>
+                                                                <!--end::Input-->
+                                                                <div id="prev_classcategory">
+
+                                                                </div>
+                                                            </div>
+                                                            <!--end::Input row-->
+
+
+                                                            <!--end::Scroll-->
+
+                                                            <!--begin::Actions-->
+                                                            <div class="text-center pt-15">
+                                                                <button type="reset" class="btn btn-light me-3" data-kt-roles-modal-action="cancel">
+                                                                    Discard
+                                                                </button>
+
+                                                                <button type="submit" onclick="getOption()" class="btn btn-primary" data-kt-roles-modal-action="submit">
+                                                                    <span class="indicator-label">
+                                                                        Update
+                                                                    </span>
+                                                                    <span class="indicator-progress">
+                                                                        Please wait... <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                                                                    </span>
+                                                                </button>
+                                                            </div>
+                                                            <!--end::Actions-->
+                                                        </form>
+                                                        <!--end::Form-->
+                                                    </div>
+                                                    <!--end::Modal body-->
+                                                </div>
+                                                <!--end::Modal content-->
+                                            </div>
+                                        <!--end::Modal dialog-->
+                                    </div>
+                                    <!--end::Modal - Update role--><!--end::Modal-->
+
+
+
+                                    </div>
+                                    <!--end::Card toolbar-->
+                                            <!--begin::Card toolbar-->
+                                            <div class="card-toolbar">
+                                                <!--begin::Search-->
+                                                <div class="d-flex align-items-center position-relative my-1"  data-kt-view-roles-table-toolbar="base">
+                                                    <i class="ki-duotone ki-magnifier fs-1 position-absolute ms-6"><span class="path1"></span><span class="path2"></span></i>                <input type="text" data-kt-roles-table-filter="search" class="form-control form-control-solid w-250px ps-15" placeholder="Search ..." />
+                                                </div>
+                                                <!--end::Search-->
+
+                                                <!--begin::Group actions-->
+                                                <div class="d-flex justify-content-end align-items-center d-none" data-kt-view-roles-table-toolbar="selected">
+                                                    <div class="fw-bold me-5">
+                                                        <span class="me-2" data-kt-view-roles-table-select="selected_count"></span> Selected
+                                                    </div>
+
+                                                    <button type="button" class="btn btn-danger" data-kt-view-roles-table-select="delete_selected">
+                                                        Delete Selected
+                                                    </button>
+                                                </div>
+                                                <!--end::Group actions-->
+                                            </div>
+                                            <!--end::Card toolbar-->
+            </div>
+            <!--end::Card header-->
+
+            @if (count($errors) > 0)
+            <div class="row animated fadeInUp">
+                @if (count($errors) > 0)
+            <div class="alert alert-warning fade in">
+            <a href="#" class="close" data-dismiss="alert">&times;</a>
+                <strong>Opps!</strong> Something went wrong, please check below errors.<br><br>
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
                 </ul>
             </div>
-        </div>
-        @if (\Session::has('status'))
-           <div class="alert alert-success alert-dismissible">
-            <button type="button" class="close" data-dismiss="alert"></button>
-                <p>{{ \Session::get('status') }}</p>
+            @endif
             </div>
-        @endif
-        @if (\Session::has('success'))
-           <div class="alert alert-success alert-dismissible">
-            <button type="button" class="close" data-dismiss="alert"></button>
-                <p>{{ \Session::get('success') }}</p>
-            </div>
-        @endif
-        @if (\Session::has('danger'))
-        <div class="alert alert-success alert-dismissible">
-         <button type="button" class="close" data-dismiss="alert"></button>
-             <p>{{ \Session::get('danger') }}</p>
-         </div>
-     @endif
+            @endif
+            <!--begin::Card body-->
+            <div class="card-body py-4">
 
-
-    </div>
-    <div class="section-body mt-4">
-        <div class="container-fluid">
-            <div class="tab-content">
-                <div class="tab-pane active" id="class">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="table-responsive">
-
-                                <table class="table table-hover js-basic-example dataTable table-striped table_custom   ">
-                                    <thead>
-                                        <tr>
-                                            <tr>
-                                                <th>SN</th>
-                                                <th>Class</th>
-                                                <th>Arm</th>
-                                                <th>Category</th>
-                                                <th>Action</th>
-                                                <th>Date Registered</th>
-                                            </tr>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php $sn = 1; ?>
-                                     @foreach ($all_classes as $class)
-
-                                     <tr id="sid{{ $class->id }}">
-                                         <td>{{ $sn++ }}</td>
-                                         <td>{{ $class->schoolclass }}</td>
-                                         <td>{{ $class->arm }}</td>
-                                         <td>{{ $class->classcategory }}</td>
-                                         <td><div class="btn-group">
-
-                                             @can('edit-school-class')
-                                             <a href="{{ route('schoolclass.edit',$class->id) }}" class="btn fa fa-pencil" data-toggle="tooltip" title="Edit Class"></a>
-                                             @endcan
-                                             @can('delete-school-class')
-                                             <a href="javascript:void(0)" class="btn fa fa-trash delete"
-                                             data-toggle="tooltip" title="Delete Class " onClick="check({{ $class->id }})"></a>
-                                         @endcan
-                                         </div></td>
-                                         <td>{{ $class->updated_at }}</td>
-                                     </tr>
-                                     @endforeach
-                                     </tbody>
-                                </table>
-                            </div>
+             <!--begin::Table-->
+        <table class="table align-middle table-row-dashed fs-6 gy-5 mb-0" id="kt_roles_view_table">
+            <thead>
+                <tr class="text-start text-muted fw-bold fs-7 text-uppercase gs-0">
+                    <th class="w-10px pe-2">
+                        <div class="form-check form-check-sm form-check-custom form-check-solid me-3">
+                            <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_roles_view_table .form-check-input" value="1" />
                         </div>
-                    </div>
-                </div>
+                    </th>
+                    <th class="min-w-125px">SN</th>
+                    <th class="min-w-125px">Class</th>
+                    <th class="min-w-125px">Arm</th>
+                    <th class="min-w-125px">Category</th>
 
-                <div class="tab-pane" id="class-add">
-                    <div class="card">
-
-                        <div class="card-header">
-
-                            <h3 class="card-title">Add Class Teacher</h3>
-
-                            @if (count($errors) > 0)
-                            <div class="alert alert-success alert-dismissible">
-                                <button type="button" class="close" data-dismiss="alert"></button>
-                                <strong>Opps!</strong> Something went wrong, please check below errors.<br><br>
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
+                    <th class="min-w-125px">Date Updated</th>
+                    <th class="min-w-100px">Actions</th>
+                </tr>
+            </thead>
+            <tbody class="fw-semibold text-gray-600">
+                @php
+                 $i = 0
+               @endphp
+             @foreach ($all_classes as $class)
+                    <tr data-url="{{ route('schoolclass.destroy',$class->id) }}">
+                        <td>
+                            <div class="form-check form-check-sm form-check-custom form-check-solid">
+                                <input class="form-check-input" type="checkbox" value="1" />
                             </div>
-                        @endif
-                            <div class="card-options ">
-                                <a href="#" class="card-options-collapse" data-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a>
-                                <a href="#" class="card-options-remove" data-toggle="card-remove"><i class="fe fe-x"></i></a>
-                            </div>
-                        </div>
-                        <form  role="form" id="inline-validation" class="form-horizontal form-stripe" action="{{ route('schoolclass.store') }}" method="POST">
-                            @csrf
-                            <div class="form-group row">
-                                <label class="col-md-3 col-form-label">Class Name <span class="text-danger">*</span></label>
-                                <div class="col-md-7">
-                                    <input type="text" class="form-control" id="schoolclass" name="schoolclass" placeholder="School class" required>
+                        </td>
+                        <td class="schoolclassid">  <input type="hidden" id="tid"  value="{{ $class->id }}" />{{ ++$i }}</td>
+                        <td class="schoolclass">{{ $class->schoolclass }} </td>
+                        <td class="arm">{{ $class->arm }}</td>
+                        <td class="classcategory">{{ $class->classcategory }} </td>
+                        <td >{{ $class->updated_at }} </td>
+                        <td >
+                            <a href="#" class="btn btn-light btn-active-light-primary btn-flex btn-center btn-sm" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
+                                Actions
+                                <i class="ki-duotone ki-down fs-5 ms-1"></i>                    </a>
+                            <!--begin::Menu-->
+                                <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-125px py-4" data-kt-menu="true">
+                                    @can('school_class-edit')
+                                        <!--begin::Menu item-->
+                                        <div class="menu-item px-3">
+
+                                            <button type="button" onClick="return removeThenAdd();" class="sel-house btn btn-light btn-active-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_update_role">Edit</button>
+                                        </div>
+                                        <!--end::Menu item-->
+                                    @endcan
+                                    @can('school_class-delete')
+                                    <div class="menu-item px-3" >
+                                        {{-- <form method="post" class="menu-link px-3" data-kt-roles-table-filter="delete_row" data-route="">
+                                          @csrf
+                                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                        </form> --}}
+                                        <a
+                                        href="javascript:void(0)"
+                                        id="show-user"
+                                        data-kt-roles-table-filter="delete_row"
+                                        data-url="{{ route('schoolclass.deleteschoolclass', ['schoolclassid'=>$class->id]) }}"
+                                        class="btn btn-danger btn-sm">Delete</a>
+                                    </div>
+                                    <!--end::Menu item-->
+                                    @endcan
+
                                 </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-3 col-form-label">Select Class Arm <span class="text-danger">*</span></label>
-                                <div class="col-md-7">
-                                    <select name ="arm" id="arm"  class="form-control" >
-                                        <option value="0">Select Class Arm </option>
-                                        @foreach ($arms as $arms => $name )
-                                         <option value="{{$name->arm}}">{{ $name->arm }}</option>
-                                        @endforeach
-                                      </select>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-3 col-form-label">Select Class Category <span class="text-danger">*</span></label>
-                                <div class="col-md-7">
-                                    <select name ="classcategoryid" id="classcategoryid"  class="form-control" >
-                                        <option value="0">Select Class Category </option>
-                                        @foreach ($classcategories as $cat => $name )
-                                         <option value="{{$name->id}}">{{ $name->category }}</option>
-                                        @endforeach
-                                      </select>
-                                </div>
-                            </div>
+                                    <!--end::Menu-->
+                        </td>
 
-                            <div class="form-group row">
-                                <label class="col-md-3 col-form-label"></label>
-                                <div class="col-md-7">
-                                    <button type="submit" class="btn btn-primary">Submit</button>
-                                    <button type="submit" class="btn btn-outline-secondary">Cancel</button>
-                                </div>
-                            </div>
-                            {!! Form::close() !!}
-                    </div>
-                </div>
+             </tr>
+             @endforeach
+                            </tbody>
+        </table>
+        <!--end::Table-->
             </div>
-        </div>
+            <!--end::Card body-->
+      </div>
+            <!--end::Card-->
     </div>
 
+            <!--end::Content container-->
+</div>
+        <!--end::Content-->
 
-    <script>
 
-        function check(id){
-
-            var id = id;
-            var spinner = $('#loader');
-
-          Swal.fire({
-          title: 'Are you sure?',
-          text: "Deleting this record will affect other associated records (e.g Any Record where this Class Teacher is featured)",
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonColor: '#3085d6',
-          cancelButtonColor: '#d33',
-          confirmButtonText: 'Yes, delete it!'
-        }).then((result) => {
-          if (result.isConfirmed) {
-            spinner.show();
-            $.ajax({
-
-                url: 'ajaxclass/'+id,
-                async: false,
-                type: "DELETE",
-                cache: false,
-                data:{
-                    _token:'{{ csrf_token() }}',
-                   id: id
-                },
-                dataType: 'JSON',
-
-            }).done(function(resp) {
-          spinner.hide();
-
-            });
-            Swal.fire(
-              'Deleted!',
-              'This Record is now Deleted. You can Check Other Records to make neccessary Editing!',
-              'success'
-            )
-
-            var myobj = document.getElementById("sid"+id);
-             myobj.remove();
-
-          }
-        })
-
-        }
-        </script>
-    @endsection
+@endsection

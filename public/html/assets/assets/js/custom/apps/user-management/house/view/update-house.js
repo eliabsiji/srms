@@ -221,6 +221,9 @@ $(function () {
     var id = $(this).parents("tr").find("#tid").val();
     var a = $.trim($(this).parents("tr").find(".schoolhouse").text());
     var b = $.trim($(this).parents("tr").find(".housecolour").text());
+    var housemaster = $.trim($(this).parents("tr").find(".housemaster").text());
+    var term = $.trim($(this).parents("tr").find(".termid").text());
+    var session= $.trim($(this).parents("tr").find(".sessionid").text());
 
 
     var housemaster_options_v = $.map($('#housemasterid option'), e=>$(e).val());
@@ -291,7 +294,12 @@ $(function () {
 
 
                     +'  </div>';
-
+        var prev_housemaster = "";
+        prev_housemaster +='Previous Selection: <input type="text" value="'+housemaster+'" class="form-control form-control-solid mb-3 mb-lg-0" readonly/>';
+        var prev_term = "";
+        prev_term +='Previous Selection: <input type="text" value="'+term+'" class="form-control form-control-solid mb-3 mb-lg-0" readonly/>';
+        var prev_session = "";
+        prev_session +='Previous Selection: <input type="text" value="'+session+'" class="form-control form-control-solid mb-3 mb-lg-0"  readonly/>';
 
         //CLEARING THE PREFILLED DATA
 
@@ -299,6 +307,9 @@ $(function () {
 
         //WRITING THE DATA ON MODEL
         $("#content").append(content);
+        $("#prev_housemaster").append(prev_housemaster);
+        $("#prev_term").append(prev_term);
+        $("#prev_session").append(prev_session);
 
 
     });

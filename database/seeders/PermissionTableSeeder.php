@@ -62,7 +62,7 @@ class PermissionTableSeeder extends Seeder
 
            'school_arm-list',
            'school_arm-create',
-           'school-arm-edit',
+           'school_arm-edit',
            'school_arm-delete',
 
            'school_class-list',

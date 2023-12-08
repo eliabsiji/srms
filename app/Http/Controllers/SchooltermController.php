@@ -121,7 +121,7 @@ class SchooltermController extends Controller
     public function updateterm(Request $request)
     {
 
-            echo $request->id;
+            //echo $request->id;
         $checkterm = Schoolterm::where('term',$request->input('term'))->exists();
         if($checkterm){
             return redirect()->route('term.index')

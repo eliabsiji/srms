@@ -16,8 +16,8 @@ class SchoolArmController extends Controller
      */
     function __construct()
     {
-         $this->middleware('permission:school_arm-list|school_arm-add|school_arm-edit|school_arm-delete', ['only' => ['index','store']]);
-         $this->middleware('permission:school_arm-add', ['only' => ['create','store']]);
+         $this->middleware('permission:school_arm-list|school_arm-create|school_arm-edit|school_arm-delete', ['only' => ['index','store']]);
+         $this->middleware('permission:school_arm-create', ['only' => ['create','store']]);
          $this->middleware('permission:school_arm-edit', ['only' => ['edit','update']]);
          $this->middleware('permission:school_arm-delete', ['only' => ['destroy']]);
     }
@@ -72,7 +72,7 @@ class SchoolArmController extends Controller
         $sarm->description = $request->remark;
         $sarm->save();
         if($sarm != null){
-            return redirect()->back()->with('status', 'School classs Registered Successfully!');
+            return redirect()->back()->with('status', 'School class Arm Registered Successfully!');
             }else{
                echo "something went wrong...";
             }
@@ -131,6 +131,23 @@ class SchoolArmController extends Controller
 
     }
 
+    public function updatearm(Request $request)
+    {
+
+
+        $this->validate($request, [
+            'arm' => 'required|min:1|unique:schoolarm',
+             'remark'=>'required',
+        ]);
+
+         $input = $request->all();
+         $sarm = Schoolarm::find($request->id);
+        //print($sarm);
+        $sarm->update($input);
+
+        return redirect()->back()->with('success', 'Record has been successfully updated!');
+    }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -144,6 +161,26 @@ class SchoolArmController extends Controller
 
         return redirect()->route('schoolarm.index')
             ->with('success', 'Arm deleted successfully.');
+
+    }
+
+    public function deletearm(Request $request)
+    {
+        Schoolarm::find($request->armid)->delete();
+        //check data deleted or not
+        if ($request->armid) {
+            $success = true;
+            $message = "Arm has been removed";
+        } else {
+            $success = true;
+            $message = "Arm not found";
+        }
+
+        //  return response
+        return response()->json([
+            'success' => $success,
+            'message' => $message,
+        ]);
 
     }
 }

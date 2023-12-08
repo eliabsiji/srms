@@ -1,208 +1,400 @@
-
 <?php $__env->startSection('content'); ?>
 
-     <!-- Start Page title and tab -->
-     <div class="section-body">
-        <div class="container-fluid">
-            <div class="d-flex justify-content-between align-items-center ">
-                <div class="header-action">
-                    <h1 class="page-title">School</h1>
-                    <ol class="breadcrumb page-breadcrumb">
-                        <li class="breadcrumb-item"><a href="#">Arm</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Arm</li>
-                    </ol>
-                </div>
-                <ul class="nav nav-tabs page-header-tab">
-                    <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('school-arm-list')): ?>
-                        <li class="nav-item"><a class="nav-link " data-toggle="tab" href="#arm">List View</a></li>
-                    <?php endif; ?>
-                    <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('add-school-arm')): ?>
-                    <li class="nav-item"><a class="nav-link" id="Library-tab-Boot" data-toggle="tab" href="#arm-add"></a></li>
-                    <?php endif; ?>
-                    <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('school-arm-list')): ?>
-                    <li class="nav-item"><a class="nav-link " data-toggle="tab" href="#arm"></a></li>
-                    <?php endif; ?>
-                    <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('add-school-arm')): ?>
-                        <li class="nav-item"><a class="nav-link" id="Library-tab-Boot" data-toggle="tab" href="#arm-add">Add Arm</a></li>
-                        <?php endif; ?>
-                        <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('school-arm-list')): ?>
-                        <li class="nav-item"><a class="nav-link " data-toggle="tab" href="#arm"></a></li>
-                    <?php endif; ?>
-                    <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('add-school-arm')): ?>
-                    <li class="nav-item"><a class="nav-link" id="Library-tab-Boot" data-toggle="tab" href="#arm-add"></a></li>
-                    <?php endif; ?>
+            <!--begin::Main-->
+            <div class="app-main flex-column flex-row-fluid" id="kt_app_main">
+                <!--begin::Content wrapper-->
+                <div class="d-flex flex-column flex-column-fluid">
+
+                <!--begin::Toolbar-->
+                <div id="kt_app_toolbar" class="app-toolbar  py-3 py-lg-6 ">
+
+                            <!--begin::Toolbar container-->
+                        <div id="kt_app_toolbar_container" class="app-container  container-xxl d-flex flex-stack ">
+
+                            <!--begin::Page title-->
+                            <div  class="page-title d-flex flex-column justify-content-center flex-wrap me-3 ">
+                                <!--begin::Title-->
+                                <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">
+                                School Session and arm
+                                        </h1>
+                                <!--end::Title-->
+
+
+                                    <!--begin::Breadcrumb-->
+                                    <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
+                                                        <!--begin::Item-->
+                                                        <li class="breadcrumb-item text-muted">
+                                                            <a href="<?php echo e(route('schoolarm.index')); ?>" class="text-muted text-hover-primary">School Session </a>
+                                                                        </li>
+                                                            <!--end::Item-->
+                                                                <!--begin::Item-->
+                                                <li class="breadcrumb-item">
+                                                    <span class="bullet bg-gray-400 w-5px h-2px"></span>
+                                                </li>
+                                                <!--end::Item-->
+
+                                                        <!--begin::Item-->
+                                                                <li class="breadcrumb-item text-muted">Session</li>
+                                                            <!--end::Item-->
+
+                                                </ul>
+                                    <!--end::Breadcrumb-->
+                                </div>
+                            <!--end::Page title-->
+                                <?php if($errors->any()): ?>
+                                <div class="alert alert-danger">
+                                    <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                                    <ul>
+                                        <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            <li><?php echo e($error); ?></li>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                    </ul>
+                                </div>
+                                <?php endif; ?>
+
+                                <?php if(\Session::has('status')): ?>
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <?php echo e(\Session::get('status')); ?>
+
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                                <?php endif; ?>
+                                <?php if(\Session::has('success')): ?>
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <?php echo e(\Session::get('success')); ?>
+
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                                <?php endif; ?>
+
+                            </div>
+                            <!--end::Toolbar container-->
+                        </div>
+                    <!--end::Toolbar-->
+
+
+                    <div id="kt_app_content" class="app-content  flex-column-fluid " >
+                        <!--begin::Content container-->
+                        <div id="kt_app_content_container" class="app-container  container-xxl ">
+
+                   <!--begin::Toolbar-->
+                        <div class="d-flex flex-wrap flex-stack my-5">
+                            <!--begin::Heading-->
+                            <h2 class="fs-2 fw-semibold my-2">
+                                School Arm
+                                <span class="fs-6 text-gray-400 ms-1">Database</span>
+                            </h2>
+                            <!--end::Heading-->
+
+
+                        </div>
+                    <!--end::Toolbar-->
+
+
+
+        <!--begin::Card-->
+    <div class="card">
+            <!--begin::Card header-->
+            <div class="card-header border-0 pt-6">
+
+                  <!--begin::Card toolbar-->
+                    <div class="card-toolbar">
+                              <!--begin::Toolbar-->
+                                    <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
+                                            <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('school_arm-create')): ?>
+
+
+                                                <!--begin::Add user-->
+                                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
+                                                    <i class="ki-duotone ki-plus fs-2"></i>       Create New Arm
+                                                </button>
+                                                <!--end::Add user-->
+                                            <?php endif; ?>
+                                    </div>
+
+                                     <!--begin::Modal - Add task-->
+                                        <div class="modal fade" id="kt_modal_add_user" tabindex="-1" aria-hidden="true">
+                                            <!--begin::Modal dialog-->
+                                            <div class="modal-dialog modal-dialog-centered mw-650px">
+                                                <!--begin::Modal content-->
+                                                <div class="modal-content">
+                                                    <!--begin::Modal header-->
+                                                    <div class="modal-header" id="kt_modal_add_user_header">
+                                                        <!--begin::Modal title-->
+                                                        <h2 class="fw-bold">Create New Arm</h2>
+                                                        <!--end::Modal title-->
+
+                                                        <!--begin::Close-->
+                                                        <div class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-users-modal-action="close">
+                                                            <i class="ki-duotone ki-cross fs-1"><span class="path1"></span><span class="path2"></span></i>                </div>
+                                                        <!--end::Close-->
+                                                    </div>
+                                                    <!--end::Modal header-->
+
+
+                                                    <!--begin::Modal body-->
+                                                    <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
+                                                        <!--begin::Form-->
+                                                        <form id="kt_modal_add_user_form" class="form" action="<?php echo e(route('schoolarm.store')); ?>" method="POST">
+                                                            <?php echo csrf_field(); ?>
+                                                            <!--begin::Scroll-->
+                                                            <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_add_user_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_user_header" data-kt-scroll-wrappers="#kt_modal_add_user_scroll" data-kt-scroll-offset="300px">
+
+
+                                                                <!--begin::Input group-->
+                                                                <div class="fv-row mb-7">
+                                                                    <!--begin::Label-->
+                                                                    <label class="required fw-semibold fs-6 mb-2">Arm Name</label>
+                                                                    <!--end::Label-->
+
+                                                                    <!--begin::Input-->
+                                                                    <input type="text" name="arm" id="arm" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="arm ..."  />
+                                                                    <!--end::Input-->
+                                                                </div>
+                                                                <!--end::Input group-->
+
+
+                                                                <!--begin::Input group-->
+                                                                <div class="fv-row mb-7">
+                                                                    <!--begin::Label-->
+                                                                    <label class="required fw-semibold fs-6 mb-2">Arm Description</label>
+                                                                    <!--end::Label-->
+
+                                                                    <!--begin::Input-->
+                                                                    <input type="text" name="remark" id="remark" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="arm ..."  />
+                                                                    <!--end::Input-->
+                                                                </div>
+                                                                <!--end::Input group-->
+
+
+
+
+
+                                                            </div>
+                                                            <!--end::Scroll-->
+
+                                                            <!--begin::Actions-->
+                                                            <div class="text-center pt-15">
+                                                                <button type="reset" class="btn btn-light me-3" data-kt-users-modal-action="cancel">
+                                                                    Discard
+                                                                </button>
+
+                                                                <button type="submit" class="btn btn-primary" data-kt-users-modal-action="submit">
+                                                                    <span class="indicator-label">
+                                                                        Submit
+                                                                    </span>
+                                                                    <span class="indicator-progress">
+                                                                        Please wait... <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                                                                    </span>
+                                                                </button>
+                                                            </div>
+                                                            <!--end::Actions-->
+                                                        </form>
+                                                        <!--end::Form-->
+                                                    </div>
+                                                    <!--end::Modal body-->
+                                                </div>
+                                                <!--end::Modal content-->
+                                            </div>
+                                            <!--end::Modal dialog-->
+                                            </div>
+                                    <!--end::Modal - Add task-->
+
+                               <!--begin::Modal - Update role-->
+                                     <div class="modal fade" id="kt_modal_update_role" tabindex="-1" aria-hidden="true">
+                                        <!--begin::Modal dialog-->
+                                            <div class="modal-dialog modal-dialog-centered mw-750px">
+                                                <!--begin::Modal content-->
+                                                <div class="modal-content">
+                                                    <!--begin::Modal header-->
+                                                    <div class="modal-header">
+                                                        <!--begin::Modal title-->
+                                                        <h2 class="fw-bold">Update Arm</h2>
+                                                        <!--end::Modal title-->
+
+                                                        <!--begin::Close-->
+                                                        <div class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-roles-modal-action="close">
+                                                            <i class="ki-duotone ki-cross fs-1"><span class="path1"></span><span class="path2"></span></i>                </div>
+                                                        <!--end::Close-->
+                                                    </div>
+                                                    <!--end::Modal header-->
+
+                                                    <!--begin::Modal body-->
+                                                    <div id="formcontent" class="modal-body scroll-y mx-5 my-7">
+                                                        <!--begin::Form-->
+                                                        <form id="kt_modal_update_role_form" class="form" action="<?php echo e(route('schoolarm.updatearm')); ?>" method="POST">
+                                                            <?php echo csrf_field(); ?>
+
+                                                            <!--begin::Scroll-->
+                                                            <div id="content">
+
+                                                            </div>
+
+
+
+                                                            <!--end::Scroll-->
+
+                                                            <!--begin::Actions-->
+                                                            <div class="text-center pt-15">
+                                                                <button type="reset" class="btn btn-light me-3" data-kt-roles-modal-action="cancel">
+                                                                    Discard
+                                                                </button>
+
+                                                                <button type="submit" class="btn btn-primary" data-kt-roles-modal-action="submit">
+                                                                    <span class="indicator-label">
+                                                                        Submit
+                                                                    </span>
+                                                                    <span class="indicator-progress">
+                                                                        Please wait... <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                                                                    </span>
+                                                                </button>
+                                                            </div>
+                                                            <!--end::Actions-->
+                                                        </form>
+                                                        <!--end::Form-->
+                                                    </div>
+                                                    <!--end::Modal body-->
+                                                </div>
+                                                <!--end::Modal content-->
+                                            </div>
+                                        <!--end::Modal dialog-->
+                                    </div>
+                                    <!--end::Modal - Update role--><!--end::Modal-->
+
+
+
+                                    </div>
+                                    <!--end::Card toolbar-->
+                                            <!--begin::Card toolbar-->
+                                            <div class="card-toolbar">
+                                                <!--begin::Search-->
+                                                <div class="d-flex align-items-center position-relative my-1"  data-kt-view-roles-table-toolbar="base">
+                                                    <i class="ki-duotone ki-magnifier fs-1 position-absolute ms-6"><span class="path1"></span><span class="path2"></span></i>                <input type="text" data-kt-roles-table-filter="search" class="form-control form-control-solid w-250px ps-15" placeholder="Search ..." />
+                                                </div>
+                                                <!--end::Search-->
+
+                                                <!--begin::Group actions-->
+                                                <div class="d-flex justify-content-end align-items-center d-none" data-kt-view-roles-table-toolbar="selected">
+                                                    <div class="fw-bold me-5">
+                                                        <span class="me-2" data-kt-view-roles-table-select="selected_count"></span> Selected
+                                                    </div>
+
+                                                    <button type="button" class="btn btn-danger" data-kt-view-roles-table-select="delete_selected">
+                                                        Delete Selected
+                                                    </button>
+                                                </div>
+                                                <!--end::Group actions-->
+                                            </div>
+                                            <!--end::Card toolbar-->
+            </div>
+            <!--end::Card header-->
+
+            <?php if(count($errors) > 0): ?>
+            <div class="row animated fadeInUp">
+                <?php if(count($errors) > 0): ?>
+            <div class="alert alert-warning fade in">
+            <a href="#" class="close" data-dismiss="alert">&times;</a>
+                <strong>Opps!</strong> Something went wrong, please check below errors.<br><br>
+                <ul>
+                    <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <li><?php echo e($error); ?></li>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </ul>
             </div>
-        </div>
-        <?php if(\Session::has('status')): ?>
-           <div class="alert alert-success alert-dismissible">
-            <button type="button" class="close" data-dismiss="alert"></button>
-                <p><?php echo e(\Session::get('status')); ?></p>
+            <?php endif; ?>
             </div>
-        <?php endif; ?>
-        <?php if(\Session::has('success')): ?>
-           <div class="alert alert-success alert-dismissible">
-            <button type="button" class="close" data-dismiss="alert"></button>
-                <p><?php echo e(\Session::get('success')); ?></p>
-            </div>
-        <?php endif; ?>
-        <?php if(\Session::has('danger')): ?>
-        <div class="alert alert-danger alert-dismissible">
-         <button type="button" class="close" data-dismiss="alert"></button>
-             <p><?php echo e(\Session::get('danger')); ?></p>
-         </div>
-     <?php endif; ?>
-
-
-    </div>
-    <div class="section-body mt-4">
-        <div class="container-fluid">
-            <div class="tab-content">
-                <div class="tab-pane active" id="arm">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-hover js-basic-example dataTable table-striped table_custom   ">
-                                    <thead>
-                                        <tr>
-                                            <th>SN</th>
-                                            <th>Arm</th>
-                                            <th>Description</th>
-                                            <th>Action</th>
-                                            <th>Date Registered</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php $sn = 1; ?>
-                                        <?php $__currentLoopData = $all_arms; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $arm): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-
-                                        <tr id="sid<?php echo e($arm->id); ?>">
-                                            <td><?php echo e($sn++); ?></td>
-                                            <td><?php echo e($arm->arm); ?></td>
-                                            <td><?php echo e($arm->description); ?></td>
-                                            <td><div class="btn-group">
-
-                                                <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('edit-school-arm')): ?>
-                                                <a href="<?php echo e(route('schoolarm.edit',$arm->id)); ?>" class="btn fa fa-pencil" data-toggle="tooltip" title="Edit Arm"></a>
-                                                <?php endif; ?>
-                                                <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('delete-school-arm')): ?>
-                                                <a href="javascript:void(0)" class="btn fa fa-trash delete"
-                                                data-toggle="tooltip" title="Delete Arm" onClick="check(<?php echo e($arm->id); ?>)"></a>
-                                            <?php endif; ?>
-                                            </div></td>
-                                            <td><?php echo e($arm->updated_at); ?></td>
-                                        </tr>
-                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-
-
-                                    </tbody>
-                                </table>
-                            </div>
+            <?php endif; ?>
+            <!--begin::Card body-->
+            <div class="card-body py-4">
+             <!--begin::Table-->
+        <table class="table align-middle table-row-dashed fs-6 gy-5 mb-0" id="kt_roles_view_table">
+            <thead>
+                <tr class="text-start text-muted fw-bold fs-7 text-uppercase gs-0">
+                    <th class="w-10px pe-2">
+                        <div class="form-check form-check-sm form-check-custom form-check-solid me-3">
+                            <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_roles_view_table .form-check-input" value="1" />
                         </div>
-                    </div>
-                </div>
+                    </th>
+                    <th class="min-w-125px">SN</th>
+                    <th class="min-w-125px">Arm</th>
+                    <th class="min-w-125px">Remark</th>
+                    <th class="min-w-125px">Date Updated</th>
+                    <th class="min-w-100px">Actions</th>
+                </tr>
+            </thead>
+            <tbody class="fw-semibold text-gray-600">
+                <?php
+                 $i = 0
+               ?>
+           <?php $__currentLoopData = $all_arms; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $arm): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 
-                <div class="tab-pane" id="arm-add">
-                    <div class="card">
 
-                        <div class="card-header">
-
-                            <h3 class="card-title">Add Arm</h3>
-
-                            <?php if(count($errors) > 0): ?>
-                            <div class="alert alert-warning fade in">
-                            <a href="#" class="close" data-dismiss="alert">&times;</a>
-                                <strong>Opps!</strong> Something went wrong, please check below errors.<br><br>
-                                <ul>
-                                    <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                        <li><?php echo e($error); ?></li>
-                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                </ul>
+                    <tr data-url="<?php echo e(route('schoolarm.destroy',$arm->id)); ?>">
+                        <td>
+                            <div class="form-check form-check-sm form-check-custom form-check-solid">
+                                <input class="form-check-input" type="checkbox" value="1" />
                             </div>
-                        <?php endif; ?>
-                            <div class="card-options ">
-                                <a href="#" class="card-options-collapse" data-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a>
-                                <a href="#" class="card-options-remove" data-toggle="card-remove"><i class="fe fe-x"></i></a>
-                            </div>
-                        </div>
-                        <form  role="form" id="inline-validation" class="form-horizontal form-stripe" action="<?php echo e(route('schoolarm.store')); ?>" method="POST">
-                            <?php echo csrf_field(); ?>
-                            <div class="form-group row">
-                                <label class="col-md-3 col-form-label">Arm <span class="text-danger">*</span></label>
-                                <div class="col-md-7">
-                                    <input type="text" class="form-control" id="arm" name="arm" placeholder="Arm" required>
+                        </td>
+                        <td class="armid">  <input type="hidden" id="tid"  value="<?php echo e($arm->id); ?>" /><?php echo e(++$i); ?></td>
+                        <td id="arm" class="d-flex align-items-center arm">
+                            <?php echo e($arm->arm); ?>
+
+                        </td>
+                        <td class="remark">
+                            <?php echo e($arm->description); ?>
+
+                        </td>
+                        <td>
+                            <?php echo e($arm->updated_at); ?>
+
+                        </td>
+                        <td >
+                            <a href="#" class="btn btn-light btn-active-light-primary btn-flex btn-center btn-sm" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
+                                Actions
+                                <i class="ki-duotone ki-down fs-5 ms-1"></i>                    </a>
+                            <!--begin::Menu-->
+                                <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-125px py-4" data-kt-menu="true">
+                                    <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('school_arm-edit')): ?>
+                                        <!--begin::Menu item-->
+                                        <div class="menu-item px-3">
+
+                                            <button type="button" class="sel-arm btn btn-light btn-active-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_update_role">Edit</button>
+                                        </div>
+                                        <!--end::Menu item-->
+                                    <?php endif; ?>
+                                    <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('school_arm-delete')): ?>
+                                    <div class="menu-item px-3" >
+                                        
+                                        <a
+                                        href="javascript:void(0)"
+                                        id="show-user"
+                                        data-kt-roles-table-filter="delete_row"
+                                        data-url="<?php echo e(route('schoolarm.deletearm', ['armid'=>$arm->id])); ?>"
+                                        class="btn btn-danger btn-sm">Delete</a>
+                                    </div>
+                                    <!--end::Menu item-->
+                                    <?php endif; ?>
+
                                 </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-3 col-form-label">Remark <span class="text-danger">*</span></label>
-                                <div class="col-md-7">
-                                    <input type="text" class="form-control" id="remark" name="remark" placeholder="Remark" required>
-                                </div>
-                            </div>
+                                    <!--end::Menu-->
+                        </td>
 
-                            <div class="form-group row">
-                                <label class="col-md-3 col-form-label"></label>
-                                <div class="col-md-7">
-                                    <button type="submit" class="btn btn-primary">Submit</button>
-                                    <button type="submit" class="btn btn-outline-secondary">Cancel</button>
-                                </div>
-                            </div>
-                            <?php echo Form::close(); ?>
-
-                    </div>
-                </div>
+             </tr>
+             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                            </tbody>
+        </table>
+        <!--end::Table-->
             </div>
-        </div>
+            <!--end::Card body-->
+      </div>
+            <!--end::Card-->
     </div>
 
-    <script>
-
-        function check(id){
-
-            var id = id;
+            <!--end::Content container-->
+</div>
+        <!--end::Content-->
 
 
-            Swal.fire({
-          title: 'Are you sure?',
-          text: "Deleting this record will affect other associated records",
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonColor: '#3085d6',
-          cancelButtonColor: '#d33',
-          confirmButtonText: 'Yes, delete it!'
-        }).then((result) => {
-          if (result.isConfirmed) {
-
-            $.ajax({
-                url: 'ajaxarm/'+id,
-                type: "DELETE",
-                cache: false,
-                data:{
-                    _token:'<?php echo e(csrf_token()); ?>',
-                   id: id
-                },
-                dataType: 'JSON',
-                success: function(dataResult){
-                    var dataResult = JSON.parse(dataResult);
-                    if(dataResult.statusCode==200){
-                       //console.log("svssdvsdvs");
-                    }
-                }
-            });
-            Swal.fire(
-              'Deleted!',
-              'This Record is now Deleted. You can Check Other Records to make neccessary Editing!',
-              'success'
-            )
-            var myobj = document.getElementById("sid"+id);
-             myobj.remove();
-
-          }
-        })
-
-        }
-        </script>
-
-    <?php $__env->stopSection(); ?>
+<?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\srms\resources\views/arm/index.blade.php ENDPATH**/ ?>
