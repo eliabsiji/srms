@@ -144,7 +144,7 @@
                                                                     <!--end::Label-->
 
                                                                     <!--begin::Input-->
-                                                                    <input type="text" id="schoolclass" name="schoolclass" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="House Name ..."  />
+                                                                    <input type="text" id="schoolclass" name="schoolclass" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="School Class Name ..."  />
                                                                     <!--end::Input-->
                                                                 </div>
                                                                 <!--end::Input group-->
@@ -156,7 +156,7 @@
                                                                   <!--begin::Input group-->
                                                                   <div class="mb-7">
                                                                     <!--begin::Label-->
-                                                                    <label class="required fw-semibold fs-6 mb-5">Select House Master</label>
+                                                                    <label class="required fw-semibold fs-6 mb-5">Select Class Arm</label>
                                                                     <!--end::Label-->
                                                                             <!--begin::Input row-->
                                                                             <div class="fv-row mb-7">
@@ -165,7 +165,7 @@
                                                                                     <select name ="arm" id="arm"  class="form-control form-control-solid mb-3 mb-lg-0">
                                                                                         <option value="0">Select Class Arm </option>
                                                                                         <?php $__currentLoopData = $arms; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $arms => $name): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                                                         <option value="<?php echo e($name->arm); ?>"><?php echo e($name->arm); ?></option>
+                                                                                         <option value="<?php echo e($name->id); ?>"><?php echo e($name->arm); ?></option>
                                                                                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                                                                       </select>
                                                                                     <!--end::Input-->
@@ -189,8 +189,7 @@
                                                                                         <?php $__currentLoopData = $classcategories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cat => $name): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                                                          <option value="<?php echo e($name->id); ?>"><?php echo e($name->category); ?></option>
                                                                                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                                                                        <option value="1">Junior School</option>
-                                                                                        <option value="2">Senior School</option>
+
                                                                                       </select>
                                                                                     </select>
                                                                                     <!--end::Input-->

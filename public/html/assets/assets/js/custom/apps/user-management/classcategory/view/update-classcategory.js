@@ -15,38 +15,24 @@ var KTUsersUpdatePermissions = function () {
             form,
             {
                 fields: {
-                    'update_house': {
+                    'update_ca1score': {
                         validators: {
                             notEmpty: {
-                                message: 'House name is required'
+                                message: 'CA 1 Score is required'
                             }
                         }
                     },
-                    'update_housecolour': {
+                    'update_ca2score': {
                         validators: {
                             notEmpty: {
-                                message: 'House Colour  is required'
+                                message: 'CA 2 Score  is required'
                             }
                         }
                     },
-                    'update_housemasterid': {
+                    'update_examscore': {
                         validators: {
                             notEmpty: {
-                                message: 'House master  is required'
-                            }
-                        }
-                    },
-                    'update_termid': {
-                        validators: {
-                            notEmpty: {
-                                message: 'Term is required'
-                            }
-                        }
-                    },
-                    'update_sessionid': {
-                        validators: {
-                            notEmpty: {
-                                message: 'Session is required'
+                                message: 'Exam Score  is required'
                             }
                         }
                     },
@@ -212,6 +198,53 @@ KTUtil.onDOMContentLoaded(function () {
     KTUsersUpdatePermissions.init();
 });
 
+function check() {
+
+
+    var txtFirsttextValue= 0;
+    var txtSecondtextValue = 0;
+    var txtExamtextValue = 0;
+    var result = 0;
+    var total = 0;
+
+        var txtFirsttextValue = document.getElementById('update_ca1score').value;
+        var txtSecondtextValue = document.getElementById('update_ca2score').value;
+        var txtExamtextValue = document.getElementById('update_examscore').value;
+
+        if(isNaN(txtFirsttextValue) || txtExamtextValue == ""){
+            alert("First CA  is not a digit please");
+            return false;
+        }
+
+        if(isNaN(txtSecondtextValue) ||txtSecondtextValue== "" ){
+            alert("Second CA is not a digit please");
+            return false;
+        }
+
+        if(isNaN(txtExamtextValue) || txtExamtextValue == ""){
+            alert("Exam score is not a digit please");
+            return false;
+        }
+
+        var result = parseFloat(txtFirsttextValue) +
+                     parseFloat(txtSecondtextValue) +
+                     parseFloat(txtExamtextValue) ;
+        total = parseFloat(result);
+
+        if (!isNaN(result)) {
+
+            document.getElementById('update_totalscore').value = total;
+
+            if (total != 100){
+                alert("Score should not be more or less than 100%");
+                return false;
+            }
+
+
+
+
+        }
+}
 
 $(function () {
 
@@ -219,45 +252,13 @@ $(function () {
     $(".sel-house").click(function () {
       //FINDING ELEMENTS OF ROWS AND STORING THEM IN VARIABLES
     var id = $(this).parents("tr").find("#tid").val();
-    var a = $.trim($(this).parents("tr").find(".schoolhouse").text());
-    var b = $.trim($(this).parents("tr").find(".housecolour").text());
-    var housemaster = $.trim($(this).parents("tr").find(".housemaster").text());
-    var term = $.trim($(this).parents("tr").find(".termid").text());
-    var session= $.trim($(this).parents("tr").find(".sessionid").text());
-
-
-    var housemaster_options_v = $.map($('#housemasterid option'), e=>$(e).val());
-    var housemaster_values_v = $.map($('#housemasterid option'), e=>$(e).text());
-   populate(update_housemasterid,housemaster_options_v,housemaster_values_v);
-
-     var term_options_v = $.map($('#termid option'), e=>$(e).val());
-     var term_values_v = $.map($('#termid option'), e=>$(e).text());
-    populate(update_termid,term_options_v,term_values_v);
-
-    var session_options_v = $.map($('#sessionid option'), e=>$(e).val());
-    var session_values_v = $.map($('#sessionid option'), e=>$(e).text());
-   populate(update_sessionid,session_options_v,session_values_v);
+    var a = $.trim($(this).parents("tr").find(".ca1score").text());
+    var b = $.trim($(this).parents("tr").find(".ca2score").text());
+    var c = $.trim($(this).parents("tr").find(".examscore").text());
+ 
 
 
 
-
-     function populate(selectid,valuearr,optionarr,){;
-            for (var i = 0, ii = optionarr.length; i<ii; i++) {
-                let optn = optionarr[i];
-                let el = document.createElement("option");
-                el.textContent = optn;
-                el.value = valuearr[i];
-                selectid.appendChild(el);
-            }
-        }
-
-
-
-        $("#kt_modal_update_role").on('hide.bs.modal', function(){
-            $("#update_termid").find("option").remove().end().append('');
-            $("#update_housemasterid").find("option").remove().end().append('');
-             $("#update_sessionid").find("option").remove().end().append('');
-          });
 
         // CREATING DATA TO SHOW ON MODEL
 
@@ -271,11 +272,11 @@ $(function () {
 
         +'<div class="fv-row mb-7">'
 
-        +'<label class="required fw-semibold fs-6 mb-2">House Name</label>'
+        +'<label class="required fw-semibold fs-6 mb-2">CA 1 Score</label>'
 
 
 
-        +'<input type="text" name="house" id="update_house" value="'+a+'" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="House Name ..." required  />'
+        +'<input type="text" name="ca1score" id="update_ca1score" value="'+a+'" class="form-control form-control-solid mb-3 mb-lg-0" onkeyup="check()"  required  />'
 
         +'</div>'
 
@@ -284,22 +285,36 @@ $(function () {
 
         +' <div class="fv-row mb-7">'
 
-        +'<label class="required fw-semibold fs-6 mb-2">House Colour</label>'
+        +'<label class="required fw-semibold fs-6 mb-2">CA 2 Score</label>'
 
 
 
-        +'<input type="text" name="housecolour" id="update_housecolour" value="'+b+'" class="form-control form-control-solid mb-3 mb-lg-0" required placeholder="House Colour ..."  />'
+        +'<input type="text" name="ca2score" id="update_ca2score" value="'+b+'" class="form-control form-control-solid mb-3 mb-lg-0" onkeyup="check()" required   />'
+
+        +'</div>'
+
+        +' <div class="fv-row mb-7">'
+
+        +'<label class="required fw-semibold fs-6 mb-2">Exam Score</label>'
+
+
+
+        +'<input type="text" name="examscore" id="update_examscore" value="'+c+'" class="form-control form-control-solid mb-3 mb-lg-0"  onkeyup="check()" required   />'
+
+        +'</div>'
+
+        +' <div class="fv-row mb-7">'
+
+        +'<label class="required fw-semibold fs-6 mb-2">Total</label>'
+
+
+
+        +'<input type="text" name="totalscore" id="update_totalscore" onkeyup="check()" class="form-control form-control-solid mb-3 mb-lg-0" required   />'
 
         +'</div>'
 
 
                     +'  </div>';
-        var prev_housemaster = "";
-        prev_housemaster +='Previous Selection: <input type="text" value="'+housemaster+'" class="form-control form-control-solid mb-3 mb-lg-0" readonly/>';
-        var prev_term = "";
-        prev_term +='Previous Selection: <input type="text" value="'+term+'" class="form-control form-control-solid mb-3 mb-lg-0" readonly/>';
-        var prev_session = "";
-        prev_session +='Previous Selection: <input type="text" value="'+session+'" class="form-control form-control-solid mb-3 mb-lg-0"  readonly/>';
 
         //CLEARING THE PREFILLED DATA
 
@@ -307,9 +322,6 @@ $(function () {
 
         //WRITING THE DATA ON MODEL
         $("#content").append(content);
-        $("#prev_housemaster").append(prev_housemaster);
-        $("#prev_term").append(prev_term);
-        $("#prev_session").append(prev_session);
 
 
     });

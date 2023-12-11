@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Classcategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Schoolclass;
 use App\Models\Schoolarm;
 use App\Models\ClassTeacher;
-use App\Models\Classcategory;
+
 
 
 
@@ -33,8 +34,9 @@ class SchoolClassController extends Controller
         //
         $all_classes = Schoolclass::all();
         $all_classes = Schoolclass::leftJoin('classcategories', 'classcategories.id','=','schoolclass.classcategoryid')
+        ->leftJoin('schoolarm', 'schoolarm.id','=','schoolclass.arm')
         ->get(['classcategories.id as categoryid','classcategories.category as classcategory',
-              'schoolclass.id as id','schoolclass as schoolclass','schoolclass.arm as arm','schoolclass.updated_at as updated_at']);
+              'schoolclass.id as id','schoolclass as schoolclass','schoolarm.arm as arm','schoolclass.updated_at as updated_at']);
 
         $arms = Schoolarm::all();
         $classcategories = Classcategory::all();
@@ -134,12 +136,12 @@ class SchoolClassController extends Controller
         //
 
         $all_classes = Schoolclass::where('schoolclass.id',$id)
-         ->leftJoin('classcategories', 'classcategories.id','=','schoolclass.classcategoryid')
-         ->get(['schoolclass.classcategoryid as categoryid','classcategories.category as classcategory',
+         ->leftJoin('classcategories', 'classcategories.id','=','schoolclass.schoolclassid')
+         ->get(['schoolclass.schoolclassid as categoryid','classcategories.category as schoolclass',
               'schoolclass.id as id','schoolclass as schoolclass','schoolclass.arm as arm','schoolclass.updated_at as updated_at']);
       // foreach($sclass)
       $arms = Schoolarm::all();
-      $classcategories = Classcategory::all();
+      $classcategories = schoolclass::all();
       return View('schoolclass.edit')->with('all_classes',$all_classes)
                                       ->with('arms',$arms)
                                       ->with('classcategories',$classcategories);
@@ -158,7 +160,7 @@ class SchoolClassController extends Controller
         $this->validate($request, [
             'schoolclass' => 'required',
             'arm' => 'required|min:1|',
-             'classcategoryid'=>'required',
+             'schoolclassid'=>'required',
         ]);
 
         $input = $request->all();
@@ -172,6 +174,24 @@ class SchoolClassController extends Controller
 
     }
 
+    public function updateschoolclass(Request $request)
+    {
+
+        //  $this->validate($request, [
+        //     'house' => 'required',
+        //     'housecolour' => 'required'
+        // ]);
+
+        DB::table('schoolclass')->updateOrInsert(
+            ['id'=>$request->id],
+            ['house'=>$request->house,
+                    'housecolour'=>$request->housecolour,
+                    'housemasterid'=>$request->update_housemasterid,
+                    'termid'=>$request->update_termid,
+                    'sessionid'=>$request->update_sessionid,]);
+
+        return redirect()->back()->with('success', 'Record has been successfully updated!');
+    }
 
 
     /**
@@ -189,5 +209,25 @@ class SchoolClassController extends Controller
 
         return redirect()->route('schoolclass.index')
             ->with('success', 'School class deleted successfully.');
+    }
+
+    public function deleteschoolclass(Request $request)
+    {
+        schoolclass::find($request->schoolclassid)->delete();
+        //check data deleted or not
+        if ($request->schoolclassid) {
+            $success = true;
+            $message = "School Class has been removed";
+        } else {
+            $success = true;
+            $message = "School Class not found";
+        }
+
+        //  return response
+        return response()->json([
+            'success' => $success,
+            'message' => $message,
+        ]);
+
     }
 }

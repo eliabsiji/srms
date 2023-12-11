@@ -54,8 +54,14 @@
        @if (Route::is('schoolclass.*'))
              @include('layouts.pages-assets.css.users-list-css')
        @endif
-       @if (Route::is('classcategory.*'))
+       @if (Route::is('classcategories.*'))
               @include('layouts.pages-assets.css.users-list-css')
+       @endif
+       @if (Route::is('classteacher.*'))
+             @include('layouts.pages-assets.css.users-list-css')
+       @endif
+       @if (Route::is('subject.*'))
+            @include('layouts.pages-assets.css.users-list-css')
        @endif
        @if (Route::is('authors.*') || Route::is('author.review') || Route::is('author.journal')  )
             @include('layouts.pages-assets.css.users-list-css')
@@ -250,8 +256,14 @@
         @if (Route::is('schoolarm.*'))
              @include('layouts.pages-assets.js.arm-list-js')
         @endif
-        @if (Route::is('schoolarm.*'))
+        @if (Route::is('classcategories.*'))
              @include('layouts.pages-assets.js.classcategory-list-js')
+        @endif
+        @if (Route::is('classteacher.*'))
+             @include('layouts.pages-assets.js.classteacher-list-js')
+        @endif
+        @if (Route::is('subject.*'))
+             @include('layouts.pages-assets.js.subject-list-js')
         @endif
         @if (Route::is('myjournals.*'))
             @include('layouts.pages-assets.js.journalvolume-list-js')

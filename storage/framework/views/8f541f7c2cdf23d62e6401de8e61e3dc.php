@@ -54,6 +54,15 @@
        <?php if(Route::is('schoolclass.*')): ?>
              <?php echo $__env->make('layouts.pages-assets.css.users-list-css', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
        <?php endif; ?>
+       <?php if(Route::is('classcategories.*')): ?>
+              <?php echo $__env->make('layouts.pages-assets.css.users-list-css', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+       <?php endif; ?>
+       <?php if(Route::is('classteacher.*')): ?>
+             <?php echo $__env->make('layouts.pages-assets.css.users-list-css', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+       <?php endif; ?>
+       <?php if(Route::is('subject.*')): ?>
+            <?php echo $__env->make('layouts.pages-assets.css.users-list-css', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+       <?php endif; ?>
        <?php if(Route::is('authors.*') || Route::is('author.review') || Route::is('author.journal')  ): ?>
             <?php echo $__env->make('layouts.pages-assets.css.users-list-css', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
        <?php endif; ?>
@@ -246,6 +255,15 @@
         <?php endif; ?>
         <?php if(Route::is('schoolarm.*')): ?>
              <?php echo $__env->make('layouts.pages-assets.js.arm-list-js', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+        <?php endif; ?>
+        <?php if(Route::is('classcategories.*')): ?>
+             <?php echo $__env->make('layouts.pages-assets.js.classcategory-list-js', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+        <?php endif; ?>
+        <?php if(Route::is('classteacher.*')): ?>
+             <?php echo $__env->make('layouts.pages-assets.js.classteacher-list-js', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+        <?php endif; ?>
+        <?php if(Route::is('subject.*')): ?>
+             <?php echo $__env->make('layouts.pages-assets.js.subject-list-js', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
         <?php endif; ?>
         <?php if(Route::is('myjournals.*')): ?>
             <?php echo $__env->make('layouts.pages-assets.js.journalvolume-list-js', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>

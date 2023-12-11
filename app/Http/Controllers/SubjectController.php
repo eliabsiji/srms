@@ -14,10 +14,10 @@ class SubjectController extends Controller
 
     function __construct()
     {
-         $this->middleware('permission:subject-list|add-subject|edit-subject|delete-subject', ['only' => ['index','store']]);
-         $this->middleware('permission:add-subject', ['only' => ['create','store']]);
-         $this->middleware('permission:edit-subject', ['only' => ['edit','update']]);
-         $this->middleware('permission:delete-subject', ['only' => ['destroy']]);
+         $this->middleware('permission:subject-list|subject-create|subject-edit|subject-delete', ['only' => ['index','store']]);
+         $this->middleware('permission:subject-create', ['only' => ['create','store']]);
+         $this->middleware('permission:subject-edit', ['only' => ['edit','update','updatesubject']]);
+         $this->middleware('permission:subject-delete', ['only' => ['destroy','deletesubject']]);
     }
 
     /**
@@ -136,6 +136,28 @@ class SubjectController extends Controller
 
     }
 
+    public function updatesubject(Request $request)
+    {
+
+        //
+        $this->validate($request, [
+            'subject' => 'required',
+            'subject_code' => 'required|min:4|unique:subject',
+             'remark'=>'required',
+        ]);
+
+        $input = $request->all();
+
+
+        $subject = Subject::find($request->id);
+        $subject->update($input);
+
+
+
+        return redirect()->back()->with('success', 'Record has been successfully updated!');
+    }
+
+
     /**
      * Remove the specified resource from storage.
      *
@@ -149,5 +171,25 @@ class SubjectController extends Controller
 
         return redirect()->route('subject.index')
             ->with('success', 'Subject deleted successfully.');
+    }
+
+    public function deletesubject(Request $request)
+    {
+        Subject::find($request->subjectid)->delete();
+        //check data deleted or not
+        if ($request->subjectid) {
+            $success = true;
+            $message = "Subject has been removed";
+        } else {
+            $success = true;
+            $message = "Subject not found";
+        }
+
+        //  return response
+        return response()->json([
+            'success' => $success,
+            'message' => $message,
+        ]);
+
     }
 }

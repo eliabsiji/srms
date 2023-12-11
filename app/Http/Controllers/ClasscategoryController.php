@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\classcategory;
-use App\Models\User;
+use Illuminate\Support\Facades\Validator;
 use PhpOffice\PhpSpreadsheet\Calculation\Category;
 
 class ClasscategoryController extends Controller
@@ -13,10 +14,10 @@ class ClasscategoryController extends Controller
 
     function __construct()
     {
-         $this->middleware('permission:classcategory-list|add-classcategory|edit-classcategory|delete-classcategory', ['only' => ['index','store']]);
-         $this->middleware('permission:add-classcategory', ['only' => ['create','store']]);
-         $this->middleware('permission:edit-classcategory', ['only' => ['edit','update']]);
-         $this->middleware('permission:delete-classcategory', ['only' => ['destroy']]);
+         $this->middleware('permission:classcategory-list|classcategory-create|classcategory-edit|classcategory-delete', ['only' => ['index','store']]);
+         $this->middleware('permission:classcategory-create', ['only' => ['create','store']]);
+         $this->middleware('permission:classcategory-edit', ['only' => ['edit','update']]);
+         $this->middleware('permission:classcategory-delete', ['only' => ['destroy']]);
     }
     /**
      * Display a listing of the resource.
@@ -106,6 +107,26 @@ return redirect()->back()->with('success', 'Record has been successfully created
             ->with('success', 'Class category updated successfully.');
     }
 
+    public function updateclasscategory(Request $request)
+    {
+        $this->Validate($request, [
+            'category' => 'required|numeric',
+            'ca1score' => 'required|numeric',
+            'ca2score' => 'required|numeric',
+            'examscore' => 'required|numeric',
+
+        ]
+    );
+
+
+        $input = $request->all();
+        $sclass = classcategory::find($request->id);
+        $sclass->update($input);
+
+        return redirect()->route('classcategories.index')
+            ->with('success', 'Class category updated successfully.');
+    }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -116,4 +137,25 @@ return redirect()->back()->with('success', 'Record has been successfully created
     {
         //
     }
+
+    public function deleteclasscategory(Request $request)
+    {
+        classcategory::find($request->classcategoryid)->delete();
+        //check data deleted or not
+        if ($request->classcategoryid) {
+            $success = true;
+            $message = "Class Category has been removed";
+        } else {
+            $success = true;
+            $message = "Class Category not found";
+        }
+
+        //  return response
+        return response()->json([
+            'success' => $success,
+            'message' => $message,
+        ]);
+
+    }
+
 }

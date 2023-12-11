@@ -646,7 +646,7 @@
     <div  data-kt-menu-trigger="click"  class="menu-item {{
     request()->is('schoolarm*') ||
     request()->is('schoolclass*')  ||
-    request()->is('classcategory*') ||
+    request()->is('classcategories*') ||
     request()->is('classteacher*')
     ? ' here show menu-accordion' : '' }}" >
     <!--begin:Menu link-->
@@ -684,6 +684,24 @@
                         </div>
                         <!--end:Menu item-->
                     @endcan
+                    @can('classcategory-list')
+                    <!--begin:Menu item-->
+                        <div  class="menu-item" >
+                                <!--begin:Menu link-->
+                                <a class="menu-link {{ request()->is('classcategory*')
+                                    ? ' active' : '' }}"
+                                href="{{ route('classcategories.index') }}" >
+                                    <span  class="menu-bullet" >
+                                        <span class="bullet bullet-dot">
+                                            </span></span>
+                                            <span  class="menu-title" >
+                                                Class Category
+                                            </span>
+                                </a>
+                                <!--end:Menu link-->
+                        </div>
+                            <!--end:Menu item-->
+                    @endcan
                     @can('school_class-list')
                         <!--begin:Menu item-->
                         <div  class="menu-item" >
@@ -702,24 +720,7 @@
                         </div>
                         <!--end:Menu item-->
                     @endcan
-                    @can('classcategory-list')
-                            <!--begin:Menu item-->
-                        <div  class="menu-item" >
-                                <!--begin:Menu link-->
-                                <a class="menu-link {{ request()->is('classcategory*')
-                                    ? ' active' : '' }}"
-                                href="{{ route('classcategories.index') }}" >
-                                    <span  class="menu-bullet" >
-                                        <span class="bullet bullet-dot">
-                                            </span></span>
-                                            <span  class="menu-title" >
-                                                Class Category
-                                            </span>
-                                </a>
-                                <!--end:Menu link-->
-                        </div>
-                            <!--end:Menu item-->
-                    @endcan
+
                     @can('class_teacher-list')
                             <div  class="menu-item" >
                                 <!--begin:Menu link-->
@@ -812,7 +813,7 @@
                                         <span class="bullet bullet-dot">
                                             </span></span>
                                             <span  class="menu-title" >
-                                               Subject Class
+                                               Subjects For Classes
                                             </span>
                                 </a>
                                 <!--end:Menu link-->

@@ -25,7 +25,7 @@
                                     <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
                                                         <!--begin::Item-->
                                                         <li class="breadcrumb-item text-muted">
-                                                            <a href="{{ route('classcategory.index') }}" class="text-muted text-hover-primary">Class Category </a>
+                                                            <a href="{{ route('classcategories.index') }}" class="text-muted text-hover-primary">Class Category </a>
                                                                         </li>
                                                             <!--end::Item-->
                                                                 <!--begin::Item-->
@@ -99,6 +99,9 @@
                   <!--begin::Card toolbar-->
                     <div class="card-toolbar">
                               <!--begin::Toolbar-->
+                              @can('classcategory-create')
+
+
                                     <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
                                                 <!--begin::Add user-->
                                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
@@ -106,7 +109,7 @@
                                                 </button>
                                                 <!--end::Add user-->
                                     </div>
-
+                                @endcan
                                      <!--begin::Modal - Add task-->
                                         <div class="modal fade" id="kt_modal_add_user" tabindex="-1" aria-hidden="true">
                                             <!--begin::Modal dialog-->
@@ -130,7 +133,7 @@
                                                     <!--begin::Modal body-->
                                                     <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
                                                         <!--begin::Form-->
-                                                        <form id="kt_modal_add_user_form" class="form" action="{{ route('classcategory.store') }}" method="POST">
+                                                        <form id="kt_modal_add_user_form" class="form" action="{{ route('classcategories.store') }}" method="POST">
                                                             @csrf
                                                             <!--begin::Scroll-->
                                                             <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_add_user_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_user_header" data-kt-scroll-wrappers="#kt_modal_add_user_scroll" data-kt-scroll-offset="300px">
@@ -259,7 +262,7 @@
                                                     <!--begin::Modal body-->
                                                     <div id="formcontent" class="modal-body scroll-y mx-5 my-7">
                                                         <!--begin::Form-->
-                                                        <form id="kt_modal_update_role_form" class="form" action="{{ route('classcategory.updatehouse') }}" method="POST">
+                                                        <form id="kt_modal_update_role_form" class="form" action="{{ route('classcategories.updateclasscategory') }}" method="POST">
                                                             @csrf
 
                                                             <!--begin::Scroll-->
@@ -268,57 +271,8 @@
                                                             </div>
 
 
-                                                             <!--begin::Input row-->
-                                                             <div class="fv-row mb-7">
-                                                                <!--begin::Label-->
-                                                                <label class="required fw-semibold fs-6 mb-5">Select Housemaster</label>
-                                                                <!--end::Label-->
-                                                                <!--begin::Input-->
-                                                                <select name ="update_housemasterid" id="update_housemasterid" class="sel-housemaster form-control form-control-solid mb-3 mb-lg-0"  >
 
 
-                                                                </select>
-                                                                <!--end::Input-->
-                                                                <div id="prev_housemaster">
-
-                                                                </div>
-                                                            </div>
-                                                            <!--end::Input row-->
-
-
-                                                             <!--begin::Input row-->
-                                                             <div class="fv-row mb-7">
-                                                                <!--begin::Label-->
-                                                                <label class="required fw-semibold fs-6 mb-5">Select Term</label>
-                                                                <!--end::Label-->
-                                                                <!--begin::Input-->
-                                                                <select name ="update_termid" id="update_termid" class="sel-term form-control form-control-solid mb-3 mb-lg-0"  >
-                                                                </select>
-                                                                <!--end::Input-->
-                                                                <div id="prev_term">
-
-                                                                </div>
-                                                            </div>
-                                                            <!--end::Input row-->
-
-                                                                <!--begin::Input row-->
-                                                                <div class="fv-row mb-7">
-                                                                        <!--begin::Label-->
-                                                                        <label class="required fw-semibold fs-6 mb-5">Select Session</label>
-                                                                        <!--end::Label-->
-                                                                    <!--begin::Input-->
-
-                                                                    <select name ="update_sessionid" id="update_sessionid" class="sel-sesson form-control form-control-solid mb-3 mb-lg-0"  >
-
-
-                                                                    </select>
-                                                                    <!--end::Input-->
-                                                                    <div id="prev_session">
-
-                                                                    </div>
-
-                                                                </div>
-                                                                <!--end::Input row-->
                                                             <!--end::Scroll-->
 
                                                             <!--begin::Actions-->
@@ -327,7 +281,7 @@
                                                                     Discard
                                                                 </button>
 
-                                                                <button type="submit" onclick="getOption()" class="btn btn-primary" data-kt-roles-modal-action="submit">
+                                                                <button type="submit" onclick="return check()" class="btn btn-primary" data-kt-roles-modal-action="submit">
                                                                     <span class="indicator-label">
                                                                         Update
                                                                     </span>
@@ -408,7 +362,7 @@
                     <th class="min-w-125px">CA 1 Score</th>
                     <th class="min-w-125px">Ca 2 Score</th>
                     <th class="min-w-125px">Exam Score</th>
-                   
+
                     <th class="min-w-125px">Date Updated</th>
                     <th class="min-w-100px">Actions</th>
                 </tr>
@@ -417,20 +371,18 @@
                 @php
                  $i = 0
                @endphp
-            @foreach ($classcategorys as $sc)
-
-
-                    <tr data-url="{{ route('classcategory.destroy',$sc->id) }}">
+             @foreach ($classcategories as $sc)
+                    <tr data-url="{{ route('classcategories.destroy',$sc->id) }}">
                         <td>
                             <div class="form-check form-check-sm form-check-custom form-check-solid">
                                 <input class="form-check-input" type="checkbox" value="1" />
                             </div>
                         </td>
-                        <td class="classcategoryid">  <input type="hidden" id="tid"  value="{{ $sc->id }}" />{{ ++$i }}</td>
+                        <td class="classcategoriesid">  <input type="hidden" id="tid"  value="{{ $sc->id }}" />{{ ++$i }}</td>
                         <td class="classcategory">{{ $sc->category }} </td>
-                        <td class="housecolour">{{ $sc->ca1score }}</td>
-                        <td class="housemaster">{{ $sc->ca2score }}</td>
-                        <td class="termid">{{ $sc->$sc->examscore }}</td>
+                        <td class="ca1score">{{ $sc->ca1score }}</td>
+                        <td class="ca2score">{{ $sc->ca2score }}</td>
+                        <td class="examscore">{{ $sc->examscore }}</td>
 
                         <td >{{ $sc->updated_at }} </td>
                         <td >
@@ -443,7 +395,7 @@
                                         <!--begin::Menu item-->
                                         <div class="menu-item px-3">
 
-                                            <button type="button" onClick="return removeThenAdd();" class="sel-house btn btn-light btn-active-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_update_role">Edit</button>
+                                            <button type="button"  class="sel-house btn btn-light btn-active-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_update_role">Edit</button>
                                         </div>
                                         <!--end::Menu item-->
                                     @endcan
@@ -457,7 +409,7 @@
                                         href="javascript:void(0)"
                                         id="show-user"
                                         data-kt-roles-table-filter="delete_row"
-                                        data-url="{{ route('classcategory.deletehouse', ['houseid'=>$sc->id]) }}"
+                                        data-url="{{ route('classcategories.deleteclasscategory', ['classcategoryid'=>$sc->id]) }}"
                                         class="btn btn-danger btn-sm">Delete</a>
                                     </div>
                                     <!--end::Menu item-->

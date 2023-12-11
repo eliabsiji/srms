@@ -1,170 +1,301 @@
 @extends('layouts.master')
 @section('content')
 
-     <!-- Start Page title and tab -->
-     <div class="section-body">
-        <div class="container-fluid">
-            <div class="d-flex justify-content-between align-items-center ">
-                <div class="header-action">
-                    <h1 class="page-title">School</h1>
-                    <ol class="breadcrumb page-breadcrumb">
-                        <li class="breadcrumb-item"><a href="#">Class Teacher</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Edit Class Teacher</li>
-                    </ol>
-                </div>
-                <ul class="nav nav-tabs page-header-tab">
-                    <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#edit-class-teacher">Edit Class Teacher</a></li>
+            <!--begin::Main-->
+            <div class="app-main flex-column flex-row-fluid" id="kt_app_main">
+                <!--begin::Content wrapper-->
+                <div class="d-flex flex-column flex-column-fluid">
 
-                </ul>
-            </div>
+                <!--begin::Toolbar-->
+                <div id="kt_app_toolbar" class="app-toolbar  py-3 py-lg-6 ">
+
+                            <!--begin::Toolbar container-->
+                        <div id="kt_app_toolbar_container" class="app-container  container-xxl d-flex flex-stack ">
+
+                            <!--begin::Page title-->
+                            <div  class="page-title d-flex flex-column justify-content-center flex-wrap me-3 ">
+                                <!--begin::Title-->
+                                <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">
+                                Class Teacher
+                                        </h1>
+                                <!--end::Title-->
+
+
+                                    <!--begin::Breadcrumb-->
+                                    <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
+                                                        <!--begin::Item-->
+                                                        <li class="breadcrumb-item text-muted">
+                                                            <a href="{{ route('classteacher.index') }}" class="text-muted text-hover-primary">Class Teacher </a>
+                                                                        </li>
+                                                            <!--end::Item-->
+                                                                <!--begin::Item-->
+                                                <li class="breadcrumb-item">
+                                                    <span class="bullet bg-gray-400 w-5px h-2px"></span>
+                                                </li>
+                                                <!--end::Item-->
+
+                                                        <!--begin::Item-->
+                                                                <li class="breadcrumb-item text-muted">Class Teacher</li>
+                                                            <!--end::Item-->
+
+                                                </ul>
+                                    <!--end::Breadcrumb-->
+                                </div>
+                            <!--end::Page title-->
+                                @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                                @endif
+
+                                @if (\Session::has('status'))
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                {{ \Session::get('status') }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                                @endif
+                                @if (\Session::has('success'))
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                {{ \Session::get('success') }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                                @endif
+
+                                <!--begin::Actions-->
+<div class="d-flex align-items-center gap-2 gap-lg-3">
+
+
+<!--begin::Secondary button-->
+
+
+<!--begin::Primary button-->
+    <a href="{{ route('classteacher.index') }}" class="btn btn-sm fw-bold btn-primary" >
+    << Back        </a>
+<!--end::Primary button-->
+</div>
+<!--end::Actions-->
+                            </div>
+                            <!--end::Toolbar container-->
+                        </div>
+                    <!--end::Toolbar-->
+
+
+        <div id="kt_app_content" class="app-content  flex-column-fluid " >
+            <!--begin::Content container-->
+
+            <?php
+            foreach($classteachers as $cteachers) {
+                $cteachers->ctid;
+                $cteachers->staffname;
+                $cteachers->schoolclass;
+                $cteachers->schoolarm;
+                $cteachers->schoolterm;
+                $cteachers->schoolsession;
+            }
+
+            ?>
+        <!--begin::Content container-->
+        <div id="kt_app_content_container" class="app-container  container-xxl ">
+            {{-- <form id="kt_ecommerce_add_category_form" class="form d-flex flex-column flex-lg-row" action="{{ route('classteacher.update',$cteachers->ctid) }}" method="PATCH"> --}}
+        {!! Form::model($classteachers, ['route' => ['classteacher.update', $cteachers->ctid], 'method'=>'PATCH','class'=>'form d-flex flex-column flex-lg-row']) !!}
+                @csrf
+                @csrf
+    <!--begin::Main column-->
+    <div class="d-flex flex-column flex-row-fluid gap-7 gap-lg-10">
+        <!--begin::General options-->
+<div class="card card-flush py-4">
+    <!--begin::Card header-->
+    <div class="card-header">
+        <div class="card-title">
+            <h2>Edit Class Teacher</h2>
         </div>
-        @if (\Session::has('status'))
-           <div class="alert alert-warning fade in">
-            <a href="#" class="close" data-dismiss="alert">&times;</a>
-                <p>{{ \Session::get('status') }}</p>
-            </div>
-        @endif
-            @if (\Session::has('success'))
-           <div class="alert alert-success alert-dismissible">
-            <button type="button" class="close" data-dismiss="alert"></button>
-                <p>{{ \Session::get('success') }}</p>
-            </div>
-        @endif
-
     </div>
-    <div class="section-body mt-4">
-        <div class="container-fluid">
-            <div class="tab-content">
-                <div class="tab-pane active" id="edit-arm">
-                    <div class="card">
-                        <div class="card-header">
-                            <a class="btn btn-primary" href="{{ route('classteacher.index') }}"> Back to Class Teacher</a>
-                            @if (count($errors) > 0)
-                            <div class="alert alert-success alert-dismissible">
-                                <button type="button" class="close" data-dismiss="alert"></button>
-                                <strong>Opps!</strong> Something went wrong, please check below errors.<br><br>
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
+    <!--end::Card header-->
+
+    <!--begin::Card body-->
+    <div class="card-body pt-0">
+
+ <!--begin::Input group-->
+ <div class="mb-7">
+    <!--begin::Label-->
+    <label class="required fw-semibold fs-6 mb-5">Select Class Teacher</label>
+    <!--end::Label-->
+            <!--begin::Input row-->
+            <div class="fv-row mb-7">
+
+                    <!--begin::Input-->
+                    <select name ="staffid" id="staffid"  class="form-control form-control-solid mb-3 mb-lg-0">
+                        @if ($cteachers->userid == "")
+                        <option value="">Select Staff </option>
+                        @else
+                            <option value="{{ $cteachers->userid }}">Select  </option>
                         @endif
-                            <div class="card-options ">
-                                <a href="#" class="card-options-collapse" data-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a>
-                                <a href="#" class="card-options-remove" data-toggle="card-remove"><i class="fe fe-x"></i></a>
-                            </div>
-                        </div>
-                        <?php
-                        foreach($classteachers as $cteachers) {
-                            $cteachers->ctid;
-                            $cteachers->staffname;
-                            $cteachers->schoolclass;
-                            $cteachers->schoolarm;
-                            $cteachers->schoolterm;
-                            $cteachers->schoolsession;
-                        }
 
-                        ?>
-                        {!! Form::model($classteachers, ['route' => ['classteacher.update', $cteachers->ctid], 'method'=>'PATCH','class'=>'form-horizontal form-stripe']) !!}
-                        @csrf
+                        @foreach ($teachers as $staffname => $name )
+                            <option value="{{$name->userid}}">{{ $name->name }} </option>
+                        @endforeach
+                        </select>[ {{ $cteachers->staffname }}]
+                    <!--end::Input-->
 
-                        <div class="form-group row">
-                            <label class="col-md-3 col-form-label">Select Staff <span class="text-danger">*</span></label>
-                            <div class="col-md-7">
-                                <select name ="staffid" id="staffid"  class="form-control">
+            </div>
+            <!--end::Input row-->
+        </div>
+        <!--end::Input group-->
 
 
-                                    @if ($cteachers->userid == "")
-                                        <option value="">Select Staff </option>
-                                    @else
-                                        <option value="{{ $cteachers->userid }}">Select  </option>
-                                    @endif
+        <!--begin::Input group-->
+ <div class="mb-7">
+    <!--begin::Label-->
+    <label class="required fw-semibold fs-6 mb-5">Select Class </label>
+    <!--end::Label-->
+            <!--begin::Input row-->
+            <div class="fv-row mb-7">
+
+                    <!--begin::Input-->
+                    <select name ="schoolclassid" id="schoolclassid"  class="form-control form-control-solid mb-3 mb-lg-0">
+                        @if ($cteachers->classid == "")
+                        <option value="">Select Class </option>
+                   @else
+                       <option value="{{ $cteachers->classid }}">Select  Class </option>
+                   @endif
+
+                   @foreach ($schoolclasses as $schoolclass => $name )
+                    <option value="{{$name->id}}">{{ $name->schoolclass }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ $name->arm}} </option>
+                   @endforeach
+               </select>[ {{ $cteachers->schoolclass }} &nbsp;&nbsp;&nbsp;&nbsp; {{ $cteachers->schoolarm }}]
+                    <!--end::Input-->
+
+            </div>
+            <!--end::Input row-->
+        </div>
+        <!--end::Input group-->
 
 
-                                @foreach ($teachers as $staffname => $name )
-                                 <option value="{{$name->userid}}">{{ $name->name }} </option>
-                                @endforeach
-                            </select>[ {{ $cteachers->staffname }}]
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-md-3 col-form-label">Select Class <span class="text-danger">*</span></label>
-                            <div class="col-md-7">
-                                <select name ="schoolclassid" id="schoolclassid"  class="form-control" >
+        <!--begin::Input group-->
+ <div class="mb-7">
+    <!--begin::Label-->
+    <label class="required fw-semibold fs-6 mb-5">Select Class Teacher</label>
+    <!--end::Label-->
+            <!--begin::Input row-->
+            <div class="fv-row mb-7">
 
-                                    @if ($cteachers->classid == "")
-                                         <option value="">Select Class </option>
-                                    @else
-                                        <option value="{{ $cteachers->classid }}">Select  Class </option>
-                                    @endif
+                    <!--begin::Input-->
+                    <select name ="staffid" id="staffid"  class="form-control form-control-solid mb-3 mb-lg-0">
+                        @if ($cteachers->userid == "")
+                        <option value="">Select Staff </option>
+                        @else
+                            <option value="{{ $cteachers->userid }}">Select  </option>
+                        @endif
 
-                                    @foreach ($schoolclasses as $schoolclass => $name )
-                                     <option value="{{$name->id}}">{{ $name->schoolclass }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ $name->arm}} </option>
-                                    @endforeach
-                                </select>[ {{ $cteachers->schoolclass }} &nbsp;&nbsp;&nbsp;&nbsp; {{ $cteachers->schoolarm }}]
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-md-3 col-form-label">Select Term <span class="text-danger">*</span></label>
-                            <div class="col-md-7">
-                                <select name ="termid" id="termid"  class="form-control" >
+                        @foreach ($teachers as $staffname => $name )
+                            <option value="{{$name->userid}}">{{ $name->name }} </option>
+                        @endforeach
+                        </select>[ {{ $cteachers->staffname }}]
+                    <!--end::Input-->
 
-                                    @if ($cteachers->termid == "")
-                                    <option value="{{ $cteachers->termid }}">Select Term </option>
-                                    @else
-                                        <option value="{{ $cteachers->termid }}" selected>Select  Term </option>
-                                    @endif
+            </div>
+            <!--end::Input row-->
+        </div>
+        <!--end::Input group-->
 
 
+                            <!--begin::Input group-->
+                    <div class="mb-7">
+                        <!--begin::Label-->
+                        <label class="required fw-semibold fs-6 mb-5">Select Term</label>
+                        <!--end::Label-->
+                                <!--begin::Input row-->
+                                <div class="fv-row mb-7">
 
-                                    @foreach ($schoolterms as $schoolterm => $name )
-                                     <option value="{{$name->id}}">{{ $name->term}}</option>
-                                    @endforeach
-                                </select>[ {{ $cteachers->term }}]
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-md-3 col-form-label">Select Session <span class="text-danger">*</span></label>
-                            <div class="col-md-7">
-                                <select name ="sessionid" id="sessiionid"  class="form-control">
-
-                                    @if ($cteachers->sessionid == "")
-                                    <option value="">Select Session </option>
-                                    @else
-                                        <option value="{{ $cteachers->sessionid }}">Select  Session </option>
-                                    @endif
-
-                                    @foreach ($schoolsessions as $schoolsession => $name )
-                                     <option value="{{$name->id}}">{{ $name->session}}</option>
-                                    @endforeach
-                                </select>[ {{ $cteachers->session }}]
-                            </div>
-                        </div>
+                                        <!--begin::Input-->
+                                        <select name ="termid" id="termid"  class="form-control form-control-solid mb-3 mb-lg-0">
+                                            @if ($cteachers->termid == "")
+                                            <option value="{{ $cteachers->termid }}">Select Term </option>
+                                            @else
+                                                <option value="{{ $cteachers->termid }}" selected>Select  Term </option>
+                                            @endif
 
 
-                            <div class="form-group row">
-                                <label class="col-md-3 col-form-label"></label>
-                                <div class="col-md-7">
-                                    <button type="submit" class="btn btn-primary">Submit</button>
+
+                                            @foreach ($schoolterms as $schoolterm => $name )
+                                            <option value="{{$name->id}}">{{ $name->term}}</option>
+                                            @endforeach
+                                        </select>[ {{ $cteachers->term }}]
+                                        <!--end::Input-->
 
                                 </div>
+                                <!--end::Input row-->
                             </div>
-                            {!! Form::close() !!}
+                            <!--end::Input group-->
 
 
-                    </div>
-                </div>
 
+                              <!--begin::Input group-->
+ <div class="mb-7">
+    <!--begin::Label-->
+    <label class="required fw-semibold fs-6 mb-5">Select Session</label>
+    <!--end::Label-->
+            <!--begin::Input row-->
+            <div class="fv-row mb-7">
+
+                    <!--begin::Input-->
+                    <select name ="sessionid" id="sessiionid"  class="form-control form-control-solid mb-3 mb-lg-0">
+                        @if ($cteachers->sessionid == "")
+                        <option value="">Select Session </option>
+                        @else
+                            <option value="{{ $cteachers->sessionid }}">Select  Session </option>
+                        @endif
+
+                        @foreach ($schoolsessions as $schoolsession => $name )
+                         <option value="{{$name->id}}">{{ $name->session}}</option>
+                        @endforeach
+                    </select>[ {{ $cteachers->session }}]
+                    <!--end::Input-->
 
             </div>
+            <!--end::Input row-->
         </div>
+        <!--end::Input group-->
+
+
+
     </div>
-    <script>
-        function chk(){
-      //  var p = document.getElementById('ternid').value;
-       // var opt = p.options[p.selectedIndex];
-            alert();
-        }
-    </script>
-    @endsection
+    <!--end::Card header-->
+
+    <div class="d-flex justify-content-end">
+        <!--begin::Button-->
+        <a href="products.html" id="kt_ecommerce_add_product_cancel" class="btn btn-light me-5">
+           Cancel
+       </a>
+       <!--end::Button-->
+
+       <!--begin::Button-->
+       <button type="submit" id="kt_ecommerce_add_category_submit" class="btn btn-primary">
+           <span class="indicator-label">
+               Save Changes
+           </span>
+           <span class="indicator-progress">
+               Please wait... <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+           </span>
+       </button>
+       <!--end::Button-->
+   </div>
+</div>
+<!--end::General options-->
+
+    </div>
+    <!--end::Main column-->
+    {!! Form::close() !!}
+ </div>
+
+            <!--end::Content container-->
+        </div>
+                <!--end::Content-->
+
+
+@endsection

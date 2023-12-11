@@ -143,7 +143,7 @@
                                                                     <!--end::Label-->
 
                                                                     <!--begin::Input-->
-                                                                    <input type="text" id="schoolclass" name="schoolclass" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="House Name ..."  />
+                                                                    <input type="text" id="schoolclass" name="schoolclass" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="School Class Name ..."  />
                                                                     <!--end::Input-->
                                                                 </div>
                                                                 <!--end::Input group-->
@@ -155,7 +155,7 @@
                                                                   <!--begin::Input group-->
                                                                   <div class="mb-7">
                                                                     <!--begin::Label-->
-                                                                    <label class="required fw-semibold fs-6 mb-5">Select House Master</label>
+                                                                    <label class="required fw-semibold fs-6 mb-5">Select Class Arm</label>
                                                                     <!--end::Label-->
                                                                             <!--begin::Input row-->
                                                                             <div class="fv-row mb-7">
@@ -164,7 +164,7 @@
                                                                                     <select name ="arm" id="arm"  class="form-control form-control-solid mb-3 mb-lg-0">
                                                                                         <option value="0">Select Class Arm </option>
                                                                                         @foreach ($arms as $arms => $name )
-                                                                                         <option value="{{$name->arm}}">{{ $name->arm }}</option>
+                                                                                         <option value="{{$name->id}}">{{ $name->arm }}</option>
                                                                                         @endforeach
                                                                                       </select>
                                                                                     <!--end::Input-->
@@ -188,8 +188,7 @@
                                                                                         @foreach ($classcategories as $cat => $name )
                                                                                          <option value="{{$name->id}}">{{ $name->category }}</option>
                                                                                         @endforeach
-                                                                                        <option value="1">Junior School</option>
-                                                                                        <option value="2">Senior School</option>
+
                                                                                       </select>
                                                                                     </select>
                                                                                     <!--end::Input-->

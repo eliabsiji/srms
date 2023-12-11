@@ -20,7 +20,7 @@ class ClassTeacherController extends Controller
          $this->middleware('permission:class_teacher-list|class_teacher-create|class_teacher-edit|class_teacher-delete', ['only' => ['index','store']]);
          $this->middleware('permission:class_teacher-create', ['only' => ['create','store']]);
          $this->middleware('permission:class_teacher-edit', ['only' => ['edit','update']]);
-         $this->middleware('permission:class_teacher-delete', ['only' => ['destroy']]);
+         $this->middleware('permission:class_teacher-delete', ['only' => ['destroy','deleteclassteacher']]);
     }
 
 
@@ -32,7 +32,8 @@ class ClassTeacherController extends Controller
     public function index()
     {
         //
-        $schoolclass = Schoolclass::all();
+        $schoolclass = Schoolclass::leftJoin('schoolarm', 'schoolarm.id','=','schoolclass.arm')
+        ->get(['schoolclass.id as id','schoolarm.arm as schoolarm','schoolclass.schoolclass as schoolclass',]);
        // $subjectteachers = Subjectteacher::all();
         $subjectteachers = User::whereHas('roles', function($q){ $q->where('name', '!=','Student'); })
         ->get(['users.id as userid','users.name as name']);
@@ -41,10 +42,11 @@ class ClassTeacherController extends Controller
         $schoolsession = Schoolsession::all();
         $classteachers = ClassTeacher::leftJoin('users', 'users.id','=','classteacher.staffid')
         ->leftJoin('schoolclass', 'schoolclass.id','=','classteacher.schoolclassid')
+        ->leftJoin('schoolarm', 'schoolarm.id','=','schoolclass.arm')
         ->leftJoin('schoolterm', 'schoolterm.id','=','classteacher.termid')
         ->leftJoin('schoolsession', 'schoolsession.id','=','classteacher.sessionid')
-        ->get(['classteacher.id as id','users.id as userid','users.name as staffname',
-             'schoolclass.schoolclass as schoolclass','schoolclass.arm as schoolarm',
+        ->get(['classteacher.id as id','users.id as userid','users.name as staffname','users.avatar as avatar',
+             'schoolclass.schoolclass as schoolclass','schoolarm.arm as schoolarm',
             'schoolclass.description as classcategory','schoolterm.term as term',
             'schoolsession.session as session','classteacher.updated_at as updated_at']);
 
@@ -119,8 +121,7 @@ class ClassTeacherController extends Controller
         }else{
 
             $input = $request->all();
-
-        classteacher::create($input);
+            classteacher::create($input);
 
         return redirect()->route('classteacher.index')
         ->with('success', 'Teacher Assigned to Class successfully.');
@@ -221,5 +222,25 @@ class ClassTeacherController extends Controller
 
         return redirect()->route('classteacher.index')
             ->with('success', 'Class Teacher deleted successfully.');
+    }
+
+    public function deleteclassteacher(Request $request)
+    {
+        classteacher::find($request->classteacherid)->delete();
+        //check data deleted or not
+        if ($request->classteacherid) {
+            $success = true;
+            $message = "Class Teacher has been removed";
+        } else {
+            $success = true;
+            $message = "Class Teacher not found";
+        }
+
+        //  return response
+        return response()->json([
+            'success' => $success,
+            'message' => $message,
+        ]);
+
     }
 }

@@ -108,6 +108,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('academicoperations', AcademicOperationsController::class);
 
     Route::resource('subject', SubjectController::class);
+    Route::get('/subjectid/{subjectid}',[SubjectController::class, 'deletesubject'])->name('subject.deletesubject');
+    Route::post('subjectid',[SubjectController::class, 'updatesubject'])->name('subject.updatesubject');
 
     Route::resource('schoolclass', SchoolClassController::class);
 
@@ -127,6 +129,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('subjectteacher', SubjectTeacherController::class);
 
     Route::resource('classteacher', ClassTeacherController::class);
+    Route::get('/classteacherid/{classteacherid}',[ClassTeacherController::class, 'deleteclassteacher'])->name('classteacher.deleteclassteacher');
+    Route::post('classteacherid',[ClassTeacherController::class, 'updateclassteacher'])->name('classteacher.updateclassteacher');
 
     Route::resource('session', SchoolsessionController::class);
     Route::get('/sessionid/{sessionid}',[SchoolsessionController::class, 'deletesession'])->name('session.deletesession');
@@ -141,8 +145,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('classoperation', ClassOperationController::class);
 
     Route::resource('classcategories', ClasscategoryController::class);
-    Route::get('/classcategoryid/{classcategoryid}',[ClasscategoryController::class, 'deleteclasscategory'])->name('classcategory.deleteclasscategory');
-    Route::post('updateclasscategoryid',[SchoolsessionController::class, 'updateclasscategory'])->name('classcategory.updateclasscategory');
+    Route::get('/classcategoryid/{classcategoryid}',[ClasscategoryController::class, 'deleteclasscategory'])->name('classcategories.deleteclasscategory');
+    Route::post('updateclasscategoryid',[ClasscategoryController::class, 'updateclasscategory'])->name('classcategories.updateclasscategory');
 
     Route::resource('subjectoperation', SubjectOperationController::class);
     Route::resource('parent', ParentController::class);

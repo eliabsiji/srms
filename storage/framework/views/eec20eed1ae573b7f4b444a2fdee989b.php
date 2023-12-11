@@ -624,7 +624,7 @@
     <!--begin:Menu item-->
     <div  data-kt-menu-trigger="click"  class="menu-item <?php echo e(request()->is('schoolarm*') ||
     request()->is('schoolclass*')  ||
-    request()->is('classcategory*') ||
+    request()->is('classcategories*') ||
     request()->is('classteacher*')
     ? ' here show menu-accordion' : ''); ?>" >
     <!--begin:Menu link-->
@@ -662,6 +662,24 @@
                         </div>
                         <!--end:Menu item-->
                     <?php endif; ?>
+                    <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('classcategory-list')): ?>
+                    <!--begin:Menu item-->
+                        <div  class="menu-item" >
+                                <!--begin:Menu link-->
+                                <a class="menu-link <?php echo e(request()->is('classcategory*')
+                                    ? ' active' : ''); ?>"
+                                href="<?php echo e(route('classcategories.index')); ?>" >
+                                    <span  class="menu-bullet" >
+                                        <span class="bullet bullet-dot">
+                                            </span></span>
+                                            <span  class="menu-title" >
+                                                Class Category
+                                            </span>
+                                </a>
+                                <!--end:Menu link-->
+                        </div>
+                            <!--end:Menu item-->
+                    <?php endif; ?>
                     <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('school_class-list')): ?>
                         <!--begin:Menu item-->
                         <div  class="menu-item" >
@@ -680,24 +698,7 @@
                         </div>
                         <!--end:Menu item-->
                     <?php endif; ?>
-                    <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('classcategory-list')): ?>
-                            <!--begin:Menu item-->
-                        <div  class="menu-item" >
-                                <!--begin:Menu link-->
-                                <a class="menu-link <?php echo e(request()->is('classcategory*')
-                                    ? ' active' : ''); ?>"
-                                href="<?php echo e(route('classcategories.index')); ?>" >
-                                    <span  class="menu-bullet" >
-                                        <span class="bullet bullet-dot">
-                                            </span></span>
-                                            <span  class="menu-title" >
-                                                Class Category
-                                            </span>
-                                </a>
-                                <!--end:Menu link-->
-                        </div>
-                            <!--end:Menu item-->
-                    <?php endif; ?>
+
                     <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('class_teacher-list')): ?>
                             <div  class="menu-item" >
                                 <!--begin:Menu link-->
@@ -789,7 +790,7 @@
                                         <span class="bullet bullet-dot">
                                             </span></span>
                                             <span  class="menu-title" >
-                                               Subject Class
+                                               Subjects For Classes
                                             </span>
                                 </a>
                                 <!--end:Menu link-->
