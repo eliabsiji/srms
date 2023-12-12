@@ -16,7 +16,7 @@
                             <div  class="page-title d-flex flex-column justify-content-center flex-wrap me-3 ">
                                 <!--begin::Title-->
                                 <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">
-                                School House
+                                Subject Teacher
                                         </h1>
                                 <!--end::Title-->
 
@@ -25,7 +25,7 @@
                                     <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
                                                         <!--begin::Item-->
                                                         <li class="breadcrumb-item text-muted">
-                                                            <a href="{{ route('schoolhouse.index') }}" class="text-muted text-hover-primary">School House </a>
+                                                            <a href="{{ route('subjectteacher.index') }}" class="text-muted text-hover-primary">Subject Teacher </a>
                                                                         </li>
                                                             <!--end::Item-->
                                                                 <!--begin::Item-->
@@ -35,7 +35,7 @@
                                                 <!--end::Item-->
 
                                                         <!--begin::Item-->
-                                                                <li class="breadcrumb-item text-muted">School House</li>
+                                                                <li class="breadcrumb-item text-muted">Subject Teacher</li>
                                                             <!--end::Item-->
 
                                                 </ul>
@@ -80,7 +80,7 @@
                         <div class="d-flex flex-wrap flex-stack my-5">
                             <!--begin::Heading-->
                             <h2 class="fs-2 fw-semibold my-2">
-                                School House
+                                Subject Teacher
                                 <span class="fs-6 text-gray-400 ms-1">Database</span>
                             </h2>
                             <!--end::Heading-->
@@ -102,7 +102,7 @@
                                     <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
                                                 <!--begin::Add user-->
                                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
-                                                    <i class="ki-duotone ki-plus fs-2"></i>       Create New House
+                                                    <i class="ki-duotone ki-plus fs-2"></i>     New Subject teacher
                                                 </button>
                                                 <!--end::Add user-->
                                     </div>
@@ -116,7 +116,7 @@
                                                     <!--begin::Modal header-->
                                                     <div class="modal-header" id="kt_modal_add_user_header">
                                                         <!--begin::Modal title-->
-                                                        <h2 class="fw-bold">Create New House</h2>
+                                                        <h2 class="fw-bold">New Subject Teacher</h2>
                                                         <!--end::Modal title-->
 
                                                         <!--begin::Close-->
@@ -130,52 +130,49 @@
                                                     <!--begin::Modal body-->
                                                     <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
                                                         <!--begin::Form-->
-                                                        <form id="kt_modal_add_user_form" class="form" action="{{ route('schoolhouse.store') }}" method="POST">
+                                                        <form id="kt_modal_add_user_form" class="form" action="{{ route('subjectteacher.store') }}" method="POST">
                                                             @csrf
                                                             <!--begin::Scroll-->
                                                             <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_add_user_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_user_header" data-kt-scroll-wrappers="#kt_modal_add_user_scroll" data-kt-scroll-offset="300px">
 
-
-                                                                <!--begin::Input group-->
-                                                                <div class="fv-row mb-7">
-                                                                    <!--begin::Label-->
-                                                                    <label class="required fw-semibold fs-6 mb-2">House Name</label>
-                                                                    <!--end::Label-->
-
-                                                                    <!--begin::Input-->
-                                                                    <input type="text" name="house" id="house" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="House Name ..."  />
-                                                                    <!--end::Input-->
-                                                                </div>
-                                                                <!--end::Input group-->
-
-
-                                                                   <!--begin::Input group-->
-                                                                   <div class="fv-row mb-7">
+                                                                    <!--begin::Input group-->
+                                                                    <div class="mb-7">
                                                                         <!--begin::Label-->
-                                                                        <label class="required fw-semibold fs-6 mb-2">House Colour</label>
+                                                                        <label class="required fw-semibold fs-6 mb-5">Select Subject Teacher</label>
                                                                         <!--end::Label-->
+                                                                                <!--begin::Input row-->
+                                                                                <div class="fv-row mb-7">
 
-                                                                        <!--begin::Input-->
-                                                                        <input type="text" name="housecolour" id="housecolour" value="poool" class="sel-housecol form-control form-control-solid mb-3 mb-lg-0" placeholder="House Colour ..."  />
-                                                                        <!--end::Input-->
-                                                                    </div>
-                                                                <!--end::Input group-->
+                                                                                        <!--begin::Input-->
+                                                                                        <select name ="staffid" id="staffid" class="form-control form-control-solid mb-3 mb-lg-0"  >
+                                                                                            <option value="" selected>Select staff</option>
+                                                                                            @foreach ($staffs as $staff => $name )
+                                                                                            <option value="{{$name->userid}}">{{ $name->name }} </option>
+                                                                                            @endforeach
+                                                                                        </select>
+                                                                                        <!--end::Input-->
+
+                                                                                </div>
+                                                                                <!--end::Input row-->
+                                                                            </div>
+                                                                            <!--end::Input group-->
+
 
 
                                                                   <!--begin::Input group-->
                                                                   <div class="mb-7">
                                                                     <!--begin::Label-->
-                                                                    <label class="required fw-semibold fs-6 mb-5">Select House Master</label>
+                                                                    <label class="required fw-semibold fs-6 mb-5">Select Subject</label>
                                                                     <!--end::Label-->
                                                                             <!--begin::Input row-->
                                                                             <div class="fv-row mb-7">
 
                                                                                     <!--begin::Input-->
-                                                                                    <select name ="housemasterid" id="housemasterid" class="form-control form-control-solid mb-3 mb-lg-0"  >
-                                                                                        <option value="" selected>Select House master</option>
-                                                                                        @foreach ($staff as $st => $name )
-                                                                                      <option value="{{$name->userid}}">{{ $name->name }}  </option>
-                                                                                     @endforeach
+                                                                                    <select name ="subjectid" id="subjectid" class="form-control form-control-solid mb-3 mb-lg-0"  >
+                                                                                        <option value="" selected>Select Subject</option>
+                                                                                        @foreach ($subjects as $subject => $name )
+                                                                                         <option value="{{$name->id}}">{{ $name->subject }} ............................. {{ $name->subject_code }} </option>
+                                                                                        @endforeach
                                                                                     </select>
                                                                                     <!--end::Input-->
 
@@ -195,9 +192,9 @@
                                                                                     <!--begin::Input-->
                                                                                     <select name ="termid" id="termid" class="form-control form-control-solid mb-3 mb-lg-0"  >
                                                                                         <option value="" selected>Select Term </option>
-                                                                                            @foreach ($schoolterm as $term => $name )
-                                                                                            <option value="{{$name->id}}">{{ $name->term}}</option>
-                                                                                            @endforeach
+                                                                                        @foreach ($terms as $term => $name )
+                                                                                        <option value="{{$name->id}}">{{ $name->term}}</option>
+                                                                                       @endforeach
                                                                                     </select>
                                                                                     <!--end::Input-->
                                                                             </div>
@@ -218,9 +215,9 @@
                                                                                             <!--begin::Input-->
                                                                                             <select name ="sessionid" id="sessionid" class="sel-sesson form-control form-control-solid mb-3 mb-lg-0"  >
                                                                                                 <option value="" selected>Select Session </option>
-                                                                                                    @foreach ($schoolsession as $schsess => $name )
-                                                                                                    <option value="{{$name->id}}">{{ $name->session}}</option>
-                                                                                                    @endforeach
+                                                                                                @foreach ($schoolsessions as $schoolsession => $name )
+                                                                                                 <option value="{{$name->id}}">{{ $name->session}}</option>
+                                                                                                @endforeach
                                                                                             </select>
                                                                                             <!--end::Input-->
 
@@ -270,7 +267,7 @@
                                                     <!--begin::Modal header-->
                                                     <div class="modal-header">
                                                         <!--begin::Modal title-->
-                                                        <h2 class="fw-bold">Update School House</h2>
+                                                        <h2 class="fw-bold">Update Subject Teacher</h2>
                                                         <!--end::Modal title-->
 
                                                         <!--begin::Close-->
@@ -283,7 +280,7 @@
                                                     <!--begin::Modal body-->
                                                     <div id="formcontent" class="modal-body scroll-y mx-5 my-7">
                                                         <!--begin::Form-->
-                                                        <form id="kt_modal_update_role_form" class="form" action="{{ route('schoolhouse.updatehouse') }}" method="POST">
+                                                        <form id="kt_modal_update_role_form" class="form" action="{{ route('subjectteacher.updatesubjectteacher') }}" method="POST">
                                                             @csrf
 
                                                             <!--begin::Scroll-->
@@ -308,6 +305,25 @@
                                                                 </div>
                                                             </div>
                                                             <!--end::Input row-->
+
+
+                                                               <!--begin::Input row-->
+                                                               <div class="fv-row mb-7">
+                                                                <!--begin::Label-->
+                                                                <label class="required fw-semibold fs-6 mb-5">Select Subject</label>
+                                                                <!--end::Label-->
+                                                                <!--begin::Input-->
+                                                                <select name ="update_subjectid" id="update_subjectid" class="sel-subject form-control form-control-solid mb-3 mb-lg-0"  >
+
+
+                                                                </select>
+                                                                <!--end::Input-->
+                                                                <div id="prev_subject">
+
+                                                                </div>
+                                                            </div>
+                                                            <!--end::Input row-->
+
 
 
                                                              <!--begin::Input row-->
@@ -351,7 +367,7 @@
                                                                     Discard
                                                                 </button>
 
-                                                                <button type="submit" onclick="getOption()" class="btn btn-primary" data-kt-roles-modal-action="submit">
+                                                                <button type="submit"  class="btn btn-primary" data-kt-roles-modal-action="submit">
                                                                     <span class="indicator-label">
                                                                         Update
                                                                     </span>
@@ -428,9 +444,9 @@
                         </div>
                     </th>
                     <th class="min-w-125px">SN</th>
-                    <th class="min-w-125px">House</th>
-                    <th class="min-w-125px">House Colour</th>
-                    <th class="min-w-125px">House Master</th>
+                    <th class="min-w-125px">Subject Teacher</th>
+                    <th class="min-w-125px">Subject</th>
+                    <th class="min-w-125px">Subject Code</th>
                     <th class="min-w-125px">Term</th>
                     <th class="min-w-125px">Session</th>
                     <th class="min-w-125px">Date Updated</th>
@@ -441,7 +457,7 @@
                 @php
                  $i = 0
                @endphp
-            @foreach ($schoolhouses as $sc)
+               @foreach ($subjectteacher as $sc)
 
 
                     <tr data-url="{{ route('schoolhouse.destroy',$sc->id) }}">
@@ -450,36 +466,52 @@
                                 <input class="form-check-input" type="checkbox" value="1" />
                             </div>
                         </td>
-                        <td class="schoolhouseid">  <input type="hidden" id="tid"  value="{{ $sc->id }}" />{{ ++$i }}</td>
-                        <td class="schoolhouse">{{ $sc->house }} </td>
-                        <td class="housecolour">{{ $sc->housecolour }}</td>
-                        <td class="housemaster"><input type="hidden" id="housemaster"  value="{{ $sc->name }}" />{{ $sc->name }}
+                        <td class="subjecteacherid">  <input type="hidden" id="tid"  value="{{ $sc->id }}" />{{ ++$i }}</td>
+                        <td class="subjectteacher d-flex align-items-center"><input type="hidden" id="sub_teacherid"  value="{{ $sc->staffname }}" />
+                            <!--begin:: Avatar -->
+                                    <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
+                                        <a href="#">
+                                                        <div class="symbol-label">
+                                        <?php $image = "";?>
+                                        <?php
+                                        if ($sc->avatar  == NULL || !isset($sc->avatar ) ){
+                                                $image =  'unnamed.png';
+                                        }else {
+                                            $image =   $sc->avatar;
+                                        }
+                                        ?>
+                                                    <img src="{{ Storage::url('images/staffavatar/'.$image)}}" alt="{{ $sc->staffname }}" class="w-100" />
+                                                </div>
+                                                                    </a>
+                                    </div>
+                                    <!--end::Avatar-->
+                                    <!--begin::User details-->
+                                    <div class="d-flex flex-column">
+                                        <a href="#" class="text-gray-800 text-hover-primary mb-1">{{ $sc->staffname }}</a>
 
-                                        <!--begin::User details-->
-                                        <div class="d-flex flex-column">
-                                            <a href="#" class="text-gray-800 text-hover-primary mb-1">{{ $sc->housemaster }}</a>
-                                        </div>
-
-
+                                    </div>
+                                    <!--begin::User details-->
                         </td>
-                        <td class="termid">{{ $sc->term }}</td>
-                        <td class="sessionid">{{ $sc->session }}</td>
-                        <td >{{ $sc->updated_at }} </td>
+                        <td class="subject">{{ $sc->subjectname }}</td>
+                        <td class="subjectcode">{{ $sc->subjectcode }} </td>
+                        <td class="termid">{{ $sc->termname }}</td>
+                        <td class="sessionid">{{ $sc->sessionname }}</td>
+                        <td >{{ $sc->date }} </td>
                         <td >
                             <a href="#" class="btn btn-light btn-active-light-primary btn-flex btn-center btn-sm" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
                                 Actions
                                 <i class="ki-duotone ki-down fs-5 ms-1"></i>                    </a>
                             <!--begin::Menu-->
                                 <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-125px py-4" data-kt-menu="true">
-                                    @can('schoolhouse-edit')
+                                    @can('subject_teacher-edit')
                                         <!--begin::Menu item-->
                                         <div class="menu-item px-3">
 
-                                            <button type="button" onClick="return removeThenAdd();" class="sel-house btn btn-light btn-active-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_update_role">Edit</button>
+                                            <button type="button"  class="sel-subjectteacher btn btn-light btn-active-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_update_role">Edit</button>
                                         </div>
                                         <!--end::Menu item-->
                                     @endcan
-                                    @can('schoolhouse-delete')
+                                    @can('subject_teacher-delete')
                                     <div class="menu-item px-3" >
                                         {{-- <form method="post" class="menu-link px-3" data-kt-roles-table-filter="delete_row" data-route="">
                                           @csrf
@@ -489,7 +521,7 @@
                                         href="javascript:void(0)"
                                         id="show-user"
                                         data-kt-roles-table-filter="delete_row"
-                                        data-url="{{ route('schoolhouse.deletehouse', ['houseid'=>$sc->id]) }}"
+                                        data-url="{{ route('subjectteacher.deletesubjectteacher', ['subjectteacherid'=>$sc->id]) }}"
                                         class="btn btn-danger btn-sm">Delete</a>
                                     </div>
                                     <!--end::Menu item-->

@@ -104,7 +104,7 @@
             {{-- <form id="kt_ecommerce_add_category_form" class="form d-flex flex-column flex-lg-row" action="{{ route('classteacher.update',$cteachers->ctid) }}" method="PATCH"> --}}
         {!! Form::model($classteachers, ['route' => ['classteacher.update', $cteachers->ctid], 'method'=>'PATCH','class'=>'form d-flex flex-column flex-lg-row']) !!}
                 @csrf
-                @csrf
+                
     <!--begin::Main column-->
     <div class="d-flex flex-column flex-row-fluid gap-7 gap-lg-10">
         <!--begin::General options-->

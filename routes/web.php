@@ -121,12 +121,16 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('armid',[SchoolArmController::class, 'updatearm'])->name('schoolarm.updatearm');
 
     Route::resource('subjectclass', SubjectclassController::class);
+    Route::get('/subjectclassid/{subjectclassid}',[SubjectClassController::class, 'deletesubjectclass'])->name('subjectclass.deletesubjectclass');
 
     Route::resource('staff', StaffController::class);
 
     Route::resource('staffacademicinfo', AcademicinfoController::class);
 
     Route::resource('subjectteacher', SubjectTeacherController::class);
+    Route::get('/subjectteacherid/{subjectteacherid}',[SubjectTeacherController::class, 'deletesubjectteacher'])->name('subjectteacher.deletesubjectteacher');
+    Route::post('subjectteacherid',[SubjectTeacherController::class, 'updatesubjectteacher'])->name('subjectteacher.updatesubjectteacher');
+
 
     Route::resource('classteacher', ClassTeacherController::class);
     Route::get('/classteacherid/{classteacherid}',[ClassTeacherController::class, 'deleteclassteacher'])->name('classteacher.deleteclassteacher');

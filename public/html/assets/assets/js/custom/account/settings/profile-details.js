@@ -14,45 +14,124 @@ var KTAccountSettingsProfileDetails = function () {
             form,
             {
                 fields: {
-                    fname: {
+                    admissionNo: {
                         validators: {
                             notEmpty: {
-                                message: 'First name is required'
+                                message: 'Admission Number is required'
                             }
                         }
                     },
-                    lname: {
+                    // avatar: {
+                    //     validators: {
+                    //         notEmpty: {
+                    //             message: 'Student Picture required'
+                    //         }
+                    //     }
+                    // },
+                    title: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Title is required'
+                            }
+                        }
+                    },
+                    firstname: {
+                        validators: {
+                            notEmpty: {
+                                message: 'First Name is required'
+                            }
+                        }
+                    },
+                    lastname: {
                         validators: {
                             notEmpty: {
                                 message: 'Last name is required'
                             }
                         }
                     },
-                    onames: {
+                    othername: {
                         validators: {
                             notEmpty: {
-                                message: 'Other names is required'
+                                message: 'Other Name is required'
                             }
                         }
                     },
-                    address: {
+                    home_address: {
                         validators: {
                             notEmpty: {
-                                message: 'Address is required'
+                                message: 'Home Address 1 is required'
                             }
                         }
                     },
-                    phone: {
+                    home_address2: {
                         validators: {
                             notEmpty: {
-                                message: 'Contact phone number is required'
+                                message: 'Home Address 2 is required'
                             }
                         }
                     },
-                    dob: {
+                    dateofbirth: {
                         validators: {
                             notEmpty: {
-                                message: 'Please enter date of birth'
+                                message: 'Date Of Birth is required'
+                            }
+                        }
+                    },
+                    ag1: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Age is required'
+                            }
+                        }
+                    },
+                    Placeofbirth: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Place of Birth is required'
+                            }
+                        }
+                    },
+                    nationality: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Nationality is required'
+                            }
+                        }
+                    },
+
+
+                    state: {
+                        validators: {
+                            notEmpty: {
+                                message: 'State is required'
+                            }
+                        }
+                    },
+                    local: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Local Goverment Name is required'
+                            }
+                        }
+                    },
+                    religion: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Religion is required'
+                            }
+                        }
+                    },
+                    last_school: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Last School Attended is required'
+                            }
+                        }
+                    },
+                    last_class: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Last Class attended is required'
                             }
                         }
                     },
@@ -63,13 +142,7 @@ var KTAccountSettingsProfileDetails = function () {
                             }
                         }
                     },
-                    'maritalstatus[]': {
-                        validators: {
-                            notEmpty: {
-                                message: 'Please select at least one marital status'
-                            }
-                        }
-                    },
+
 
                 },
                 plugins: {
@@ -154,3 +227,5 @@ var KTAccountSettingsProfileDetails = function () {
 KTUtil.onDOMContentLoaded(function() {
     KTAccountSettingsProfileDetails.init();
 });
+
+

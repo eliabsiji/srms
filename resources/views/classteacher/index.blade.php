@@ -456,7 +456,7 @@
                                  <div class="symbol-label">
                     <?php $image = "";?>
                     <?php
-                    if ($classteacher->staffname  == NULL || !isset($classteacher->staffname ) ){
+                    if ($classteacher->avatar  == NULL || !isset($classteacher->avatar ) ){
                            $image =  'unnamed.png';
                     }else {
                        $image =   $classteacher->avatar;

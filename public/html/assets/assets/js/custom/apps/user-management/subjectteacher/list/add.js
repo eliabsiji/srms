@@ -15,7 +15,7 @@ var KTUsersAddUser = function () {
             form,
             {
                 fields: {
-                    'staffid': {
+                    'id': {
                         validators: {
                             notEmpty: {
                                 message: 'Class Teacher is required'

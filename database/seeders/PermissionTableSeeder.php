@@ -95,7 +95,7 @@ class PermissionTableSeeder extends Seeder
            'studentresults-list',
 
            'subject_class-list',
-           'subject_class-create',
+           'subject_class-assign',
            'subject_class-edit',
            'subject_class-delete',
 
@@ -111,7 +111,7 @@ class PermissionTableSeeder extends Seeder
 
            'subject_teacher-list',
            'subject_teacher-assign',
-           'subject_teachcer-edit',
+           'subject_teacher-edit',
            'subject_teacher-delete',
 
            'view_student-list',

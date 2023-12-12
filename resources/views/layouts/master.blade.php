@@ -63,6 +63,13 @@
        @if (Route::is('subject.*'))
             @include('layouts.pages-assets.css.users-list-css')
        @endif
+       @if (Route::is('subjectteacher.*'))
+            @include('layouts.pages-assets.css.users-list-css')
+       @endif
+       @if (Route::is('subjectclass.*'))
+            @include('layouts.pages-assets.css.users-list-css')
+       @endif
+
        @if (Route::is('authors.*') || Route::is('author.review') || Route::is('author.journal')  )
             @include('layouts.pages-assets.css.users-list-css')
        @endif
@@ -264,6 +271,15 @@
         @endif
         @if (Route::is('subject.*'))
              @include('layouts.pages-assets.js.subject-list-js')
+        @endif
+        @if (Route::is('subjectteacher.*'))
+             @include('layouts.pages-assets.js.subjectteacher-list-js')
+        @endif
+        @if (Route::is('subjectclass.*'))
+             @include('layouts.pages-assets.js.subjectclass-list-js')
+        @endif
+        @if (Route::is('student.*'))
+             @include('layouts.pages-assets.js.users-list-js')
         @endif
         @if (Route::is('myjournals.*'))
             @include('layouts.pages-assets.js.journalvolume-list-js')

@@ -197,7 +197,7 @@ KTUtil.onDOMContentLoaded(function () {
 });
 
 
-function check() {
+function addcheck() {
 
 
     var txtFirsttextValue= 0;

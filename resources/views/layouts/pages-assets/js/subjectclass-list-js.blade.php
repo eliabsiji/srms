@@ -8,9 +8,9 @@
 <!--end::Vendors Javascript-->
 
 <!--begin::Custom Javascript(used for this page only)-->
-    <script src="{{ asset('html/assets/assets/js/custom/apps/user-management/classteacher/list/add.js')}}"></script>
-    <script src="{{ asset('html/assets/assets/js/custom/apps/user-management/classteacher/view/view.js')}}"></script>
-    <script src="{{ asset('html/assets/assets/js/custom/apps/user-management/classteacher/view/update-classteacher.js')}}"></script>
+    <script src="{{ asset('html/assets/assets/js/custom/apps/user-management/subjectclass/list/add.js')}}"></script>
+    <script src="{{ asset('html/assets/assets/js/custom/apps/user-management/subjectclass/view/view.js')}}"></script>
+    {{-- <script src="{{ asset('html/assets/assets/js/custom/apps/user-management/subjectclass/view/update-subjectclass.js')}}"></script> --}}
     <script src="{{ asset('html/assets/assets/js/widgets.bundle.js')}}"></script>
     <script src="{{ asset('html/assets/assets/js/custom/widgets.js')}}"></script>
     <script src="{{ asset('html/assets/assets/js/custom/apps/chat/chat.js')}}"></script>

@@ -32,6 +32,7 @@ class StudentRegistration extends Migration
             $table->string('local');
             $table->string('last_school');
             $table->string('last_class');
+            $table->string('registeredBy');
             $table->timestamps();
         });
 

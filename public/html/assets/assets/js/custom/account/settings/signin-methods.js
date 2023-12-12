@@ -59,21 +59,21 @@ var KTAccountSettingsSigninMethods = function () {
             signInForm,
             {
                 fields: {
-                    emailaddress: {
+                   schoolclassid: {
                         validators: {
                             notEmpty: {
-                                message: 'Email is required'
+                                message: 'School Class required'
                             },
-                            emailAddress: {
-                                message: 'The value is not a valid email address'
+                            termid: {
+                                message: 'Term is required '
                             }
                         }
                     },
 
-                    confirmemail: {
+                    sessionid: {
                         validators: {
                             notEmpty: {
-                                message: 'confirm Email is required'
+                                message: 'Session is required'
                             }
                         }
                     }

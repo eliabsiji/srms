@@ -157,7 +157,7 @@
                                                                         <!--end::Label-->
 
                                                                         <!--begin::Input-->
-                                                                        <input type="text" name="housecolour" id="housecolour" value="poool" class="sel-housecol form-control form-control-solid mb-3 mb-lg-0" placeholder="House Colour ..."  />
+                                                                        <input type="text" name="housecolour" id="housecolour"  class="form-control form-control-solid mb-3 mb-lg-0" placeholder="House Colour ..."  />
                                                                         <!--end::Input-->
                                                                     </div>
                                                                 <!--end::Input group-->

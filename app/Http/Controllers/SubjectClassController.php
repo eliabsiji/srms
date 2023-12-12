@@ -21,15 +21,18 @@ class SubjectClassController extends Controller
      */
     function __construct()
     {
-         $this->middleware('permission:subject-class-list|assign-subject-class|subject-class-edit|subject-class-delete', ['only' => ['index','store']]);
-         $this->middleware('permission:assign-subject-class', ['only' => ['create','store']]);
-         $this->middleware('permission:subject-class-edit', ['only' => ['edit','update']]);
-         $this->middleware('permission:subject-class-delete', ['only' => ['destroy']]);
+         $this->middleware('permission:subject_class-list|subject_class-assign|subject_class-edit|subject_class-delete', ['only' => ['index','store']]);
+         $this->middleware('permission:subject_class-assign', ['only' => ['create','store']]);
+         $this->middleware('permission:subject_class-edit', ['only' => ['edit','update']]);
+         $this->middleware('permission:subject_class-delete', ['only' => ['destroy','destroysubjectclass']]);
     }
     public function index()
     {
         //
-        $schoolclass = Schoolclass::all();
+        $schoolclass = Schoolclass::leftJoin('schoolarm', 'schoolarm.id','=','schoolclass.arm')
+        ->get(['schoolclass.id as id','schoolclass.schoolclass as schoolclass','schoolarm.arm as arm'])
+         ->sortBy('sdesc');
+
         $subjectteacher = Subjectteacher::leftJoin('subject', 'subject.id','=','subjectteacher.subjectid')
         ->leftJoin('users', 'users.id','=','subjectteacher.staffid')
         ->leftJoin('staffbioinfo', 'staffbioinfo.userid','=','users.id')
@@ -43,11 +46,12 @@ class SubjectClassController extends Controller
                                       ->leftJoin('subjectteacher', 'subjectteacher.id','=','subjectclass.subjectteacherid')
                                       ->leftJoin('subject', 'subject.id','=','subjectteacher.subjectid')
                                       ->leftJoin('users', 'users.id','=','subjectteacher.staffid')
+                                      ->leftJoin('schoolarm', 'schoolarm.id','=','schoolclass.arm')
                                       ->leftJoin('staffPicture', 'staffPicture.staffId','=','subjectteacher.staffid')
-                                      ->get(['subjectclass.id as scid','schoolclass.schoolclass as sclass', 'schoolclass.arm as sarm',
+                                      ->get(['subjectclass.id as scid','schoolclass.schoolclass as sclass', 'schoolclass.arm as sarm','schoolarm.arm as schoolarm',
                                       'subjectteacher.staffid as subtid','subjectteacher.subjectid as subid','subject.subject_code as subjectcode',
                                       'subject.subject as subjectname','schoolclass.description as sdesc','users.name as teachername',
-                                      'subjectclass.updated_at as updated_at','staffPicture.picture as picture','schoolclass.id as did',
+                                      'subjectclass.updated_at as updated_at','users.avatar as picture','schoolclass.id as did',
                                       'subject.id as subjectid','subjectteacher.id as subteacherid'])
                                        ->sortBy('sdesc');
 

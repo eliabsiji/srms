@@ -159,7 +159,7 @@
                                                                         <!--end::Label-->
 
                                                                         <!--begin::Input-->
-                                                                        <input type="text" name="ca1score" id="ca1score"  class="form-control form-control-solid mb-3 mb-lg-0" onkeyup="check()" placeholder="scores (%)"  />
+                                                                        <input type="text" name="ca1score" id="ca1score"  class="form-control form-control-solid mb-3 mb-lg-0" onkeyup="addcheck()" placeholder="scores (%)"  />
                                                                         <!--end::Input-->
                                                                     </div>
                                                                 <!--end::Input group-->
@@ -171,7 +171,7 @@
                                                                     <!--end::Label-->
 
                                                                     <!--begin::Input-->
-                                                                    <input type="text" name="ca2score" id="ca2score"  class="form-control form-control-solid mb-3 mb-lg-0" onkeyup="check()" placeholder="scores (%)"  />
+                                                                    <input type="text" name="ca2score" id="ca2score"  class="form-control form-control-solid mb-3 mb-lg-0" onkeyup="addcheck()" placeholder="scores (%)"  />
                                                                     <!--end::Input-->
                                                                 </div>
                                                             <!--end::Input group-->
@@ -183,7 +183,7 @@
                                                                 <!--end::Label-->
 
                                                                 <!--begin::Input-->
-                                                                <input type="text" name="examscore" id="examscore"  class="form-control form-control-solid mb-3 mb-lg-0" onkeyup="check()" placeholder="Exam scores (%)"  />
+                                                                <input type="text" name="examscore" id="examscore"  class="form-control form-control-solid mb-3 mb-lg-0" onkeyup="addcheck()" placeholder="Exam scores (%)"  />
                                                                 <!--end::Input-->
                                                             </div>
                                                         <!--end::Input group-->
@@ -195,7 +195,7 @@
                                                             <!--end::Label-->
 
                                                             <!--begin::Input-->
-                                                            <input type="text" name="totalscore" id="totalscore"  class="form-control form-control-solid mb-3 mb-lg-0" onkeyup="check()" placeholder="Total Score (%)"  />
+                                                            <input type="text" name="totalscore" id="totalscore"  class="form-control form-control-solid mb-3 mb-lg-0" onkeyup="addcheck()" placeholder="Total Score (%)"  />
                                                             <!--end::Input-->
                                                         </div>
                                                     <!--end::Input group-->
@@ -281,7 +281,7 @@
                                                                     Discard
                                                                 </button>
 
-                                                                <button type="submit" onclick="return check()" class="btn btn-primary" data-kt-roles-modal-action="submit">
+                                                                <button type="submit" onclick="return addcheck()" class="btn btn-primary" data-kt-roles-modal-action="submit">
                                                                     <span class="indicator-label">
                                                                         Update
                                                                     </span>

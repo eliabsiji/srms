@@ -24,8 +24,8 @@ class StudentController extends Controller
 
     function __construct()
     {
-         $this->middleware('permission:student-list|add-student|edit-student|delete-student', ['only' => ['index','store']]);
-         $this->middleware('permission:add-student', ['only' => ['create','store']]);
+         $this->middleware('permission:student-list|student-create|edit-student|delete-student', ['only' => ['index','store']]);
+         $this->middleware('permission:student-create', ['only' => ['create','store']]);
          $this->middleware('permission:edit-student', ['only' => ['edit','update']]);
          $this->middleware('permission:delete-student', ['only' => ['destroy']]);
     }
@@ -45,7 +45,7 @@ class StudentController extends Controller
                          ->leftJoin('studentpicture','studentpicture.studentid','=','studentRegistration.id')
                          ->leftJoin('studenthouses','studenthouses.studentid','=','studentRegistration.id')
                          ->leftJoin('schoolhouses','schoolhouses.id','=','studenthouses.schoolhouse')
-                        ->get(['studentRegistration.id as id','studentRegistration.admissionNo as admissionNo',
+                        ->get(['studentRegistration.id as id','studentRegistration.admissionNo as admissionNo','studentRegistration.registeredBy as registeredBy',
                                'studentRegistration.firstname as firstname','schoolhouses.house as house',
                               'studentRegistration.lastname as lastname','studentRegistration.dateofbirth as dateofbirth','studentRegistration.gender as gender',
                               'studentRegistration.updated_at as updated_at','studentpicture.picture as picture']);
@@ -67,8 +67,16 @@ class StudentController extends Controller
      */
     public function create()
     {
-        //
 
+        $schoolclass = Schoolclass::leftJoin('schoolarm', 'schoolarm.id','=','schoolclass.arm')
+        ->get(['schoolclass.id as id','schoolclass.schoolclass as schoolclass','schoolarm.arm as arm'])
+         ->sortBy('sdesc');
+        $schoolterm = Schoolterm::all();
+        $schoolsession = Schoolsession::all();
+
+        return view('student.create')->with('schoolclass',$schoolclass)
+                                    ->with('schoolterm',$schoolterm)
+                                    ->with('schoolsession', $schoolsession);
 
     }
 
@@ -82,110 +90,112 @@ class StudentController extends Controller
     {
         //
 
-        $studentbiodata = new Student();
-        $studentclass = new Studentclass();
-        $promotion = new Promotionstatus();
-        $parent = new ParentRegistration();
-        $picture = new Studentpicture();
-        $studenthouse = new Studenthouse();
-        $studentpersonalityprofile = new Studentpersonalityprofile();
-        $broadsheet = new Broadsheet();
+        dd($request->all());
 
-        $studentcheck = Student::where('admissionNo',$request->admissionNo)
-                                ->exists();
+        // $studentbiodata = new Student();
+        // $studentclass = new Studentclass();
+        // $promotion = new Promotionstatus();
+        // $parent = new ParentRegistration();
+        // $picture = new Studentpicture();
+        // $studenthouse = new Studenthouse();
+        // $studentpersonalityprofile = new Studentpersonalityprofile();
+        // $broadsheet = new Broadsheet();
 
-
-        if ($studentcheck){
-
-            return redirect()->back()->with('danger', 'Ooops! Record already exist! OR Adminssion Number Registered already.');
-            }else{
-
-               //for student biodata...
-               $studentbiodata->admissionNo = $request->admissionNo;
-               $studentbiodata->tittle = $request->title;
-               $studentbiodata->firstname = $request->firstname;
-               $studentbiodata->lastname = $request->lastname;
-               $studentbiodata->othername = $request->othername;
-               $studentbiodata->gender = $request->gender;
-               $studentbiodata->home_address = $request->home_address;
-               $studentbiodata->home_address2 = $request->home_address;
-               $studentbiodata->dateofbirth = $request->dateofbirth;
-               $studentbiodata->placeofbirth = $request->placeofbirth;
-               $studentbiodata->religion = $request->religion;
-               $studentbiodata->nationlity = $request->nationality;
-               $studentbiodata->state = $request->state;
-               $studentbiodata->local = $request->local;
-               $studentbiodata->last_school = $request->last_school;
-               $studentbiodata->last_class = $request->last_class;
-               $studentbiodata->save();
-               $studentId = $studentbiodata->id;
-
-               // for parent....
-               $parent->studentId = $studentId;
-               $parent->father_title ="";
-               $parent->mother_title ="";
-               $parent->father  ="";
-               $parent->mother ="";
-               $parent->father_phone ="";
-               $parent->mother_phone ="";
-               $parent->parent_address ="";
-               $parent->office_address ="";
-               $parent->father_occupation ="";
-               $parent->religion ="";
-               $parent->save();
-
-               //for student class
-
-               $studentclass->studentId = $studentId;
-               $studentclass->schoolclassid = $request->schoolclassid;
-               $studentclass->termid = $request->termid;
-               $studentclass->sessionid = $request->sessionid;
+        // $studentcheck = Student::where('admissionNo',$request->admissionNo)
+        //                         ->exists();
 
 
-               $studentclass->save();
+        // if ($studentcheck){
 
-               //for class history...
-               $promotion->studentId = $studentId;
-               $promotion->schoolclassid = $request->schoolclassid;
-               $promotion->termid = $request->termid;
-               $promotion->sessionid = $request->sessionid;
-               $promotion->promotionStatus = "PROMOTED";
-               $promotion->classstatus = "CURRENT";
+        //     return redirect()->back()->with('danger', 'Ooops! Record already exist! OR Adminssion Number Registered already.');
+        //     }else{
 
-               $promotion->save();
+        //        //for student biodata...
+        //        $studentbiodata->admissionNo = $request->admissionNo;
+        //        $studentbiodata->tittle = $request->title;
+        //        $studentbiodata->firstname = $request->firstname;
+        //        $studentbiodata->lastname = $request->lastname;
+        //        $studentbiodata->othername = $request->othername;
+        //        $studentbiodata->gender = $request->gender;
+        //        $studentbiodata->home_address = $request->home_address;
+        //        $studentbiodata->home_address2 = $request->home_address;
+        //        $studentbiodata->dateofbirth = $request->dateofbirth;
+        //        $studentbiodata->placeofbirth = $request->placeofbirth;
+        //        $studentbiodata->religion = $request->religion;
+        //        $studentbiodata->nationlity = $request->nationality;
+        //        $studentbiodata->state = $request->state;
+        //        $studentbiodata->local = $request->local;
+        //        $studentbiodata->last_school = $request->last_school;
+        //        $studentbiodata->last_class = $request->last_class;
+        //        $studentbiodata->save();
+        //        $studentId = $studentbiodata->id;
+
+        //        // for parent....
+        //        $parent->studentId = $studentId;
+        //        $parent->father_title ="";
+        //        $parent->mother_title ="";
+        //        $parent->father  ="";
+        //        $parent->mother ="";
+        //        $parent->father_phone ="";
+        //        $parent->mother_phone ="";
+        //        $parent->parent_address ="";
+        //        $parent->office_address ="";
+        //        $parent->father_occupation ="";
+        //        $parent->religion ="";
+        //        $parent->save();
+
+        //        //for student class
+
+        //        $studentclass->studentId = $studentId;
+        //        $studentclass->schoolclassid = $request->schoolclassid;
+        //        $studentclass->termid = $request->termid;
+        //        $studentclass->sessionid = $request->sessionid;
 
 
-               //for student picture...
-               $picture->studentid = $studentId;
-               $picture->save();
+        //        $studentclass->save();
 
-                //for student house...
-                $studenthouse->studentid = $studentId;
-                $studenthouse->termid = $request->termid;
-                $studenthouse->sessionid = $request->sessionid;
-                $studenthouse->save();
+        //        //for class history...
+        //        $promotion->studentId = $studentId;
+        //        $promotion->schoolclassid = $request->schoolclassid;
+        //        $promotion->termid = $request->termid;
+        //        $promotion->sessionid = $request->sessionid;
+        //        $promotion->promotionStatus = "PROMOTED";
+        //        $promotion->classstatus = "CURRENT";
 
-                //for student personality profile...
-                $studentpersonalityprofile->studentid = $studentId;
-                $studentpersonalityprofile->schoolclassid = $request->schoolclassid;
-                $studentpersonalityprofile->termid = $request->termid;
-                $studentpersonalityprofile->sessionid = $request->sessionid;
-                $studentpersonalityprofile->save();
+        //        $promotion->save();
 
 
+        //        //for student picture...
+        //        $picture->studentid = $studentId;
+        //        $picture->save();
+
+        //         //for student house...
+        //         $studenthouse->studentid = $studentId;
+        //         $studenthouse->termid = $request->termid;
+        //         $studenthouse->sessionid = $request->sessionid;
+        //         $studenthouse->save();
+
+        //         //for student personality profile...
+        //         $studentpersonalityprofile->studentid = $studentId;
+        //         $studentpersonalityprofile->schoolclassid = $request->schoolclassid;
+        //         $studentpersonalityprofile->termid = $request->termid;
+        //         $studentpersonalityprofile->sessionid = $request->sessionid;
+        //         $studentpersonalityprofile->save();
 
 
 
-           if($studentbiodata != null){
 
-            return redirect()->back()->with('success', 'Student Details captured  Successfully!!');
 
-            }else{
+        //    if($studentbiodata != null){
 
-            return redirect()->back()->with('status', 'Something went wrong!');
-            }
+        //     return redirect()->back()->with('success', 'Student Details captured  Successfully!!');
 
-         }
+        //     }else{
+
+        //     return redirect()->back()->with('status', 'Something went wrong!');
+        //     }
+
+        //  }
 
 
 
