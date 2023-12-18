@@ -407,10 +407,10 @@ use Spatie\Permission\Models\Role;
                             <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_roles_view_table .form-check-input" value="1" />
                         </div>
                     </th>
-                    <th class="min-w-50px">SN</th>
-                    <th class="min-w-150px">User</th>
-                    <th class="min-w-125px">Joined Date</th>
-                    <th class="text-end min-w-100px">Actions</th>
+                    <th class="min-w-50px" style="color: green">SN</th>
+                    <th class="min-w-150px" style="color: green">User</th>
+                    <th class="min-w-125px" style="color: green">Joined Date</th>
+                    <th class="text-end min-w-100px" style="color: green">Actions</th>
                 </tr>
             </thead>
             <tbody class="fw-semibold text-gray-600">

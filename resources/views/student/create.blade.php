@@ -87,7 +87,19 @@
     <div id="kt_app_content_container" class="app-container  container-xxl ">
 
 
+                                <!--begin::Actions-->
+                                <div class="d-flex align-items-center gap-2 gap-lg-3">
 
+
+                                    <!--begin::Secondary button-->
+
+
+                                    <!--begin::Primary button-->
+                                        <a href="{{ route('student.index') }}" class="btn btn-sm fw-bold btn-primary" >
+                                        << Back        </a>
+                                    <!--end::Primary button-->
+                                    </div>
+                                    <!--end::Actions-->
 
 <!--begin::Basic info-->
 <div class="card mb-5 mb-xl-10">
@@ -99,6 +111,7 @@
     </div>
     <!--end::Card title-->
 </div>
+
 <!--begin::Card header-->
 @if (count($errors) > 0)
 <div class="row animated fadeInUp">
@@ -145,7 +158,7 @@
                             <i class="ki-duotone ki-pencil fs-7"><span class="path1"></span><span class="path2"></span></i>
                             <!--begin::Inputs-->
                             <input type="file" name="avatar" id="avatar" accept=".png, .jpg, .jpeg" required/>
-                            {{-- <input type="hidden" name="avatar_remove"/> --}}
+                            <input type="hidden" name="avatar_remove"/>
                             <!--end::Inputs-->
                         </label>
                         <!--end::Label-->
@@ -275,7 +288,7 @@
                     <div class="d-flex align-items-center mt-3">
                         <!--begin::Option-->
                         <label class="form-check form-check-custom form-check-inline form-check-solid me-5">
-                            <input class="form-check-input" name="gender" id="gender" type="radio" />
+                            <input class="form-check-input" name="gender"  type="radio" value="Male" required />
                             <span class="fw-semibold ps-2 fs-6">
                                 Male
                             </span>
@@ -284,7 +297,7 @@
 
                         <!--begin::Option-->
                         <label class="form-check form-check-custom form-check-inline form-check-solid">
-                            <input class="form-check-input" name="gender" id="gender" type="radio" />
+                            <input class="form-check-input" name="gender"  type="radio" value="Female" required />
                             <span class="fw-semibold ps-2 fs-6">
                                 Female
                             </span>

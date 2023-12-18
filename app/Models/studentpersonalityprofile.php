@@ -31,7 +31,7 @@ class studentpersonalityprofile extends Model
         'classteacherscomment',
         'termid',
         'sessionid',
-        'Status',
+        'attendance',
 
     ];
 

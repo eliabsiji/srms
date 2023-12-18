@@ -13,9 +13,9 @@ class StudentImageUploadController extends Controller
 
     function __construct()
     {
-         $this->middleware('permission:student-picture-upload', ['only' => ['index','store']]);
-         $this->middleware('permission:student-picture-upload', ['only' => ['create','store']]);
-         $this->middleware('permission:student-picture-upload', ['only' => ['edit','update']]);
+         $this->middleware('permission:student_picture-upload', ['only' => ['index','store']]);
+         $this->middleware('permission:student_picture-upload', ['only' => ['create','store']]);
+         $this->middleware('permission:student_picture-upload', ['only' => ['edit','update']]);
 
     }
 
@@ -63,7 +63,7 @@ class StudentImageUploadController extends Controller
 
 
 
-        $request->image->move(public_path('images/studentpics'), $imageName);
+        $request->image->move(public_path('images/studentavatar'), $imageName);
         $id = $request->post('id');
 
 

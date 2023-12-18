@@ -38,7 +38,7 @@ class BiodataController extends Controller
     public function store(Request $request)
     {
         $request->validate(['avatar' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048', ]);
-        $path = storage_path('images/staffavatar');
+        $path = storage_path('images/studentavatar');
         !is_dir($path) && mkdir($path, 0775, true);
 
 

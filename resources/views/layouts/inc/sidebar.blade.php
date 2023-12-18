@@ -288,69 +288,153 @@
 
 
                <!--begin:Menu item-->
-   <div  data-kt-menu-trigger="click"  class="menu-item {{
-    request()->is('student*') ||
-    request()->is('parent*')
-    ? ' here show menu-accordion' : '' }}" >
-    <!--begin:Menu link-->
-    <span class="menu-link" >
-        <span  class="menu-icon" >
-            <i class="ki-duotone ki-element-11 fs-2">
-                <span class="path1">
-                    </span><span class="path2">
-                    </span><span class="path3">
-                    </span><span class="path4">
-                    </span></i></span>
-                    <span  class="menu-title" >
-                     Students & Parents
-                    </span>
-                    <span  class="menu-arrow" >
-                        </span></span>
-                        <!--end:Menu link-->
-                        <!--begin:Menu sub-->
-                    <div  class="menu-sub menu-sub-accordion" >
-                        @can('student-list')
-                            <!--begin:Menu item-->
-                            <div  class="menu-item" >
-                                <!--begin:Menu link-->
-                                <a class="menu-link  {{ request()->is('student*')
-                                    ? ' active' : '' }}"  href="{{ route('student.index') }}" >
-                                    <span  class="menu-bullet" >
-                                        <span class="bullet bullet-dot">
-                                            </span>
-                                        </span>
+                    <div  data-kt-menu-trigger="click"  class="menu-item {{
+                        request()->is('student*')
+                        ? ' here show menu-accordion' : '' }}" >
+                        <!--begin:Menu link-->
+                        <span class="menu-link" >
+                            <span  class="menu-icon" >
+                                <i class="ki-duotone ki-element-11 fs-2">
+                                    <span class="path1">
+                                        </span><span class="path2">
+                                        </span><span class="path3">
+                                        </span><span class="path4">
+                                        </span></i></span>
                                         <span  class="menu-title" >
-                                              Student Management
+                                        Students Management
                                         </span>
-                                </a>
-                                <!--end:Menu link-->
-                            </div>
-                            <!--end:Menu item-->
-                            @endcan
-                            @can('parent-list')
-                            <!--begin:Menu item-->
-                            <div  class="menu-item" >
-                                <!--begin:Menu link-->
-                                <a class="menu-link  {{ request()->is('parent*')
-                                    ? ' active' : '' }}"  href="{{ route('parent.index') }}" >
-                                    <span  class="menu-bullet" >
-                                        <span class="bullet bullet-dot">
-                                            </span>
-                                        </span>
-                                        <span  class="menu-title" >
-                                          Parent Management
-                                        </span>
-                                </a>
-                                <!--end:Menu link-->
-                            </div>
-                            <!--end:Menu item-->
-                            @endcan
+                                        <span  class="menu-arrow" >
+                                            </span></span>
+                                            <!--end:Menu link-->
+                                            <!--begin:Menu sub-->
+                                        <div  class="menu-sub menu-sub-accordion" >
+                                            @can('student-list')
+                                                <!--begin:Menu item-->
+                                                <div  class="menu-item" >
+                                                    <!--begin:Menu link-->
+                                                    <a class="menu-link  {{ request()->is('student*')
+                                                        ? ' active' : '' }}"  href="{{ route('student.index') }}" >
+                                                        <span  class="menu-bullet" >
+                                                            <span class="bullet bullet-dot">
+                                                                </span>
+                                                            </span>
+                                                            <span  class="menu-title" >
+                                                                All Students
+                                                            </span>
+                                                    </a>
+                                                    <!--end:Menu link-->
+                                                </div>
+                                                <!--end:Menu item-->
+                                                @endcan
+                                                {{-- @can('parent-list')
+                                                <!--begin:Menu item-->
+                                                <div  class="menu-item" >
+                                                    <!--begin:Menu link-->
+                                                    <a class="menu-link  {{ request()->is('parent*')
+                                                        ? ' active' : '' }}"  href="{{ route('parent.index') }}" >
+                                                        <span  class="menu-bullet" >
+                                                            <span class="bullet bullet-dot">
+                                                                </span>
+                                                            </span>
+                                                            <span  class="menu-title" >
+                                                           Student Details Overview
+                                                            </span>
+                                                    </a>
+                                                    <!--end:Menu link-->
+                                                </div>
+                                                <!--end:Menu item-->
+                                                @endcan
+                                                @can('parent-list')
+                                                <!--begin:Menu item-->
+                                                <div  class="menu-item" >
+                                                    <!--begin:Menu link-->
+                                                    <a class="menu-link  {{ request()->is('parent*')
+                                                        ? ' active' : '' }}"  href="{{ route('parent.index') }}" >
+                                                        <span  class="menu-bullet" >
+                                                            <span class="bullet bullet-dot">
+                                                                </span>
+                                                            </span>
+                                                            <span  class="menu-title" >
+                                                         Student Details Setting
+                                                            </span>
+                                                    </a>
+                                                    <!--end:Menu link-->
+                                                </div>
+                                                <!--end:Menu item-->
+                                                @endcan --}}
+
+                                                @can('student_bulk-upload')
+                                                <!--begin:Menu item-->
+                                                <div  class="menu-item" >
+                                                    <!--begin:Menu link-->
+                                                    <a class="menu-link  {{ request()->is('student.*')
+                                                        ? ' active' : '' }}"  href="{{ route('student.batchindex') }}" >
+                                                        <span  class="menu-bullet" >
+                                                            <span class="bullet bullet-dot">
+                                                                </span>
+                                                            </span>
+                                                            <span  class="menu-title" >
+                                                             Batch Student Upload
+                                                            </span>
+                                                    </a>
+                                                    <!--end:Menu link-->
+                                                </div>
+                                                <!--end:Menu item-->
+                                                @endcan
 
 
+                                        </div>
+                                        <!--end:Menu sub-->
                     </div>
-                    <!--end:Menu sub-->
-   </div>
-   <!--end:Menu item-->
+                <!--end:Menu item-->
+
+
+                  <!--begin:Menu item-->
+                  <div  data-kt-menu-trigger="click"  class="menu-item {{
+                    request()->is('parent*')
+                    ? ' here show menu-accordion' : '' }}" >
+                    <!--begin:Menu link-->
+                    <span class="menu-link" >
+                        <span  class="menu-icon" >
+                            <i class="ki-duotone ki-element-11 fs-2">
+                                <span class="path1">
+                                    </span><span class="path2">
+                                    </span><span class="path3">
+                                    </span><span class="path4">
+                                    </span></i></span>
+                                    <span  class="menu-title" >
+                                      Parents
+                                    </span>
+                                    <span  class="menu-arrow" >
+                                        </span></span>
+                                        <!--end:Menu link-->
+                                        <!--begin:Menu sub-->
+                                    <div  class="menu-sub menu-sub-accordion" >
+                                        @can('parent-list')
+                                            <!--begin:Menu item-->
+                                            <div  class="menu-item" >
+                                                <!--begin:Menu link-->
+                                                <a class="menu-link  {{ request()->is('parent*')
+                                                    ? ' active' : '' }}"  href="{{ route('parent.index') }}" >
+                                                    <span  class="menu-bullet" >
+                                                        <span class="bullet bullet-dot">
+                                                            </span>
+                                                        </span>
+                                                        <span  class="menu-title" >
+                                                            Parent Management
+                                                        </span>
+                                                </a>
+                                                <!--end:Menu link-->
+                                            </div>
+                                            <!--end:Menu item-->
+                                            @endcan
+
+
+                                    </div>
+                                    <!--end:Menu sub-->
+                </div>
+            <!--end:Menu item-->
+
 
  <!--begin:Menu item-->
  <div  data-kt-menu-trigger="click"  class="menu-item {{
@@ -366,7 +450,7 @@
                     </span><span class="path4">
                     </span></i></span>
                     <span  class="menu-title" >
-                       Class Operations
+                      Subject Registration
                     </span>
                     <span  class="menu-arrow" >
                         </span></span>
@@ -384,7 +468,7 @@
                                             </span>
                                         </span>
                                         <span  class="menu-title" >
-                                          Subjects Registration
+                                         Student Subjects Reg.
                                         </span>
                                 </a>
                                 <!--end:Menu link-->
@@ -430,7 +514,7 @@
                     </span><span class="path4">
                     </span></i></span>
                     <span  class="menu-title" >
-                       Staff Classes & subjects
+                       My Classes & subjects
                     </span>
                     <span  class="menu-arrow" >
                         </span></span>
@@ -441,7 +525,7 @@
                             <!--begin:Menu item-->
                             <div  class="menu-item" >
                                 <!--begin:Menu link-->
-                                <a class="menu-link  {{ request()->is('myclass*')
+                                <a class="menu-link  {{ request()->is('myclass*') || request()->is('viewstudent*')
                                     ? ' active' : '' }}"  href="{{ route('myclass.index') }}" >
                                     <span  class="menu-bullet" >
                                         <span class="bullet bullet-dot">

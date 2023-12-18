@@ -45,6 +45,7 @@ class MyScoreSheetController extends Controller
         ->where('Broadsheet.session',$sessionid)
         ->leftJoin('subjectclass', 'subjectclass.id','=','Broadsheet.subjectclassid')
         ->leftJoin('schoolclass', 'schoolclass.id','=','subjectclass.schoolclassid')
+        ->leftJoin('schoolarm', 'schoolarm.id','=','schoolclass.arm')
         ->leftJoin('classcategories', 'classcategories.id','=','schoolclass.classcategoryid')
         ->leftJoin('subjectteacher','subjectteacher.id','=','subjectclass.subjectteacherid')
         ->leftJoin('subject', 'subject.id','=','subjectteacher.subjectid')
@@ -54,7 +55,7 @@ class MyScoreSheetController extends Controller
         ->leftJoin('studentRegistration', 'studentRegistration.id','=','Broadsheet.studentId')
         ->leftJoin('studentpicture','studentpicture.studentid','=','studentRegistration.id')
         ->get(['Broadsheet.id as id','studentRegistration.admissionNO as admissionno','studentRegistration.firstname as fname','studentRegistration.lastname as lname',
-              'subject.subject as subject','subject.subject_code as subjectcode','schoolclass.schoolclass as schoolclass','schoolclass.arm as arm',
+              'subject.subject as subject','subject.subject_code as subjectcode','schoolclass.schoolclass as schoolclass','schoolarm.arm as arm',
               'schoolterm.term as term','schoolsession.session as session','subjectclass.id as subjectclid','Broadsheet.staffid as staffid',
               'Broadsheet.termid as termid','Broadsheet.session as sessionid','classcategories.ca2score as ca2',
               'classcategories.ca1score as ca1','classcategories.examscore as exam',
@@ -219,7 +220,8 @@ class MyScoreSheetController extends Controller
         }
 
 
-          return view('subjectscoresheet.index')->with('broadsheets',$Broadsheets)
+          return view('subjectscoresheet.index')
+                ->with('broadsheets',$Broadsheets)
                 ->with('s_Broadsheetid', Session::put('broadsheetid',$r->id))
                 ->with('s_subjectclassid', Session::put('subjectclassid',$r->subjectclid))
                 ->with('s_staffid', Session::put('staffid',$r->staffid))
@@ -275,6 +277,7 @@ class MyScoreSheetController extends Controller
         ->leftJoin('studentpicture','studentpicture.studentid','=','studentRegistration.id')
         ->leftJoin('subjectclass', 'subjectclass.id','=','Broadsheet.subjectclassid')
         ->leftJoin('schoolclass', 'schoolclass.id','=','subjectclass.schoolclassid')
+        ->leftJoin('schoolarm', 'schoolarm.id','=','schoolclass.arm')
         ->leftJoin('classcategories', 'classcategories.id','=','schoolclass.classcategoryid')
         ->leftJoin('subjectteacher','subjectteacher.id','=','subjectclass.subjectteacherid')
         ->leftJoin('subject', 'subject.id','=','subjectteacher.subjectid')
@@ -286,7 +289,7 @@ class MyScoreSheetController extends Controller
              'studentPicture.picture as picture','Broadsheet.ca1 as ca1','Broadsheet.ca2 as ca2','Broadsheet.exam as exam',
              'Broadsheet.total  as total','Broadsheet.grade as grade', 'schoolterm.term as term','schoolsession.session as session',
              'subject.subject as subject','subject.subject_code as subjectcode','schoolclass.schoolclass as schoolclass',
-             'schoolclass.arm as arm','Broadsheet.subjectpositionclass as position','Broadsheet.remark as remark','classcategories.ca2score as ca2',
+             'schoolarm.arm as arm','Broadsheet.subjectpositionclass as position','Broadsheet.remark as remark','classcategories.ca2score as ca2',
              'classcategories.ca1score as ca1','classcategories.examscore as exam',])->sortBy('fname');
 
 
@@ -386,6 +389,7 @@ class MyScoreSheetController extends Controller
        ->where('Broadsheet.session',$sessionid)
        ->leftJoin('subjectclass', 'subjectclass.id','=','Broadsheet.subjectclassid')
        ->leftJoin('schoolclass', 'schoolclass.id','=','subjectclass.schoolclassid')
+       ->leftJoin('schoolarm', 'schoolarm.id','=','schoolclass.arm')
        ->leftJoin('subjectteacher','subjectteacher.id','=','subjectclass.subjectteacherid')
        ->leftJoin('users', 'users.id','=','subjectteacher.staffid')
        ->leftJoin('subject', 'subject.id','=','subjectteacher.subjectid')
@@ -397,7 +401,7 @@ class MyScoreSheetController extends Controller
 
 
 
-      ->get(['Broadsheet.id as bid','subject.subject as subject','subject.subject_code as subjectcode','schoolclass.schoolclass as schoolclass','schoolclass.arm as arm',
+      ->get(['Broadsheet.id as bid','subject.subject as subject','subject.subject_code as subjectcode','schoolclass.schoolclass as schoolclass','schoolarm.arm as arm',
              'schoolterm.term as term','schoolsession.session as session','users.id as userid','users.name as staffname',
 
            ])->sortBy('fname');
@@ -434,6 +438,11 @@ class MyScoreSheetController extends Controller
 
     public function importsheet(Request $request){
        // $Broadsheetid  = $request->Broadsheetid;
+
+
+       $this->validate($request, [
+        'file' => 'required',
+    ]);
         $schoolclassid = $request->input('schoolclassid');
         $subjectclassid = $request->input('subjectclassid');
         $staffid = $request->input('staffid');
@@ -457,6 +466,7 @@ class MyScoreSheetController extends Controller
         ->where('Broadsheet.session',$sessionid)
         ->leftJoin('subjectclass', 'subjectclass.id','=','Broadsheet.subjectclassid')
         ->leftJoin('schoolclass', 'schoolclass.id','=','subjectclass.schoolclassid')
+        ->leftJoin('schoolarm', 'schoolarm.id','=','schoolclass.arm')
         ->leftJoin('subjectteacher','subjectteacher.id','=','subjectclass.subjectteacherid')
         ->leftJoin('subject', 'subject.id','=','subjectteacher.subjectid')
         ->leftJoin('schoolterm', 'schoolterm.id','=','subjectteacher.termid')
@@ -468,7 +478,7 @@ class MyScoreSheetController extends Controller
 
 
        ->get(['Broadsheet.id as id','studentRegistration.admissionNO as admissionno','studentRegistration.firstname as fname','studentRegistration.lastname as lname',
-              'subject.subject as subject','subject.subject_code as subjectcode','schoolclass.schoolclass as schoolclass','schoolclass.arm as arm',
+              'subject.subject as subject','subject.subject_code as subjectcode','schoolclass.schoolclass as schoolclass','schoolarm.arm as arm',
               'schoolterm.term as term','schoolsession.session as session','subjectclass.id as subjectclid','Broadsheet.staffid as staffid',
               'Broadsheet.termid as termid','Broadsheet.session as sessionid',
              'studentPicture.picture as picture','Broadsheet.ca1 as ca1','Broadsheet.ca2 as ca2','Broadsheet.exam as exam','Broadsheet.total  as total','Broadsheet.grade as grade',

@@ -1,133 +1,210 @@
 @extends('layouts.master')
 @section('content')
 
-<div class="content">
-    <div class="content-header">
-        <div class="leftside-content-header">
-            <ul class="breadcrumbs">
-                <li><i class="fa fa-table" aria-hidden="true"></i><a href="{{ route('classteacher.index') }}"> class Teacher</a></li>
-                <li><a>Class Teacher  Management</a></li>
-            </ul>
+     <!-- Start Page title and tab -->
+     <div class="section-body">
+        <div class="container-fluid">
+            <div class="d-flex justify-content-between align-items-center ">
+                <div class="header-action">
+                    <h1 class="page-title">School</h1>
+                    <ol class="breadcrumb page-breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">My Result Room</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Scores Sheet</li>
+                    </ol>
+                </div>
+                <ul class="nav nav-tabs page-header-tab">
+
+                        <li class="nav-item"><a class="nav-link " data-toggle="tab" href="#mysubjects">My Subjects</a></li>
+
+
+
+                    <li class="nav-item"><a class="nav-link" id="Library-tab-Boot" data-toggle="tab" href="#classteacher-add"></a></li>
+
+
+                        <li class="nav-item"><a class="nav-link " data-toggle="tab" href="#classteacher"></a></li>
+
+
+
+                    <li class="nav-item"><a class="nav-link" id="Library-tab-Boot" data-toggle="tab" href="#mysubjectshistory"> My Subject History</a></li>
+
+
+
+                        <li class="nav-item"><a class="nav-link " data-toggle="tab" href="#classteacher"></a></li>
+
+
+
+                    <li class="nav-item"><a class="nav-link" id="Library-tab-Boot" data-toggle="tab" href="#classteacher-add"></a></li>
+
+                </ul>
+            </div>
         </div>
+        @if (\Session::has('status'))
+           <div class="alert alert-success alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert"></button>
+                <p>{{ \Session::get('status') }}</p>
+            </div>
+        @endif
+        @if (\Session::has('success'))
+           <div class="alert alert-success alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert"></button>
+                <p>{{ \Session::get('success') }}</p>
+            </div>
+        @endif
+        @if (\Session::has('danger'))
+        <div class="alert alert-danger alert-dismissible">
+         <button type="button" class="close" data-dismiss="alert"></button>
+             <p>{{ \Session::get('danger') }}</p>
+         </div>
+     @endif
+
     </div>
-    @if (\Session::has('status'))
-    <div class="alert alert-warning fade in">
-     <a href="#" class="close" data-dismiss="alert">&times;</a>
-         <p>{{ \Session::get('status') }}</p>
-     </div>
- @endif
-     @if (\Session::has('success'))
-    <div class="alert alert-warning fade in">
-     <a href="#" class="close" data-dismiss="alert">&times;</a>
-         <p>{{ \Session::get('success') }}</p>
-     </div>
- @endif
- <span class="float-right">
-    <a class="btn btn-primary  btn fa fa-plus" href="{{ route('classteacher.create') }}">  Assign Class Teacher</a>
-</span>
-<div class="row animated fadeInRight">
-        <div class="col-sm-12">
-            <h4 class="section-subtitle">Registered Class Teacher</h4>
-            <div class="panel">
-                <div class="panel-content">
-                    <table id="responsive-table" class="data-table table table-striped table-hover responsive nowrap" cellspacing="0" width="100%">
-                        <thead>
-                        <tr>
-                            <th>SN</th>
-                            <th>Class </th>
-                            <th>Arm</th>
-                            <th>Category</th>
-                            <th>Staff</th>
-                            <th>Term</th>
-                            <th>Session</th>
-                            <th>Date Registered</th>
-                            <th>Actions</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                           <?php $sn = 1; ?>
-                        @foreach ($classteachers as $classteacher)
+    <div class="section-body mt-4">
+        <div class="container-fluid">
+            <div class="tab-content">
+                <div class="tab-pane active" id="mysubjects">
+                    <div class="card">
+                        <div class="card-header">
 
-                        <tr id="sid{{ $classteacher->id }}">
-                            <td>{{ $sn++ }}</td>
-                            <td>{{ $classteacher->schoolclass }}</td>
-                            <td>{{ $classteacher->schoolarm }}</td>
-                            <td>{{ $classteacher->classcategory}}</td>
-                            <td>{{ $classteacher->staffname }}</td>
-                            <td>{{ $classteacher->term }}</td>
-                            <td>{{ $classteacher->session }}</td>
-                            <td>{{ $classteacher->updated_at }}</td>
-                            <td><div class="btn-group">
-                                @can('edit-class-teacher')
-                                <a href="{{ route('classteacher.edit',$classteacher->id) }}" class="btn fa fa-pencil" data-toggle="tooltip" title="Edit Class Teacher"></a>
-                                @endcan
-                                </div>
-                            <div class="btn-group">
-                                @can('subject-teacher-delete')
-                                <a href="javascript:void(0)" class="btn fa fa-trash delete"
-                                    data-toggle="tooltip" title="Delete Class Teacher" onClick="check({{ $classteacher->id }})"></a>
-                                  @endcan
-                               </div>
+                            <h5 class="card-title">My Subjects Score Sheet for the curent session</h5>
 
-                        </td>
 
-                        </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+
+                                <table class="table table-hover js-basic-example dataTable table-striped table_custom   ">
+                                    <thead>
+                                        <tr>
+                                            <tr>
+                                                <th>SN</th>
+                                                <th>Class</th>
+                                                <th>Arm</th>
+                                                <th>Subject</th>
+                                                <th>Subject Code</th>
+                                                <th>Term</th>
+                                                <th>Session</th>
+                                                <th>Score Sheet</th>
+
+                                            </tr>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php $sn = 1; ?>
+                                        @foreach ($mysubjects as $subject)
+
+                                        <tr id="sid{{ $subject->id }}">
+                                            <td>{{ $sn++ }}</td>
+                                            <td>{{ $subject->schoolclass }}</td>
+                                            <td>{{ $subject->arm }}</td>
+                                            <td>{{ $subject->subject }}</td>
+                                            <td>{{ $subject->subjectcode }}</td>
+                                            <td>{{ $subject->term }}</td>
+                                            <td>{{ $subject->session }}</td>
+                                            <td>
+
+                                               <?php
+
+                                           $broadsheetchk = broadsheet::where('staffid',$subject->userid)
+                                            ->where('subjectclassid',$subject->subclassid)
+                                            ->where('termid',$subject->termid)
+                                            ->where('session',$subject->sessionid)->exists();
+
+                                                  ?>
+                                            @if ($broadsheetchk)
+
+                                            <a href="subjectscoresheet/{{ $subject->schoolclassid }}/{{ $subject->subclassid }}/{{ $subject->userid }}/{{ $subject->termid }}/{{ $subject->sessionid }}" class="btn btn-outline-success" data-toggle="tooltip" title="Open Score Sheet for {{ $subject->subject }}  {{ $subject->subjectcode }} " >Open Score Sheet</a>
+
+                                            @else
+                                            <a href="#" class="btn btn-outline-warning" data-toggle="tooltip" title=" {{ $subject->subject }}  {{ $subject->subjectcode }} has not been registered by any student yet ">No Scoresheet yet</a>
+                                            @endif
+                                             </td>
+                                        </tr>
+                                        @endforeach
+                                     </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane" id="mysubjectshistory">
+                    <div class="card">
+                        <div class="card-header">
+
+                            <h3 class="card-title">My Subjects History</h3>
+
+
+                        </div>
+
+                        <div class="card-body">
+                            <div class="table-responsive">
+
+
+
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <div id="loader"></div>
-</div>
-<script>
-
-    function check(id){
-
-        var id = id;
-        var spinner = $('#loader');
-
-      Swal.fire({
-      title: 'Are you sure?',
-      text: "Deleting this record will affect other associated records (e.g Any Record where this Class Teacher is featured)",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        spinner.show();
-        $.ajax({
-
-            url: 'ajaxclassteacher/'+id,
-            async: false,
-            type: "DELETE",
-            cache: false,
-            data:{
-                _token:'{{ csrf_token() }}',
-               id: id
-            },
-            dataType: 'JSON',
-
-        }).done(function(resp) {
-      spinner.hide();
-
-        });
-        Swal.fire(
-          'Deleted!',
-          'This Record Has Been Deleted. You can Check Other Records to make neccessary Editing!',
-          'success'
-        )
-
-        var myobj = document.getElementById("sid"+id);
-         myobj.remove();
-
-      }
-    })
-
-    }
+    <script>
+        history.pushState(null, document.title, location.href);
+        history.back();
+        history.forward();
+        window.onpopstate = function () {
+            history.go(1);
+        };
     </script>
 
-@endsection
+
+    <script>
+
+        function check(id){
+
+            var id = id;
+            var spinner = $('#loader');
+
+          Swal.fire({
+          title: 'Are you sure?',
+          text: "Deleting this record will affect other associated records (e.g Any Record where this Class Teacher is featured)",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            spinner.show();
+            $.ajax({
+
+                url: 'ajaxclassteacher/'+id,
+                async: false,
+                type: "DELETE",
+                cache: false,
+                data:{
+                    _token:'{{ csrf_token() }}',
+                   id: id
+                },
+                dataType: 'JSON',
+
+            }).done(function(resp) {
+          spinner.hide();
+
+            });
+            Swal.fire(
+              'Deleted!',
+              'This Record is now Deleted. You can Check Other Records to make neccessary Editing!',
+              'success'
+            )
+
+            var myobj = document.getElementById("sid"+id);
+             myobj.remove();
+
+          }
+        })
+
+        }
+        </script>
+    @endsection

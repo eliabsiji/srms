@@ -106,7 +106,7 @@
         <?php echo Form::model($classteachers, ['route' => ['classteacher.update', $cteachers->ctid], 'method'=>'PATCH','class'=>'form d-flex flex-column flex-lg-row']); ?>
 
                 <?php echo csrf_field(); ?>
-                <?php echo csrf_field(); ?>
+                
     <!--begin::Main column-->
     <div class="d-flex flex-column flex-row-fluid gap-7 gap-lg-10">
         <!--begin::General options-->

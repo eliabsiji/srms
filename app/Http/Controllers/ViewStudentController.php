@@ -89,7 +89,9 @@ class ViewStudentController extends Controller
 
         $session = Schoolsession::where('id',$sessionid)->get();
         $term = Schoolterm::where('id',$termid)->get();
-        $schoolclass = Schoolclass::where('id',$id)->get();
+        $schoolclass = Schoolclass::where('schoolclass.id',$id)
+        ->leftJoin('schoolarm','schoolarm.id','=','schoolclass.arm')
+        ->get(['schoolclass.schoolclass as schoolclass','schoolarm.arm as arm']);
         return view('viewstudents.index')
                                         ->with('allstudents',$allstudents)
                                         ->with('term',$term)

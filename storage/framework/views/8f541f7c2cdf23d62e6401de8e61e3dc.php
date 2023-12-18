@@ -69,15 +69,27 @@
        <?php if(Route::is('subjectclass.*')): ?>
             <?php echo $__env->make('layouts.pages-assets.css.users-list-css', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
        <?php endif; ?>
-
-       <?php if(Route::is('authors.*') || Route::is('author.review') || Route::is('author.journal')  ): ?>
+       <?php if(Route::is('subjectoperation.*')): ?>
             <?php echo $__env->make('layouts.pages-assets.css.users-list-css', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
        <?php endif; ?>
-       <?php if(Route::is('myjournals.*')): ?>
+       <?php if(Route::is('subjectinfo.*')): ?>
+            <?php echo $__env->make('layouts.pages-assets.css.users-list-css', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+       <?php endif; ?>
+       <?php if(Route::is('myclass.*')): ?>
            <?php echo $__env->make('layouts.pages-assets.css.users-list-css', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
        <?php endif; ?>
-
-
+       <?php if(Route::is('mysubject.*')): ?>
+            <?php echo $__env->make('layouts.pages-assets.css.users-list-css', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+       <?php endif; ?>
+       <?php if(Route::is('viewstudent*')): ?>
+           <?php echo $__env->make('layouts.pages-assets.css.users-list-css', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+       <?php endif; ?>
+       <?php if(Route::is('myresultroom*')): ?>
+           <?php echo $__env->make('layouts.pages-assets.css.users-list-css', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+       <?php endif; ?>
+       <?php if(Route::is('subjectscoresheet*')): ?>
+               <?php echo $__env->make('layouts.pages-assets.css.users-list-css', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+       <?php endif; ?>
 
 
 
@@ -279,10 +291,31 @@
              <?php echo $__env->make('layouts.pages-assets.js.subjectclass-list-js', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
         <?php endif; ?>
         <?php if(Route::is('student.*')): ?>
-             <?php echo $__env->make('layouts.pages-assets.js.users-list-js', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+             <?php echo $__env->make('layouts.pages-assets.js.student-list-js', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
         <?php endif; ?>
-        <?php if(Route::is('myjournals.*')): ?>
-            <?php echo $__env->make('layouts.pages-assets.js.journalvolume-list-js', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+        <?php if(Route::is('batchindex.*')): ?>
+              <?php echo $__env->make('layouts.pages-assets.js.studentbatch-list-js', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+        <?php endif; ?>
+        <?php if(Route::is('subjectoperation.*')): ?>
+              <?php echo $__env->make('layouts.pages-assets.js.subjectoperation-list-js', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+        <?php endif; ?>
+        <?php if(Route::is('subjectinfo.*')): ?>
+              <?php echo $__env->make('layouts.pages-assets.js.subjectinfo-list-js', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+        <?php endif; ?>
+        <?php if(Route::is('myclass.*')): ?>
+             <?php echo $__env->make('layouts.pages-assets.js.myclass-list-js', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+        <?php endif; ?>
+        <?php if(Route::is('mysubject.*')): ?>
+                <?php echo $__env->make('layouts.pages-assets.js.mysubject-list-js', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+        <?php endif; ?>
+        <?php if(Route::is('viewstudent*')): ?>
+             <?php echo $__env->make('layouts.pages-assets.js.viewstudent-list-js', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+        <?php endif; ?>
+        <?php if(Route::is('myresultroom*')): ?>
+               <?php echo $__env->make('layouts.pages-assets.js.myresultroom-list-js', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+        <?php endif; ?>
+        <?php if(Route::is('subjectscoresheet*')): ?>
+              <?php echo $__env->make('layouts.pages-assets.js.subjectscoresheet-list-js', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
         <?php endif; ?>
 
 

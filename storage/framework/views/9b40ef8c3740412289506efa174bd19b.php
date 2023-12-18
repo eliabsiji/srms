@@ -18,6 +18,9 @@
     <script src="<?php echo e(asset('html/assets/assets/js/custom/utilities/modals/upgrade-plan.js')); ?>"></script>
     <script src="<?php echo e(asset('html/assets/assets/js/custom/utilities/modals/create-app.js')); ?>"></script>
     <script src="<?php echo e(asset('html/assets/assets/js/custom/utilities/modals/users-search.js')); ?>"></script>
+
+    <script src="<?php echo e(asset('html/assets/assets/js/custom/account/settings/signin-methods.js')); ?>"></script>
+    <script src="<?php echo e(asset('html/assets/assets/js/custom/account/settings/profile-details.js')); ?>"></script>
 <!--end::Custom Javascript-->
 <!--end::Javascript-->
 <?php /**PATH C:\xampp\htdocs\srms\resources\views/layouts/pages-assets/js/student-list-js.blade.php ENDPATH**/ ?>

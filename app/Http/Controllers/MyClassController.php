@@ -33,11 +33,12 @@ class MyClassController extends Controller
        $myclass = ClassTeacher::where('staffid',$user->id)
        ->leftJoin('users', 'users.id','=','classteacher.staffid')
        ->leftJoin('schoolclass', 'schoolclass.id','=','classteacher.schoolclassid')
+       ->leftJoin('schoolarm', 'schoolarm.id','=','schoolclass.arm')
        ->leftJoin('schoolterm', 'schoolterm.id','=','classteacher.termid')
        ->leftJoin('schoolsession', 'schoolsession.id','=','classteacher.sessionid')
        ->where('schoolsession.status','=',$current)
        ->get(['classteacher.id as id','users.id as userid','users.name as staffname',
-            'schoolclass.schoolclass as schoolclass','classteacher.termid as termid','classteacher.sessionid as sessionid','schoolclass.arm as schoolarm',
+            'schoolclass.schoolclass as schoolclass','classteacher.termid as termid','classteacher.sessionid as sessionid','schoolarm.arm as schoolarm',
            'schoolclass.description as classcategory','schoolterm.term as term',
            'schoolsession.session as session','classteacher.updated_at as updated_at','schoolclass.id as schoolclassID'])->sortBy('schoolclass');
 

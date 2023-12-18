@@ -1,56 +1,57 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 
 
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\PermissionController;
-
-use App\Http\Controllers\BiodataController;
-use App\Http\Controllers\OverviewController;
-
-
-use App\Http\Controllers\AcademicOperationsController;
-use App\Http\Controllers\SubjectController;
-use App\Http\Controllers\SchoolClassController;
-use App\Http\Controllers\SchoolArmController;
-use App\Http\Controllers\SubjectClassController;
 use App\Http\Controllers\StaffController;
-use App\Http\Controllers\AcademicinfoController;
-use App\Http\Controllers\SubjectTeacherController;
-use App\Http\Controllers\ClassTeacherController;
-use App\Http\Controllers\SchoolsessionController;
-use App\Http\Controllers\SchooltermController;
-use App\Http\Controllers\AjaxSubController;
-use App\Http\Controllers\AjaxSubclassController;
-use App\Http\Controllers\AjaxclassteacherController;
-use App\Http\Controllers\AjaxclassController;
-use App\Http\Controllers\AjaxarmController;
-use App\Http\Controllers\AjaxsessionController;
-use App\Http\Controllers\AjaxsubteacherController;
-use App\Http\Controllers\AjaxsubjectController;
-use App\Http\Controllers\StaffImageUploadController;
-use App\Http\Controllers\StudentImageUploadController;
-use App\Http\Controllers\StudentController;
-use App\Http\Controllers\SchoolHouseController;
-use App\Http\Controllers\StudentHouseController;
-use App\Http\Controllers\ClassOperationController;
-use App\Http\Controllers\ClasscategoryController;
-use App\Http\Controllers\SubjectOperationController;
+
 use App\Http\Controllers\ParentController;
+use App\Http\Controllers\AjaxarmController;
+
+
+use App\Http\Controllers\AjaxSubController;
+use App\Http\Controllers\BiodataController;
 use App\Http\Controllers\MyClassController;
-use App\Http\Controllers\ViewStudentController;
-use App\Http\Controllers\AjaxsubjectopController;
+use App\Http\Controllers\StudentController;
+use App\Http\Controllers\SubjectController;
+use App\Http\Controllers\OverviewController;
+use App\Http\Controllers\AjaxclassController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MySubjectController;
+use App\Http\Controllers\SchoolArmController;
+use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\SchooltermController;
+use App\Http\Controllers\AjaxsessionController;
+use App\Http\Controllers\AjaxsubjectController;
+use App\Http\Controllers\SchoolClassController;
+use App\Http\Controllers\SchoolHouseController;
+use App\Http\Controllers\ViewStudentController;
+use App\Http\Controllers\AcademicinfoController;
+use App\Http\Controllers\AjaxSubclassController;
+use App\Http\Controllers\ClassTeacherController;
 use App\Http\Controllers\MyresultroomController;
 use App\Http\Controllers\MyScoreSheetController;
+use App\Http\Controllers\StudentHouseController;
+use App\Http\Controllers\SubjectClassController;
+use App\Http\Controllers\AjaxsubjectopController;
+use App\Http\Controllers\ClasscategoryController;
+use App\Http\Controllers\SchoolsessionController;
+use App\Http\Controllers\AjaxsubteacherController;
+use App\Http\Controllers\ClassOperationController;
 use App\Http\Controllers\StudentResultsController;
-use App\Http\Controllers\AjaxStudentDeleteController;
+use App\Http\Controllers\SubjectTeacherController;
 use App\Http\Controllers\AjaxschoolhouseController;
-use App\Http\Controllers\StudentpersonalityprofileController;
+use App\Http\Controllers\AjaxclassteacherController;
+use App\Http\Controllers\StaffImageUploadController;
+use App\Http\Controllers\SubjectOperationController;
 use App\Http\Controllers\AjaxclasssettingsController;
+use App\Http\Controllers\AjaxStudentDeleteController;
+use App\Http\Controllers\AcademicOperationsController;
+use App\Http\Controllers\StudentImageUploadController;
+use App\Http\Controllers\StudentpersonalityprofileController;
 
 
 
@@ -88,18 +89,6 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/userid/{userid}/roleid/{roleid}',[RoleController::class, 'removeuserrole'])->name('roles.removeuserrole');
     Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
 
-    //journal routes...
-    Route::resource('journalcategory', JournalCategoryController::class);
-    Route::resource('journalvolume', JournalVolumeController::class);
-    Route::resource('journalyear', JournalYearController::class);
-
-    Route::resource('authors', AuthorController::class);
-    Route::get('/review/{id}',[AuthorController::class, 'showreview'])->name('author.review');
-    Route::get('/journal/{id}',[AuthorController::class, 'showjournal'])->name('author.journal');
-
-
-    //user apps routes
-    Route::resource('myjournals', MyJournalsController::class);
 
 
 
@@ -145,6 +134,13 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/termid/{termid}',[SchooltermController::class, 'deleteterm'])->name('term.deleteterm');
 
     Route::resource('student', StudentController::class);
+    Route::get('/studentid/{studentid}',[StudentController::class, 'deletestudent'])->name('student.deletestudent');
+    Route::get('/studentoverview/{id}',[StudentController::class, 'overview'])->name('student.overview');
+    Route::get('/studentsettings/{id}',[StudentController::class, 'setting'])->name('student.settings');
+    Route::get('/studentbulkupload',[StudentController::class, 'bulkupload'])->name('student.bulkupload');
+    Route::post('/studentbulkuploadsave',[StudentController::class, 'bulkuploadsave'])->name('student.bulkuploadsave');
+    Route::get('/batchindex',[StudentController::class, 'batchindex'])->name('student.batchindex');
+    Route::get('/studentbatchid/{studentbatchid}',[StudentController::class, 'deletestudentbatch'])->name('student.deletestudentbatch');
 
     Route::resource('classoperation', ClassOperationController::class);
 
@@ -165,13 +161,13 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/houseid/{houseid}',[SchoolHouseController::class, 'deletehouse'])->name('schoolhouse.deletehouse');
     Route::resource('studenthouse',StudentHouseController::class);
     //Route::resource('studentpersonalityprofile',StudentpersonalityprofileController::class);
-    Route::get('/viewstudent/{id}/{termid}/{sessionid}',[ViewStudentController::class, 'show']);
-    Route::get('/subjectscoresheet/{schoolclassid}/{subjectclassid}/{staffid}/{termid}/{sessionid}',[MyScoreSheetController::class, 'subjectscoresheet']);
+    Route::get('/viewstudent/{id}/{termid}/{sessionid}',[ViewStudentController::class, 'show'])->name('viewstudent');
+    Route::get('/subjectscoresheet/{schoolclassid}/{subjectclassid}/{staffid}/{termid}/{sessionid}',[MyScoreSheetController::class, 'subjectscoresheet'])->name('subjectscoresheet');
     //Route::resource('viewstudent', viewStudentController::class);
     Route::resource('subjectoperation', SubjectOperationController::class);
-    Route::get('/subjectinfo/{id}/{schid}/{sessid}/{termid}',[SubjectOperationController::class, 'subjectinfo']);
+    Route::get('/subjectinfo/{id}/{schid}/{sessid}/{termid}',[SubjectOperationController::class, 'subjectinfo'])->name('subjectoperation.subjectinfo');
     Route::get('/viewresults/{id}/{schoolclassid}/{sessid}/{termid}',[StudentResultsController::class, 'viewresults']);
-    Route::get('/studentpersonalityprofile/{id}/{schoolclassid}/{sessid}/{termid}',[StudentpersonalityprofileController::class,'studentpersonalityprofile']);
+    Route::get('/studentpersonalityprofile/{id}/{schoolclassid}/{sessid}/{termid}',[StudentpersonalityprofileController::class,'studentpersonalityprofile'])->name('myclass.studentpersonalityprofile');
     Route::post('save',[StudentpersonalityprofileController::class,'save'])->name('save');
     Route::get('export', [MyScoreSheetController::class, 'export']);
     Route::post('classsetting', [MyClassController::class, 'importsheet'])->name('import.post');;

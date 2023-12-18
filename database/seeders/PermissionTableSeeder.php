@@ -92,6 +92,9 @@ class PermissionTableSeeder extends Seeder
            'student_edit-edit',
            'student_delete-delete',
 
+           'student_bulk-upload',
+           'student_bulk-uploadsave',
+
            'studentresults-list',
 
            'subject_class-list',
@@ -190,6 +193,10 @@ class PermissionTableSeeder extends Seeder
 
                 if($word == "studentresults")
                 Permission::create(['name' => $permission,'title'=>"Student Results Management"]);
+
+                if($word == "student_bulk")
+                Permission::create(['name' => $permission,'title'=>"Student Management"]);
+
 
                 if($word == "subject_class")
                 Permission::create(['name' => $permission,'title'=>"Subject Class Management"]);

@@ -203,18 +203,18 @@ use Spatie\Permission\Models\Role;
                         // }
 
                         ?>
-                        <div class="fw-bold text-gray-600 mb-5">Total users with this role: {{ $roles_num }}</div>
-                        <!--end::Users-->
-                        <div class="d-flex flex-column text-gray-600">
-                         <!--begin::Permissions-->
-                        @foreach ($role_permissions as $role_permission)
+                            <div class="fw-bold text-gray-600 mb-5">Total users with this role: {{ $roles_num }}</div>
+                            <!--end::Users-->
+                            <div class="d-flex flex-column text-gray-600">
+                            <!--begin::Permissions-->
+                            @foreach ($role_permissions as $role_permission)
 
-                        <div class="d-flex align-items-center py-2"><span class="bullet bg-primary me-3"></span> {{$role_permission}}</div>
+                            <div class="d-flex align-items-center py-2"><span class="bullet bg-primary me-3"></span> {{$role_permission}}</div>
 
-                        @endforeach
-                         <div class='d-flex align-items-center py-2'><span class='bullet bg-primary me-3'></span> @can('role-list')<a href="{{ route('roles.show',$role->id) }}" <em>...and more</a>@endcan</em></div>
-                    </div>
-<!--end::Permissions-->
+                            @endforeach
+                            <div class='d-flex align-items-center py-2'><span class='bullet bg-primary me-3'></span> @can('role-list')<a href="{{ route('roles.show',$role->id) }}" <em>...and more</a>@endcan</em></div>
+                            </div>
+                            <!--end::Permissions-->
 
                 {{-- <!--begin::Users group-->
                 <div class="symbol-group symbol-hover mb-9">

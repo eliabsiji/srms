@@ -450,10 +450,10 @@
                                 <input class="form-check-input" type="checkbox" value="1" />
                             </div>
                         </td>
-                        <td class="schoolhouseid">  <input type="hidden" id="tid"  value="{{ $sc->id }}" />{{ ++$i }}</td>
-                        <td class="schoolhouse">{{ $sc->house }} </td>
-                        <td class="housecolour">{{ $sc->housecolour }}</td>
-                        <td class="housemaster"><input type="hidden" id="housemaster"  value="{{ $sc->name }}" />{{ $sc->name }}
+                        <td class="schoolhouseid" style="color: rgb(51, 35, 200)">  <input type="hidden" id="tid"  value="{{ $sc->id }}" />{{ ++$i }}</td>
+                        <td class="schoolhouse" style="color: rgb(51, 35, 200)">{{ $sc->house }} </td>
+                        <td class="housecolour" style="color: rgb(51, 35, 200)">{{ $sc->housecolour }}</td>
+                        <td class="housemaster" style="color: rgb(51, 35, 200)"><input type="hidden" id="housemaster"  value="{{ $sc->name }}" />{{ $sc->name }}
 
                                         <!--begin::User details-->
                                         <div class="d-flex flex-column">
@@ -462,8 +462,8 @@
 
 
                         </td>
-                        <td class="termid">{{ $sc->term }}</td>
-                        <td class="sessionid">{{ $sc->session }}</td>
+                        <td class="termid" style="color: rgb(51, 35, 200)">{{ $sc->term }}</td>
+                        <td class="sessionid" style="color: rgb(51, 35, 200)">{{ $sc->session }}</td>
                         <td >{{ $sc->updated_at }} </td>
                         <td >
                             <a href="#" class="btn btn-light btn-active-light-primary btn-flex btn-center btn-sm" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">

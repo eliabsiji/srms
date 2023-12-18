@@ -63,13 +63,16 @@ var KTAccountSettingsSigninMethods = function () {
                         validators: {
                             notEmpty: {
                                 message: 'School Class required'
-                            },
-                            termid: {
-                                message: 'Term is required '
+                             }
                             }
-                        }
-                    },
-
+                          },
+                      termid: {
+                            validators: {
+                                notEmpty: {
+                                    message: 'Session is required'
+                                }
+                            }
+                        },
                     sessionid: {
                         validators: {
                             notEmpty: {

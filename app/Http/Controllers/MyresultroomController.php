@@ -33,6 +33,7 @@ class MyresultroomController extends Controller
        ->leftJoin('users', 'users.id','=','subjectteacher.staffid')
        ->leftJoin('subjectclass', 'subjectclass.subjectteacherid','=','subjectteacher.id')
        ->leftJoin('schoolclass', 'schoolclass.id','=','subjectclass.schoolclassid')
+       ->leftJoin('schoolarm', 'schoolarm.id','=','schoolclass.arm')
        ->leftJoin('subject', 'subject.id','=','subjectteacher.subjectid')
        ->leftJoin('schoolterm', 'schoolterm.id','=','subjectteacher.termid')
        ->leftJoin('schoolsession', 'schoolsession.id','=','subjectteacher.sessionid')
@@ -40,7 +41,7 @@ class MyresultroomController extends Controller
        ->get(['subjectteacher.id as id','users.id as userid','users.name as staffname',
             'subject.subject as subject','subject.subject_code as subjectcode',
             'subjectteacher.termid as termid','subjectclass.id as subclassid','schoolclass.id as schoolclassid',
-            'subjectteacher.sessionid as sessionid','schoolclass.schoolclass as schoolclass','schoolclass.arm as arm',
+            'subjectteacher.sessionid as sessionid','schoolclass.schoolclass as schoolclass','schoolarm.arm as arm',
           'schoolterm.term as term','schoolsession.session as session'])->sortBy('schoolclass')
                                                                         ->sortBy('arm')
                                                                         ->sortBy('term');

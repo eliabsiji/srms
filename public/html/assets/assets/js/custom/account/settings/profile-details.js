@@ -135,6 +135,7 @@ var KTAccountSettingsProfileDetails = function () {
                             }
                         }
                     },
+
                     'gender[]': {
                         validators: {
                             notEmpty: {
@@ -142,7 +143,20 @@ var KTAccountSettingsProfileDetails = function () {
                             }
                         }
                     },
-
+                    schoolclassid: {
+                        validators: {
+                            notEmpty: {
+                                message: 'School Class is required'
+                            }
+                        }
+                    },
+                    sessionid: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Session   is required'
+                            }
+                        }
+                    },
 
                 },
                 plugins: {

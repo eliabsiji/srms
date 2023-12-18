@@ -8,6 +8,7 @@ use App\Models\Student;
 use App\Models\Schoolclass;
 use App\Models\Schoolterm;
 use App\Models\Schoolsession;
+use App\Models\Studentpicture;
 USE App\Models\Subjectclass;
 use App\Models\SubjectRegistrationStatus;
 
@@ -65,7 +66,11 @@ class SubjectOperationController extends Controller
         $staffid="";
         $subjectclassid="";
         $current = "Current";
+
+        $studentpic = Studentpicture::where(['studentid.picture as picture']);
+
         $subjectclass = Subjectclass::where('schoolclassid',$schoolclassid )
+
         ->leftJoin('subjectteacher','subjectteacher.id','=','subjectclass.subjectteacherid')
         ->leftJoin('subject','subject.id','=','subjectteacher.subjectid')
         ->leftJoin('schoolsession','schoolsession.id','=','subjectteacher.sessionid')
@@ -74,7 +79,7 @@ class SubjectOperationController extends Controller
         ->leftJoin('users','users.id','=','subjectteacher.staffid')
         ->leftJoin('staffbioinfo', 'staffbioinfo.userid','=','users.id')
         ->leftJoin('staffpicture', 'staffpicture.staffid','=','users.id')
-        ->get(['users.id as userid','staffbioinfo.title as title','users.name as name','staffpicture.picture as picture',
+        ->get(['users.id as userid','staffbioinfo.title as title','users.name as name','users.avatar as picture',
         'subject.id as subjectid','subject.subject as subject','users.id as staffid',
         'subject.subject_code as subjectcode','schoolterm.term as term','subjectclass.id as subjectclassid',
         'schoolsession.session as session', 'schoolsession.id as sessionid','schoolterm.id as termid']);
@@ -97,11 +102,13 @@ class SubjectOperationController extends Controller
 
 
         $studentdata = Student::where('id',$id)->get();
-        $classname = Schoolclass::where('id',$schoolclassid)->get();
+        $classname = Schoolclass::where('schoolclass.id',$schoolclassid)
+        ->leftJoin('schoolarm','schoolarm.id','=','schoolclass.arm')->get(['schoolclass.schoolclass as schoolclass','schoolarm.arm as arm']);
         //$schoolsession = schoolsession::where('id',$sessionid)->get();
 
 
         return view('subjectoperation.subjectinfo')
+                     ->with('studentpic',$studentpic)
                      ->with('classname',$classname)
                      ->with('subjectclass',$subjectclass)
                     ->with('schoolterm',$termid)

@@ -425,14 +425,14 @@
                             <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_roles_view_table .form-check-input" value="1" />
                         </div>
                     </th>
-                    <th class="min-w-125px">SN</th>
-                    <th class="min-w-125px">Class Teacher</th>
-                    <th class="min-w-125px">Class</th>
-                    <th class="min-w-125px">Arm</th>
-                    <th class="min-w-125px">Term</th>
-                    <th class="min-w-125px">Session</th>
-                    <th class="min-w-125px">Date Updated</th>
-                    <th class="min-w-100px">Actions</th>
+                    <th class="min-w-125px" style="color: rgb(51, 35, 200)">SN</th>
+                    <th class="min-w-125px" style="color: rgb(51, 35, 200)">Class Teacher</th>
+                    <th class="min-w-125px" style="color: rgb(51, 35, 200)">Class</th>
+                    <th class="min-w-125px" style="color: rgb(51, 35, 200)">Arm</th>
+                    <th class="min-w-125px" style="color: rgb(51, 35, 200)">Term</th>
+                    <th class="min-w-125px" style="color: rgb(51, 35, 200)">Session</th>
+                    <th class="min-w-125px" style="color: rgb(51, 35, 200)">Date Updated</th>
+                    <th class="min-w-100px" style="color: rgb(51, 35, 200)">Actions</th>
                 </tr>
             </thead>
             <tbody class="fw-semibold text-gray-600">

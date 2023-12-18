@@ -34,6 +34,7 @@ class CreateStudentpersonalityprofilesTable extends Migration
             $table->string('classteachercomment')->nullable();
             $table->string('termid')->nullable();
             $table->string('sessionid')->nullable();
+           
             $table->timestamps();
 
         });

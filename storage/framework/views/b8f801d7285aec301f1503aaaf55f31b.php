@@ -87,7 +87,19 @@
     <div id="kt_app_content_container" class="app-container  container-xxl ">
 
 
+                                <!--begin::Actions-->
+                                <div class="d-flex align-items-center gap-2 gap-lg-3">
 
+
+                                    <!--begin::Secondary button-->
+
+
+                                    <!--begin::Primary button-->
+                                        <a href="<?php echo e(route('student.index')); ?>" class="btn btn-sm fw-bold btn-primary" >
+                                        << Back        </a>
+                                    <!--end::Primary button-->
+                                    </div>
+                                    <!--end::Actions-->
 
 <!--begin::Basic info-->
 <div class="card mb-5 mb-xl-10">
@@ -99,6 +111,7 @@
     </div>
     <!--end::Card title-->
 </div>
+
 <!--begin::Card header-->
 <?php if(count($errors) > 0): ?>
 <div class="row animated fadeInUp">
@@ -275,7 +288,7 @@
                     <div class="d-flex align-items-center mt-3">
                         <!--begin::Option-->
                         <label class="form-check form-check-custom form-check-inline form-check-solid me-5">
-                            <input class="form-check-input" name="gender" id="gender" type="radio" />
+                            <input class="form-check-input" name="gender"  type="radio" value="Male" required />
                             <span class="fw-semibold ps-2 fs-6">
                                 Male
                             </span>
@@ -284,7 +297,7 @@
 
                         <!--begin::Option-->
                         <label class="form-check form-check-custom form-check-inline form-check-solid">
-                            <input class="form-check-input" name="gender" id="gender" type="radio" />
+                            <input class="form-check-input" name="gender"  type="radio" value="Female" required />
                             <span class="fw-semibold ps-2 fs-6">
                                 Female
                             </span>
@@ -744,7 +757,7 @@
                     <!--begin::Col-->
                     <div class="col-lg-8 fv-row">
 
-                        <select  class="form-control form-control-lg form-control-solid" name ="sessionid" id="sessiionid" required>
+                        <select  class="form-control form-control-lg form-control-solid" name ="sessionid" id="sessionid" required>
                             <option value="">Select Session </option>
                             <?php $__currentLoopData = $schoolsession; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $schoolsession => $name): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <option value="<?php echo e($name->id); ?>"><?php echo e($name->session); ?></option>

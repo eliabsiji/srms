@@ -46,7 +46,7 @@ class StudentpersonalityprofileController extends Controller
        $students = Student::where('studentRegistration.id',$id)
         ->leftJoin('studentpicture','studentpicture.studentid','=','studentRegistration.id')
         ->get(['studentRegistration.id as id','studentRegistration.admissionNo as admissionNo',
-             'studentRegistration.firstname as fname',
+             'studentRegistration.firstname as fname','studentRegistration.home_address as homeaddress',
              'studentRegistration.lastname as lastname','studentRegistration.dateofbirth as dateofbirth',
              'studentRegistration.gender as gender','studentRegistration.updated_at as updated_at',
              'studentpicture.picture as picture']);

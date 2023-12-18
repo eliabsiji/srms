@@ -15,7 +15,7 @@ class AddattendanceToStudentpersonalityprofilesTable extends Migration
     {
         Schema::table('studentpersonalityprofiles', function (Blueprint $table) {
             //
-            $table->String('attendance')->default(null);
+            $table->String('attendance')->nullable();
         });
     }
 

@@ -168,11 +168,13 @@
                     <th class="min-w-125px">Admmssion NO</th>
                     <th class="min-w-125px">Name</th>
                     <th class="min-w-125px">House</th>
+                    <th class="min-w-125px">Date of Birth</th>
                     <th class="min-w-125px">Age</th>
                     <th class="min-w-125px">Gender</th>
-                    <th class="min-w-125px">Registered By</th>
+                    {{-- <th class="min-w-125px">Registered By</th> --}}
                     <th class="min-w-125px">Date Updated</th>
                     <th class="min-w-100px">Actions</th>
+                    <th class="min-w-100px">More</th>
                 </tr>
             </thead>
             <tbody class="fw-semibold text-gray-600">
@@ -187,7 +189,7 @@
                                 <input class="form-check-input" type="checkbox" value="1" />
                             </div>
                         </td>
-                        <td>  <input type="hidden" id="tid"  value="{{ $sc->scid }}" />{{ ++$i }}</td>
+                        <td>  <input type="hidden" id="tid"  value="{{ $sc->id }}" />{{ ++$i }}</td>
                         <td >{{ $sc->admissionNo }}</td>
                         <td class="d-flex align-items-center">
                             <!--begin:: Avatar -->
@@ -202,7 +204,7 @@
                                             $image =   $sc->picture;
                                         }
                                         ?>
-                                                    <img src="{{ Storage::url('images/staffavatar/'.$image)}}" alt="{{ $sc->staffname }}" class="w-100" />
+                                                    <img src="{{ Storage::url('images/studentavatar/'.$image)}}" alt="{{ $sc->staffname }}" class="w-100" />
                                                 </div>
                                                                     </a>
                                     </div>
@@ -216,8 +218,8 @@
                         </td>
                         <td >{{ $sc->house }}</td>
                         <td >{{ $sc->dateofbirth }} </td>
+                        <td >{{ $sc->age }} </td>
                         <td >{{ $sc->gender }}</td>
-                        <td >{{ $sc->registeredBy }}</td>
                         <td >{{ $sc->updated_at }} </td>
                         <td >
                             <a href="#" class="btn btn-light btn-active-light-primary btn-flex btn-center btn-sm" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
@@ -227,9 +229,9 @@
                                 <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-125px py-4" data-kt-menu="true">
                                     @can('student-edit')
                                         <!--begin::Menu item-->
-                                        <div class="menu-item px-3">
+                                        <div class="menu-item px-5">
 
-                                            <a href="{{ route('subjectclass.edit',$sc->scid) }}"  class="sel-subjectclass btn btn-light btn-active-primary" >Edit</a>
+                                            <a href="{{ route('student.overview',$sc->id) }}"  class="sel-subjectclass btn btn-light btn-active-primary" >Full Details</a>
                                         </div>
                                         <!--end::Menu item-->
                                     @endcan
@@ -243,11 +245,46 @@
                                         href="javascript:void(0)"
                                         id="show-user"
                                         data-kt-roles-table-filter="delete_row"
-                                        data-url="{{ route('student.deletestudent', ['studentid'=>$sc->scid]) }}"
+                                        data-url="{{ route('student.deletestudent', ['studentid'=>$sc->id]) }}"
                                         class="btn btn-danger btn-sm">Delete</a>
                                     </div>
                                     <!--end::Menu item-->
                                     @endcan
+
+                                </div>
+                                    <!--end::Menu-->
+                        </td>
+                        <td >
+                            <a href="#" class="btn btn-light btn-active-light-primary btn-flex btn-center btn-sm" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
+                                More...
+                                <i class="ki-duotone ki-down fs-5 ms-1"></i>                    </a>
+                            <!--begin::Menu-->
+                                <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-125px py-4" data-kt-menu="true">
+                                    @can('parent-edit')
+                                        <!--begin::Menu item-->
+                                        <div class="menu-item px-3">
+
+                                            <a href="{{ route('parent.edit',$sc->id) }}"  class="sel-subjectclass btn btn-light btn-active-primary" >Parent Bio Data</a>
+                                        </div>
+                                        <!--end::Menu item-->
+                                    @endcan
+                                    @can('student_picture-upload')
+                                    <!--begin::Menu item-->
+                                    <div class="menu-item px-3">
+
+                                        <a href="{{ route('studentImageUpload.edit',$sc->id) }}"  class="sel-subjectclass btn btn-light btn-active-primary" >Student Picture</a>
+                                    </div>
+                                    <!--end::Menu item-->
+                                @endcan
+                                @can('studenthouse-create')
+                                <!--begin::Menu item-->
+                                <div class="menu-item px-3">
+
+                                    <a href="{{ route('studenthouse.edit',$sc->id) }}"  class="sel-subjectclass btn btn-light btn-active-primary" >Student House</a>
+                                </div>
+                                <!--end::Menu item-->
+                               @endcan
+
 
                                 </div>
                                     <!--end::Menu-->

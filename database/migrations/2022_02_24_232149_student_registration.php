@@ -25,6 +25,7 @@ class StudentRegistration extends Migration
             $table->string('home_address');
             $table->string('home_address2');
             $table->string('dateofbirth');
+            $table->string('age');
             $table->string('placeofbirth');
             $table->string('religion');
             $table->string('nationlity');
@@ -33,6 +34,7 @@ class StudentRegistration extends Migration
             $table->string('last_school');
             $table->string('last_class');
             $table->string('registeredBy');
+            $table->string('batchid')->nullable();
             $table->timestamps();
         });
 

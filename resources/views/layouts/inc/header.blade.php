@@ -569,7 +569,7 @@
                 <div class="row g-2">
                                             <!--begin::Col-->
                         <div class="col-4">
-                            <a href="{{ route('journalcategory.index') }}" class="d-flex flex-column flex-center text-center text-gray-800 text-hover-primary bg-hover-light rounded py-4 px-3 mb-3">
+                            <a href="#" class="d-flex flex-column flex-center text-center text-gray-800 text-hover-primary bg-hover-light rounded py-4 px-3 mb-3">
                                 <img src="{{ asset('html/assets/assets/media/svg/brand-logos/amazon.svg')}}" class="w-25px h-25px mb-2" alt=""/>
                                 <span class="fw-semibold">Journal & Publications</span>
                             </a>

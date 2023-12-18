@@ -132,10 +132,7 @@ class ScoresheetImport implements ToModel, WithUpserts, WithUpsertColumns, WithS
                 ->get(['classcategories.ca1score as ca1']);
 
                 foreach ($classcategory as $key => $val) {
-                    # code...
                     $ca1score  = $val->ca1;
-
-
                 }
 
 
@@ -164,12 +161,8 @@ class ScoresheetImport implements ToModel, WithUpserts, WithUpsertColumns, WithS
                 ->get(['classcategories.ca2score as ca2']);
 
                 foreach ($classcategory as $key => $val) {
-                    # code...
-
                     $ca2score  = $val->ca2;
-
-
-                }
+                   }
 
 
 
@@ -195,8 +188,6 @@ class ScoresheetImport implements ToModel, WithUpserts, WithUpsertColumns, WithS
                 ->get(['classcategories.examscore as exam']);
 
                 foreach ($classcategory as $key => $val) {
-                    # code...
-
                     $examscore  = $val->exam;
 
                 }

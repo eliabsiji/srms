@@ -23,6 +23,7 @@ class Student extends Model
         'home_address2',
         'placeofbirth',
         'dateofbirth',
+        'age',
         'religion',
         'state',
         'local',

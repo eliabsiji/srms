@@ -69,15 +69,27 @@
        @if (Route::is('subjectclass.*'))
             @include('layouts.pages-assets.css.users-list-css')
        @endif
-
-       @if (Route::is('authors.*') || Route::is('author.review') || Route::is('author.journal')  )
+       @if (Route::is('subjectoperation.*'))
             @include('layouts.pages-assets.css.users-list-css')
        @endif
-       @if (Route::is('myjournals.*'))
+       @if (Route::is('subjectinfo.*'))
+            @include('layouts.pages-assets.css.users-list-css')
+       @endif
+       @if (Route::is('myclass.*'))
            @include('layouts.pages-assets.css.users-list-css')
        @endif
-
-
+       @if (Route::is('mysubject.*'))
+            @include('layouts.pages-assets.css.users-list-css')
+       @endif
+       @if (Route::is('viewstudent*'))
+           @include('layouts.pages-assets.css.users-list-css')
+       @endif
+       @if (Route::is('myresultroom*'))
+           @include('layouts.pages-assets.css.users-list-css')
+       @endif
+       @if (Route::is('subjectscoresheet*'))
+               @include('layouts.pages-assets.css.users-list-css')
+       @endif
 
 
 
@@ -279,10 +291,31 @@
              @include('layouts.pages-assets.js.subjectclass-list-js')
         @endif
         @if (Route::is('student.*'))
-             @include('layouts.pages-assets.js.users-list-js')
+             @include('layouts.pages-assets.js.student-list-js')
         @endif
-        @if (Route::is('myjournals.*'))
-            @include('layouts.pages-assets.js.journalvolume-list-js')
+        @if (Route::is('batchindex.*'))
+              @include('layouts.pages-assets.js.studentbatch-list-js')
+        @endif
+        @if (Route::is('subjectoperation.*'))
+              @include('layouts.pages-assets.js.subjectoperation-list-js')
+        @endif
+        @if (Route::is('subjectinfo.*'))
+              @include('layouts.pages-assets.js.subjectinfo-list-js')
+        @endif
+        @if (Route::is('myclass.*'))
+             @include('layouts.pages-assets.js.myclass-list-js')
+        @endif
+        @if (Route::is('mysubject.*'))
+                @include('layouts.pages-assets.js.mysubject-list-js')
+        @endif
+        @if (Route::is('viewstudent*'))
+             @include('layouts.pages-assets.js.viewstudent-list-js')
+        @endif
+        @if (Route::is('myresultroom*'))
+               @include('layouts.pages-assets.js.myresultroom-list-js')
+        @endif
+        @if (Route::is('subjectscoresheet*'))
+              @include('layouts.pages-assets.js.subjectscoresheet-list-js')
         @endif
 
 

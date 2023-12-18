@@ -418,12 +418,12 @@ use Spatie\Permission\Models\Role;
                 <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_table_users .form-check-input" value="1" />
             </div>
         </th>
-        <th class="min-w-125px">SN</th>
-        <th class="min-w-125px">Name</th>
-        <th class="min-w-125px">Roles</th>
-        <th class="min-w-125px">Email</th>
-        <th class="min-w-125px">Joined Date</th>
-        <th class="text-end min-w-100px">Actions</th>
+        <th class="min-w-125px" style="color: green">SN</th>
+        <th class="min-w-125px" style="color: green">Name</th>
+        <th class="min-w-125px" style="color: green">Roles</th>
+        <th class="min-w-125px" style="color: green">Email</th>
+        <th class="min-w-125px" style="color: green">Joined Date</th>
+        <th class="text-end min-w-100px" style="color: green">Actions</th>
     </tr>
 </thead>
 <tbody class="text-gray-600 fw-semibold">
