@@ -168,7 +168,7 @@
                     <th class="min-w-125px">SN</th>
                     <th class="min-w-125px">Batch Title</th>
                     <th class="min-w-125px">School Class</th>
-                    
+                    <th class="min-w-125px">Batch Status</th>
                     <th class="min-w-125px">School Arm</th>
                     <th class="min-w-125px">Term</th>
                     <th class="min-w-125px">Session</th>
@@ -191,7 +191,7 @@
                         <td>  <input type="hidden" id="tid"  value="<?php echo e($sc->id); ?>" /><?php echo e(++$i); ?></td>
                         <td ><?php echo e($sc->title); ?></td>
                         <td ><?php echo e($sc->schoolclass); ?></td>
-                        
+                        <td style="color: <?php echo e(($sc->status =="Success") ? "green": "red"); ?>"><?php echo e($sc->status); ?></td>
                         <td ><?php echo e($sc->arm); ?> </td>
                         <td ><?php echo e($sc->term); ?> </td>
                         <td ><?php echo e($sc->session); ?></td>

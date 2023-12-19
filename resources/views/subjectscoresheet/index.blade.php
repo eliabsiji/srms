@@ -411,7 +411,7 @@
                             <!--end::Avatar-->
                             <!--begin::User details-->
                             <div class="d-flex flex-column">
-                                <a href="#" class="text-gray-800 text-hover-primary mb-1">{{ $broadsheet->fname }} {{ $b->lname }}</a>
+                                <a href="#" class="text-gray-800 text-hover-primary mb-1">{{ $broadsheet->fname }} {{ $broadsheet->lname }}</a>
 
                             </div>
                             <!--begin::User details-->

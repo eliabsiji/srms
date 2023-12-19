@@ -4,12 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use App\MOdels\ClassTeacher;
-use App\MOdels\Schoolclass;
-use App\MOdels\SubjectTeacher;
-use App\MOdels\Schoolsession;
-use App\MOdels\Schoolterm;
-use App\MOdels\User;
+use App\Models\ClassTeacher;
+use App\Models\Schoolclass;
+use App\Models\SubjectTeacher;
+use App\Models\Schoolsession;
+use App\Models\Schoolterm;
+use App\Models\User;
 
 
 class ClassTeacherController extends Controller

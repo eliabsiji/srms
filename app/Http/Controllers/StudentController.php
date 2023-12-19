@@ -119,9 +119,10 @@ class StudentController extends Controller
         ->leftJoin('schoolsession','schoolsession.id','=','student_batch_upload.session')
         ->leftJoin('schoolterm','schoolterm.id','=','student_batch_upload.termid')
         ->leftJoin('schoolarm','schoolarm.id','=','schoolclass.arm')
+        ->orderBy('upload_date', 'asc')
        ->get(['student_batch_upload.id as id','student_batch_upload.title as title','schoolclass.schoolclass as schoolclass',
               'schoolterm.term as term','schoolsession.session as session','schoolarm.arm as arm',
-              'student_batch_upload.status as status','student_batch_upload.updated_at as upload_date']) ->sortBy('upload_date');
+              'student_batch_upload.status as status','student_batch_upload.updated_at as upload_date']);
 
 
                 return view('student.batchindex')->with('batch',$batch);
@@ -150,23 +151,41 @@ class StudentController extends Controller
             return redirect()->back()->with('success', 'Title  is already choose,  Please choosen another Title for this Batch Upload');
         }else{
 
-
-        Session::put('sclassid',$request->schoolclassid);
-        Session::put('tid', $request->termid);
-        Session::put('sid',$request->sessionid);
-        // Session::put('batchid',$batch->id);
-        $file =  $request->file('filesheet');
-        //Excel::import(new StudentsImport(),$file );
-        (new StudentsImport())->import($file, null, \Maatwebsite\Excel\Excel::XLSX);
-        $batch = new StudentBatchModel();
+         $batch = new StudentBatchModel();
         $batch->title = $request->title;
         $batch->schoolclassid = $request->schoolclassid;
         $batch->termid = $request->termid;
         $batch->session = $request->sessionid;
         $batch->status = "";
         $batch->save();
+        Session::put('sclassid',$request->schoolclassid);
+        Session::put('tid', $request->termid);
+        Session::put('sid',$request->sessionid);
+        Session::put('batchid',$batch->id);
+        $file =  $request->file('filesheet');
+        //Excel::import(new StudentsImport(),$file );
+        $import = new StudentsImport();
 
-       return redirect()->back()->with('success', 'Student Batch File Imported  Successfully');
+        try {
+            $import->import($file, null, \Maatwebsite\Excel\Excel::XLSX);
+            StudentBatchModel::where("id",$batch->id)->update(["Status" => "Success"]);
+            return redirect()->back()->with('success', 'Student Batch File Imported  Successfully');
+           // $import->import('import-users.xlsx');
+        } catch (\Maatwebsite\Excel\Validators\ValidationException $e) {
+            StudentBatchModel::where("id",$batch->id)->update(["Status" => "Failed"]);
+             $failures = $e->failures();
+
+             foreach ($failures as $failure) {
+                  $failure->row(); // row that went wrong
+                 $failure->attribute(); // either heading key (if using heading row concern) or column index
+               $fail =  $failure->errors(); // Actual error messages from Laravel validator
+                 $failure->values(); // The values of the row that has failed.
+             }
+         return redirect()->back()->with('status', implode(" ",$fail));
+        }
+
+
+
         }
     }
 
@@ -295,8 +314,8 @@ class StudentController extends Controller
 
 
                //for student picture...
-            //    $picture->studentid = $studentId;
-            //    $picture->save();
+               $picture->studentid = $studentId;
+               $picture->save();
 
             $request->validate(['avatar' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048', ]);
             $path = storage_path('images/studentavatar');

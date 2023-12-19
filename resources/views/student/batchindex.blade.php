@@ -167,7 +167,7 @@
                     <th class="min-w-125px">SN</th>
                     <th class="min-w-125px">Batch Title</th>
                     <th class="min-w-125px">School Class</th>
-                    {{-- <th class="min-w-125px">Batch Status</th> --}}
+                    <th class="min-w-125px">Batch Status</th>
                     <th class="min-w-125px">School Arm</th>
                     <th class="min-w-125px">Term</th>
                     <th class="min-w-125px">Session</th>
@@ -190,7 +190,7 @@
                         <td>  <input type="hidden" id="tid"  value="{{ $sc->id }}" />{{ ++$i }}</td>
                         <td >{{ $sc->title }}</td>
                         <td >{{ $sc->schoolclass }}</td>
-                        {{-- <td style="color: {{ ($sc->status =="Success") ? "green": "red" }}">{{ $sc->status }}</td> --}}
+                        <td style="color: {{ ($sc->status =="Success") ? "green": "red" }}">{{ $sc->status }}</td>
                         <td >{{ $sc->arm }} </td>
                         <td >{{ $sc->term }} </td>
                         <td >{{ $sc->session }}</td>

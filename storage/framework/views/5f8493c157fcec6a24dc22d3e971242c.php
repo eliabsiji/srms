@@ -407,7 +407,7 @@
                             <!--end::Avatar-->
                             <!--begin::User details-->
                             <div class="d-flex flex-column">
-                                <a href="#" class="text-gray-800 text-hover-primary mb-1"><?php echo e($broadsheet->fname); ?> <?php echo e($b->lname); ?></a>
+                                <a href="#" class="text-gray-800 text-hover-primary mb-1"><?php echo e($broadsheet->fname); ?> <?php echo e($broadsheet->lname); ?></a>
 
                             </div>
                             <!--begin::User details-->

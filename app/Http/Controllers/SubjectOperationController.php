@@ -35,12 +35,12 @@ class SubjectOperationController extends Controller
     {
         $student = Student::leftJoin('parentRegistration', 'parentRegistration.id','=','studentRegistration.id')
                          ->leftJoin('studentpicture','studentpicture.studentid','=','studentRegistration.id')
-                         ->leftJoin('promotionStatus','promotionStatus.studentId','=','studentRegistration.id')
+                         ->leftJoin('promotionstatus','promotionstatus.studentId','=','studentRegistration.id')
         ->get(['studentRegistration.id as id','studentRegistration.admissionNo as admissionNo','studentRegistration.firstname as firstname',
         'studentRegistration.lastname as lastname','studentRegistration.dateofbirth as dateofbirth','studentRegistration.gender as gender',
-    'studentRegistration.updated_at as updated_at','studentpicture.picture as picture','promotionStatus.studentId as studentID',
-    'promotionStatus.schoolclassid as schoolclassid','promotionStatus.termid as termid','promotionStatus.sessionid as sessionid',
-    'promotionStatus.promotionStatus as pstatus','promotionStatus.classstatus as cstatus']);
+    'studentRegistration.updated_at as updated_at','studentpicture.picture as picture','promotionstatus.studentId as studentID',
+    'promotionstatus.schoolclassid as schoolclassid','promotionstatus.termid as termid','promotionstatus.sessionid as sessionid',
+    'promotionstatus.promotionstatus as pstatus','promotionstatus.classstatus as cstatus']);
 
 
 
