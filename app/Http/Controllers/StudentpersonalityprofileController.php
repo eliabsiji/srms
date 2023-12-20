@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Student;
-use App\Models\studentpersonalityprofile;
+use App\Models\Studentpersonalityprofile;
 use Schoolclass;
 
 class StudentpersonalityprofileController extends Controller
