@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\SubjectTeacher;
+use App\Models\Subjectteacher;
 
 class MySubjectController extends Controller
 {
@@ -27,7 +27,7 @@ class MySubjectController extends Controller
         $user = auth()->user();
         $current = "Current";
 
-       $mysubjects = SubjectTeacher::where('staffid',$user->id)
+       $mysubjects = Subjectteacher::where('staffid',$user->id)
        ->leftJoin('users', 'users.id','=','subjectteacher.staffid')
        ->leftJoin('subjectclass', 'subjectclass.subjectteacherid','=','subjectteacher.id')
        ->leftJoin('schoolclass', 'schoolclass.id','=','subjectclass.schoolclassid')
@@ -41,7 +41,7 @@ class MySubjectController extends Controller
             'subjectteacher.termid as termid','subjectteacher.sessionid as sessionid',
           'schoolterm.term as term','schoolsession.session as session'])->sortBy('subject');
 
-          $mysubjectshistory = SubjectTeacher::where('staffid',$user->id)
+          $mysubjectshistory = Subjectteacher::where('staffid',$user->id)
           ->leftJoin('users', 'users.id','=','subjectteacher.staffid')
           ->leftJoin('subjectclass', 'subjectclass.subjectteacherid','=','subjectteacher.id')
           ->leftJoin('subject', 'subject.id','=','subjectteacher.subjectid')

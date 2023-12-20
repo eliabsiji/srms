@@ -40,10 +40,10 @@ class MyScoreSheetController extends Controller
 
         // echo $schoolclassid;
         $Broadsheets = Broadsheet::where('subjectclassid',$subjectclassid)
-        ->where('Broadsheet.staffid',$staffid)
-        ->where('Broadsheet.termid',$termid)
-        ->where('Broadsheet.session',$sessionid)
-        ->leftJoin('subjectclass', 'subjectclass.id','=','Broadsheet.subjectclassid')
+        ->where('broadsheet.staffid',$staffid)
+        ->where('broadsheet.termid',$termid)
+        ->where('broadsheet.session',$sessionid)
+        ->leftJoin('subjectclass', 'subjectclass.id','=','broadsheet.subjectclassid')
         ->leftJoin('schoolclass', 'schoolclass.id','=','subjectclass.schoolclassid')
         ->leftJoin('schoolarm', 'schoolarm.id','=','schoolclass.arm')
         ->leftJoin('classcategories', 'classcategories.id','=','schoolclass.classcategoryid')
@@ -52,15 +52,15 @@ class MyScoreSheetController extends Controller
         ->leftJoin('schoolterm', 'schoolterm.id','=','subjectteacher.termid')
         ->leftJoin('schoolsession', 'schoolsession.id','=','subjectteacher.sessionid')
         ->where('schoolsession.status','=',$current)
-        ->leftJoin('studentRegistration', 'studentRegistration.id','=','Broadsheet.studentId')
+        ->leftJoin('studentRegistration', 'studentRegistration.id','=','broadsheet.studentId')
         ->leftJoin('studentpicture','studentpicture.studentid','=','studentRegistration.id')
-        ->get(['Broadsheet.id as id','studentRegistration.admissionNO as admissionno','studentRegistration.firstname as fname','studentRegistration.lastname as lname',
+        ->get(['broadsheet.id as id','studentRegistration.admissionNO as admissionno','studentRegistration.firstname as fname','studentRegistration.lastname as lname',
               'subject.subject as subject','subject.subject_code as subjectcode','schoolclass.schoolclass as schoolclass','schoolarm.arm as arm',
-              'schoolterm.term as term','schoolsession.session as session','subjectclass.id as subjectclid','Broadsheet.staffid as staffid',
-              'Broadsheet.termid as termid','Broadsheet.session as sessionid','classcategories.ca2score as ca2',
+              'schoolterm.term as term','schoolsession.session as session','subjectclass.id as subjectclid','broadsheet.staffid as staffid',
+              'broadsheet.termid as termid','broadsheet.session as sessionid','classcategories.ca2score as ca2',
               'classcategories.ca1score as ca1','classcategories.examscore as exam',
-             'studentPicture.picture as picture','Broadsheet.ca1 as ca1','Broadsheet.ca2 as ca2','Broadsheet.exam as exam','Broadsheet.total  as total','Broadsheet.grade as grade',
-            'Broadsheet.subjectpositionclass as position','Broadsheet.remark as remark'])->sortBy('admissionno');
+             'studentPicture.picture as picture','broadsheet.ca1 as ca1','broadsheet.ca2 as ca2','broadsheet.exam as exam','broadsheet.total  as total','broadsheet.grade as grade',
+            'broadsheet.subjectpositionclass as position','broadsheet.remark as remark'])->sortBy('admissionno');
 
             if($Broadsheets){
                     foreach($Broadsheets as $r){
@@ -73,39 +73,39 @@ class MyScoreSheetController extends Controller
 
                             //get minimun score....
                         $classmin = Broadsheet::where('subjectclassid',$subjectclassid)
-                        ->where('Broadsheet.staffid',$staffid)
-                        ->where('Broadsheet.termid',$termid)
-                        ->where('Broadsheet.session',$sessionid)
+                        ->where('broadsheet.staffid',$staffid)
+                        ->where('broadsheet.termid',$termid)
+                        ->where('broadsheet.session',$sessionid)
                         ->min('total');
 
                        // echo (float)$classmin;
 
 
                         Broadsheet::where('subjectclassid',$subjectclassid)
-                        ->where('Broadsheet.staffid',$staffid)
-                        ->where('Broadsheet.termid',$termid)
-                        ->where('Broadsheet.session',$sessionid)
+                        ->where('broadsheet.staffid',$staffid)
+                        ->where('broadsheet.termid',$termid)
+                        ->where('broadsheet.session',$sessionid)
                         ->update(array('cmin'=>$classmin));
 
                         //get maximun score....
                         $classmax = Broadsheet::where('subjectclassid',$subjectclassid)
-                        ->where('Broadsheet.staffid',$staffid)
-                        ->where('Broadsheet.termid',$termid)
-                        ->where('Broadsheet.session',$sessionid)
+                        ->where('broadsheet.staffid',$staffid)
+                        ->where('broadsheet.termid',$termid)
+                        ->where('broadsheet.session',$sessionid)
                         ->max('total');
                         Broadsheet::where('subjectclassid',$subjectclassid)
-                        ->where('Broadsheet.staffid',$staffid)
-                        ->where('Broadsheet.termid',$termid)
-                        ->where('Broadsheet.session',$sessionid)
+                        ->where('broadsheet.staffid',$staffid)
+                        ->where('broadsheet.termid',$termid)
+                        ->where('broadsheet.session',$sessionid)
                         ->update(array('cmax'=>$classmax));
 
 
                         //get average score...
                         $classavg = ($classmin + $classmax)/2;
                         Broadsheet::where('subjectclassid',$subjectclassid)
-                        ->where('Broadsheet.staffid',$staffid)
-                        ->where('Broadsheet.termid',$termid)
-                        ->where('Broadsheet.session',$sessionid)
+                        ->where('broadsheet.staffid',$staffid)
+                        ->where('broadsheet.termid',$termid)
+                        ->where('broadsheet.session',$sessionid)
                         ->update(array('avg'=>round($classavg, 1)));
 
 
@@ -119,9 +119,9 @@ class MyScoreSheetController extends Controller
 
                         $classpos = Broadsheet::select("*")
                         ->where('subjectclassid',$subjectclassid)
-                        ->where('Broadsheet.staffid',$staffid)
-                        ->where('Broadsheet.termid',$termid)
-                        ->where('Broadsheet.session',$sessionid)
+                        ->where('broadsheet.staffid',$staffid)
+                        ->where('broadsheet.termid',$termid)
+                        ->where('broadsheet.session',$sessionid)
                        // ->orderBy('studentId','DESC')
                         ->orderBy('total','DESC')
                         ->get();
@@ -148,10 +148,10 @@ class MyScoreSheetController extends Controller
                                // echo $row->studentId." "."$row->total"." ".gettype(strval($rank_pos))." "."<br>";
 
                             Broadsheet::where('subjectclassid',$subjectclassid)
-                                ->where('Broadsheet.studentId',$studentId)
-                                ->where('Broadsheet.staffid',$staffid)
-                                ->where('Broadsheet.termid',$termid)
-                                ->where('Broadsheet.session',$sessionid)
+                                ->where('broadsheet.studentId',$studentId)
+                                ->where('broadsheet.staffid',$staffid)
+                                ->where('broadsheet.termid',$termid)
+                                ->where('broadsheet.session',$sessionid)
                                 ->update(array('subjectpositionclass'=> $rank_pos));
 
                             }
@@ -272,10 +272,10 @@ class MyScoreSheetController extends Controller
 
 
        $current = "Current";
-        $Broadsheets = Broadsheet::where('Broadsheet.id',$id)
-        ->leftJoin('studentRegistration', 'studentRegistration.id','=','Broadsheet.studentId')
+        $Broadsheets = Broadsheet::where('broadsheet.id',$id)
+        ->leftJoin('studentRegistration', 'studentRegistration.id','=','broadsheet.studentId')
         ->leftJoin('studentpicture','studentpicture.studentid','=','studentRegistration.id')
-        ->leftJoin('subjectclass', 'subjectclass.id','=','Broadsheet.subjectclassid')
+        ->leftJoin('subjectclass', 'subjectclass.id','=','broadsheet.subjectclassid')
         ->leftJoin('schoolclass', 'schoolclass.id','=','subjectclass.schoolclassid')
         ->leftJoin('schoolarm', 'schoolarm.id','=','schoolclass.arm')
         ->leftJoin('classcategories', 'classcategories.id','=','schoolclass.classcategoryid')
@@ -284,13 +284,13 @@ class MyScoreSheetController extends Controller
         ->leftJoin('schoolterm', 'schoolterm.id','=','subjectteacher.termid')
         ->leftJoin('schoolsession', 'schoolsession.id','=','subjectteacher.sessionid')
         ->where('schoolsession.status','=',$current)
-       ->get(['Broadsheet.id as bid','studentRegistration.admissionNO as admissionno','studentRegistration.tittle as title',
+       ->get(['broadsheet.id as bid','studentRegistration.admissionNO as admissionno','studentRegistration.tittle as title',
              'studentRegistration.firstname as fname','studentRegistration.lastname as lname',
-             'studentPicture.picture as picture','Broadsheet.ca1 as ca1','Broadsheet.ca2 as ca2','Broadsheet.exam as exam',
-             'Broadsheet.total  as total','Broadsheet.grade as grade', 'schoolterm.term as term','schoolsession.session as session',
+             'studentPicture.picture as picture','broadsheet.ca1 as ca1','broadsheet.ca2 as ca2','broadsheet.exam as exam',
+             'broadsheet.total  as total','broadsheet.grade as grade', 'schoolterm.term as term','schoolsession.session as session',
              'subject.subject as subject','subject.subject_code as subjectcode','schoolclass.schoolclass as schoolclass',
-             'schoolarm.arm as arm','Broadsheet.subjectpositionclass as position','Broadsheet.remark as remark','classcategories.ca2score as ca2',
-             'classcategories.ca1score as ca1','classcategories.examscore as exam',])->sortBy('fname');
+             'schoolarm.arm as arm','broadsheet.subjectpositionclass as position','broadsheet.remark as remark',
+             'classcategories.ca2score as ca2','classcategories.ca1score as ca1','classcategories.examscore as exam',])->sortBy('fname');
 
 
             if ($Broadsheets){
@@ -384,10 +384,10 @@ class MyScoreSheetController extends Controller
 
 
        $Broadsheets = Broadsheet::where('subjectclassid',$subjectclassid)
-       ->where('Broadsheet.staffid',$staffid)
-       ->where('Broadsheet.termid',$termid)
-       ->where('Broadsheet.session',$sessionid)
-       ->leftJoin('subjectclass', 'subjectclass.id','=','Broadsheet.subjectclassid')
+       ->where('broadsheet.staffid',$staffid)
+       ->where('broadsheet.termid',$termid)
+       ->where('broadsheet.session',$sessionid)
+       ->leftJoin('subjectclass', 'subjectclass.id','=','broadsheet.subjectclassid')
        ->leftJoin('schoolclass', 'schoolclass.id','=','subjectclass.schoolclassid')
        ->leftJoin('schoolarm', 'schoolarm.id','=','schoolclass.arm')
        ->leftJoin('subjectteacher','subjectteacher.id','=','subjectclass.subjectteacherid')
@@ -396,12 +396,12 @@ class MyScoreSheetController extends Controller
        ->leftJoin('schoolterm', 'schoolterm.id','=','subjectteacher.termid')
        ->leftJoin('schoolsession', 'schoolsession.id','=','subjectteacher.sessionid')
        ->where('schoolsession.status','=',$current)
-       ->leftJoin('studentRegistration', 'studentRegistration.id','=','Broadsheet.studentId')
+       ->leftJoin('studentRegistration', 'studentRegistration.id','=','broadsheet.studentId')
        ->leftJoin('studentpicture','studentpicture.studentid','=','studentRegistration.id')
 
 
 
-      ->get(['Broadsheet.id as bid','subject.subject as subject','subject.subject_code as subjectcode','schoolclass.schoolclass as schoolclass','schoolarm.arm as arm',
+      ->get(['broadsheet.id as bid','subject.subject as subject','subject.subject_code as subjectcode','schoolclass.schoolclass as schoolclass','schoolarm.arm as arm',
              'schoolterm.term as term','schoolsession.session as session','users.id as userid','users.name as staffname',
 
            ])->sortBy('fname');
@@ -461,10 +461,10 @@ class MyScoreSheetController extends Controller
 
         // echo $schoolclassid;
         $Broadsheets = Broadsheet::where('subjectclassid',$subjectclassid)
-        ->where('Broadsheet.staffid',$staffid)
-        ->where('Broadsheet.termid',$termid)
-        ->where('Broadsheet.session',$sessionid)
-        ->leftJoin('subjectclass', 'subjectclass.id','=','Broadsheet.subjectclassid')
+        ->where('broadsheet.staffid',$staffid)
+        ->where('broadsheet.termid',$termid)
+        ->where('broadsheet.session',$sessionid)
+        ->leftJoin('subjectclass', 'subjectclass.id','=','broadsheet.subjectclassid')
         ->leftJoin('schoolclass', 'schoolclass.id','=','subjectclass.schoolclassid')
         ->leftJoin('schoolarm', 'schoolarm.id','=','schoolclass.arm')
         ->leftJoin('subjectteacher','subjectteacher.id','=','subjectclass.subjectteacherid')
@@ -472,17 +472,18 @@ class MyScoreSheetController extends Controller
         ->leftJoin('schoolterm', 'schoolterm.id','=','subjectteacher.termid')
         ->leftJoin('schoolsession', 'schoolsession.id','=','subjectteacher.sessionid')
         ->where('schoolsession.status','=',$current)
-        ->leftJoin('studentRegistration', 'studentRegistration.id','=','Broadsheet.studentId')
+        ->leftJoin('studentRegistration', 'studentRegistration.id','=','broadsheet.studentId')
         ->leftJoin('studentpicture','studentpicture.studentid','=','studentRegistration.id')
 
 
 
-       ->get(['Broadsheet.id as id','studentRegistration.admissionNO as admissionno','studentRegistration.firstname as fname','studentRegistration.lastname as lname',
+       ->get(['broadsheet.id as id','studentRegistration.admissionNO as admissionno','studentRegistration.firstname as fname','studentRegistration.lastname as lname',
               'subject.subject as subject','subject.subject_code as subjectcode','schoolclass.schoolclass as schoolclass','schoolarm.arm as arm',
-              'schoolterm.term as term','schoolsession.session as session','subjectclass.id as subjectclid','Broadsheet.staffid as staffid',
-              'Broadsheet.termid as termid','Broadsheet.session as sessionid',
-             'studentPicture.picture as picture','Broadsheet.ca1 as ca1','Broadsheet.ca2 as ca2','Broadsheet.exam as exam','Broadsheet.total  as total','Broadsheet.grade as grade',
-            'Broadsheet.subjectpositionclass as position','Broadsheet.remark as remark'])->sortBy('admissionno');
+              'schoolterm.term as term','schoolsession.session as session','subjectclass.id as subjectclid','broadsheet.staffid as staffid',
+              'broadsheet.termid as termid','broadsheet.session as sessionid',
+             'studentPicture.picture as picture','broadsheet.ca1 as ca1','broadsheet.ca2 as ca2','broadsheet.exam as exam',
+             'broadsheet.total  as total','broadsheet.grade as grade',
+            'broadsheet.subjectpositionclass as position','broadsheet.remark as remark'])->sortBy('admissionno');
 
 
 
@@ -495,9 +496,9 @@ class MyScoreSheetController extends Controller
 
         $classpos = Broadsheet::select("total")
         ->where('subjectclassid',$subjectclassid)
-        ->where('Broadsheet.staffid',$staffid)
-        ->where('Broadsheet.termid',$termid)
-        ->where('Broadsheet.session',$sessionid)
+        ->where('broadsheet.staffid',$staffid)
+        ->where('broadsheet.termid',$termid)
+        ->where('broadsheet.session',$sessionid)
         ->orderBy('total','DESC')->get();
 
         foreach ($classpos as $row){
@@ -527,10 +528,10 @@ class MyScoreSheetController extends Controller
 
                 //echo $studentId." "." ".$row->total.$rank_pos." "."<br>";
                 Broadsheet::where('subjectclassid',$subjectclassid)
-                ->where('Broadsheet.studentId',$studentId)
-                ->where('Broadsheet.staffid',$staffid)
-                ->where('Broadsheet.termid',$termid)
-                ->where('Broadsheet.session',$sessionid)
+                ->where('broadsheet.studentId',$studentId)
+                ->where('broadsheet.staffid',$staffid)
+                ->where('broadsheet.termid',$termid)
+                ->where('broadsheet.session',$sessionid)
                 ->update(array('subjectpositionclass'=>$rank_pos));
 
         }

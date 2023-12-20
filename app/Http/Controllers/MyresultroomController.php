@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 
 use Illuminate\Http\Request;
-use App\Models\SubjectTeacher;
+use App\Models\Subjectteacher;
 
 class MyresultroomController extends Controller
 {
@@ -29,7 +29,7 @@ class MyresultroomController extends Controller
         $user = auth()->user();
         $current = "Current";
 
-       $mysubjects = SubjectTeacher::where('staffid',$user->id)
+       $mysubjects = Subjectteacher::where('staffid',$user->id)
        ->leftJoin('users', 'users.id','=','subjectteacher.staffid')
        ->leftJoin('subjectclass', 'subjectclass.subjectteacherid','=','subjectteacher.id')
        ->leftJoin('schoolclass', 'schoolclass.id','=','subjectclass.schoolclassid')

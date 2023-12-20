@@ -153,7 +153,7 @@
             <!--begin::Card body-->
             <div class="card-body py-4">
                 <?php
-                use App\Models\broadsheet;
+                use App\Models\Broadsheet;
 
                 ?>
 
@@ -198,7 +198,7 @@
                         <td >
                             <?php
 
-                            $broadsheetchk = broadsheet::where('staffid',$subject->userid)
+                            $broadsheetchk = Broadsheet::where('staffid',$subject->userid)
                              ->where('subjectclassid',$subject->subclassid)
                              ->where('termid',$subject->termid)
                              ->where('session',$subject->sessionid)->exists();
