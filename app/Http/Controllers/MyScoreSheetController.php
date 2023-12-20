@@ -59,7 +59,7 @@ class MyScoreSheetController extends Controller
               'schoolterm.term as term','schoolsession.session as session','subjectclass.id as subjectclid','broadsheet.staffid as staffid',
               'broadsheet.termid as termid','broadsheet.session as sessionid','classcategories.ca2score as ca2',
               'classcategories.ca1score as ca1','classcategories.examscore as exam',
-             'studentPicture.picture as picture','broadsheet.ca1 as ca1','broadsheet.ca2 as ca2','broadsheet.exam as exam','broadsheet.total  as total','broadsheet.grade as grade',
+             'studentpicture.picture as picture','broadsheet.ca1 as ca1','broadsheet.ca2 as ca2','broadsheet.exam as exam','broadsheet.total  as total','broadsheet.grade as grade',
             'broadsheet.subjectpositionclass as position','broadsheet.remark as remark'])->sortBy('admissionno');
 
             if($Broadsheets){
@@ -286,7 +286,7 @@ class MyScoreSheetController extends Controller
         ->where('schoolsession.status','=',$current)
        ->get(['broadsheet.id as bid','studentRegistration.admissionNO as admissionno','studentRegistration.tittle as title',
              'studentRegistration.firstname as fname','studentRegistration.lastname as lname',
-             'studentPicture.picture as picture','broadsheet.ca1 as ca1','broadsheet.ca2 as ca2','broadsheet.exam as exam',
+             'studentpicture.picture as picture','broadsheet.ca1 as ca1','broadsheet.ca2 as ca2','broadsheet.exam as exam',
              'broadsheet.total  as total','broadsheet.grade as grade', 'schoolterm.term as term','schoolsession.session as session',
              'subject.subject as subject','subject.subject_code as subjectcode','schoolclass.schoolclass as schoolclass',
              'schoolarm.arm as arm','broadsheet.subjectpositionclass as position','broadsheet.remark as remark',
@@ -451,6 +451,7 @@ class MyScoreSheetController extends Controller
         $file =  $request->file('file');
         Excel::import(new ScoresheetImport(),$file );
         $this->subjectscoresheetpos($schoolclassid,$subjectclassid,$staffid,$termid,$sessionid);
+        
         return redirect()->back()->with('success', 'Batch File Imported  Successfully');
 
     }

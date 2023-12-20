@@ -16,6 +16,8 @@ use Maatwebsite\Excel\Concerns\Importable;
 use Illuminate\Validation\Rule;
 use Maatwebsite\Excel\Validators\Failure;
 
+use function PHPUnit\Framework\isEmpty;
+
 class ScoresheetImport implements ToModel, WithUpserts, WithUpsertColumns, WithStartRow, WithValidation
 {
 
@@ -248,12 +250,31 @@ class ScoresheetImport implements ToModel, WithUpserts, WithUpsertColumns, WithS
         $current = "Current";
         //class category model..
 
+        //check for null rows
+        $Broadsheetnulls = Broadsheet::where('subjectclassid',$subjectclassid)
+        ->where('broadsheet.staffid',$staffid)
+        ->where('broadsheet.termid',$termid)
+        ->where('broadsheet.session',$sessionid)
+        ->get(['broadsheet.studentId as sid']);
+
+        foreach($Broadsheetnulls as $bsn){
+            if(is_null($bsn->sid) || empty($bsn->sid)){
+                Broadsheet::where('subjectclassid',$subjectclassid)
+                ->where('broadsheet.staffid',$staffid)
+                ->where('broadsheet.termid',$termid)
+                ->where('broadsheet.session',$sessionid)
+                ->where('broadsheet.studentId',$bsn->sid)->delete();
+
+            }
+        }
+
+
         // echo $schoolclassid;
         $Broadsheets = Broadsheet::where('subjectclassid',$subjectclassid)
-        ->where('Broadsheet.staffid',$staffid)
-        ->where('Broadsheet.termid',$termid)
-        ->where('Broadsheet.session',$sessionid)
-        ->leftJoin('subjectclass', 'subjectclass.id','=','Broadsheet.subjectclassid')
+        ->where('broadsheet.staffid',$staffid)
+        ->where('broadsheet.termid',$termid)
+        ->where('broadsheet.session',$sessionid)
+        ->leftJoin('subjectclass', 'subjectclass.id','=','broadsheet.subjectclassid')
         ->leftJoin('schoolclass', 'schoolclass.id','=','subjectclass.schoolclassid')
         ->leftJoin('classcategories', 'classcategories.id','=','schoolclass.classcategoryid')
         ->leftJoin('subjectteacher','subjectteacher.id','=','subjectclass.subjectteacherid')
@@ -261,20 +282,20 @@ class ScoresheetImport implements ToModel, WithUpserts, WithUpsertColumns, WithS
         ->leftJoin('schoolterm', 'schoolterm.id','=','subjectteacher.termid')
         ->leftJoin('schoolsession', 'schoolsession.id','=','subjectteacher.sessionid')
         ->where('schoolsession.status','=',$current)
-        ->leftJoin('studentRegistration', 'studentRegistration.id','=','Broadsheet.studentId')
+        ->leftJoin('studentRegistration', 'studentRegistration.id','=','broadsheet.studentId')
         ->leftJoin('studentpicture','studentpicture.studentid','=','studentRegistration.id')
-        ->get(['Broadsheet.id as id','studentRegistration.admissionNO as admissionno',
+        ->get(['broadsheet.id as id','studentRegistration.admissionNO as admissionno',
             'studentRegistration.firstname as fname','studentRegistration.lastname as lname',
               'subject.subject as subject','subject.subject_code as subjectcode',
               'schoolclass.schoolclass as schoolclass','schoolclass.arm as arm',
               'schoolterm.term as term','schoolsession.session as session',
-              'subjectclass.id as subjectclid','Broadsheet.staffid as staffid',
-              'Broadsheet.termid as termid','Broadsheet.session as sessionid',
+              'subjectclass.id as subjectclid','broadsheet.staffid as staffid',
+              'broadsheet.termid as termid','broadsheet.session as sessionid',
               'classcategories.ca2score as ca2score','classcategories.ca1score as ca1score',
-              'classcategories.examscore as examscore','studentPicture.picture as picture'
-              ,'Broadsheet.ca1 as ca1','Broadsheet.ca2 as ca2',
-             'Broadsheet.exam as exam','Broadsheet.total  as total','Broadsheet.grade as grade',
-            'Broadsheet.subjectpositionclass as position','Broadsheet.remark as remark'])
+              'classcategories.examscore as examscore','studentpicture.picture as picture'
+              ,'broadsheet.ca1 as ca1','broadsheet.ca2 as ca2',
+             'broadsheet.exam as exam','broadsheet.total  as total','broadsheet.grade as grade',
+            'broadsheet.subjectpositionclass as position','broadsheet.remark as remark'])
               ->sortBy('admissionno');
 
             if($Broadsheets){
@@ -285,36 +306,36 @@ class ScoresheetImport implements ToModel, WithUpserts, WithUpsertColumns, WithS
 
             //get minimun score....
                 $classmin = Broadsheet::where('subjectclassid',$subjectclassid)
-                ->where('Broadsheet.staffid',$staffid)
-                ->where('Broadsheet.termid',$termid)
-                ->where('Broadsheet.session',$sessionid)
+                ->where('broadsheet.staffid',$staffid)
+                ->where('broadsheet.termid',$termid)
+                ->where('broadsheet.session',$sessionid)
                 ->min('total');
 
             // echo (float)$classmin;
 
 
                 Broadsheet::where('subjectclassid',$subjectclassid)
-                ->where('Broadsheet.staffid',$staffid)
-                ->where('Broadsheet.termid',$termid)
-                ->where('Broadsheet.session',$sessionid)
+                ->where('broadsheet.staffid',$staffid)
+                ->where('broadsheet.termid',$termid)
+                ->where('broadsheet.session',$sessionid)
                 ->update(array('cmin'=>$classmin));
                 //get maximun score....
                 $classmax = Broadsheet::where('subjectclassid',$subjectclassid)
-                ->where('Broadsheet.staffid',$staffid)
-                ->where('Broadsheet.termid',$termid)
-                ->where('Broadsheet.session',$sessionid)
+                ->where('broadsheet.staffid',$staffid)
+                ->where('broadsheet.termid',$termid)
+                ->where('broadsheet.session',$sessionid)
                 ->max('total');
                 Broadsheet::where('subjectclassid',$subjectclassid)
-                ->where('Broadsheet.staffid',$staffid)
-                ->where('Broadsheet.termid',$termid)
-                ->where('Broadsheet.session',$sessionid)
+                ->where('broadsheet.staffid',$staffid)
+                ->where('broadsheet.termid',$termid)
+                ->where('broadsheet.session',$sessionid)
                 ->update(array('cmax'=>$classmax));
                 //get average score...
                 $classavg = ($classmin + $classmax)/2;
                 Broadsheet::where('subjectclassid',$subjectclassid)
-                ->where('Broadsheet.staffid',$staffid)
-                ->where('Broadsheet.termid',$termid)
-                ->where('Broadsheet.session',$sessionid)
+                ->where('broadsheet.staffid',$staffid)
+                ->where('broadsheet.termid',$termid)
+                ->where('broadsheet.session',$sessionid)
                 ->update(array('avg'=>round($classavg, 1)));
                 //calculating position in subject per class...
                 $rank = 0;
@@ -324,9 +345,9 @@ class ScoresheetImport implements ToModel, WithUpserts, WithUpsertColumns, WithS
 
                 $classpos = Broadsheet::select("*")
                 ->where('subjectclassid',$subjectclassid)
-                ->where('Broadsheet.staffid',$staffid)
-                ->where('Broadsheet.termid',$termid)
-                ->where('Broadsheet.session',$sessionid)
+                ->where('broadsheet.staffid',$staffid)
+                ->where('broadsheet.termid',$termid)
+                ->where('broadsheet.session',$sessionid)
             // ->orderBy('studentId','DESC')
                 ->orderBy('total','DESC')
                 ->get();
@@ -361,10 +382,10 @@ class ScoresheetImport implements ToModel, WithUpserts, WithUpsertColumns, WithS
                     // echo $row->studentId." "."$row->total"." ".gettype(strval($rank_pos))." "."<br>";
 
                     Broadsheet::where('subjectclassid',$subjectclassid)
-                        ->where('Broadsheet.studentId',$studentId)
-                        ->where('Broadsheet.staffid',$staffid)
-                        ->where('Broadsheet.termid',$termid)
-                        ->where('Broadsheet.session',$sessionid)
+                        ->where('broadsheet.studentId',$studentId)
+                        ->where('broadsheet.staffid',$staffid)
+                        ->where('broadsheet.termid',$termid)
+                        ->where('broadsheet.session',$sessionid)
                         ->update(array('subjectpositionclass'=> $rank_pos));
 
                     }

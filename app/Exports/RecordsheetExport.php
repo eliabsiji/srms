@@ -64,7 +64,7 @@ class RecordsheetExport implements FromView, ShouldAutoSize, WithStyles
         'subject.subject as subject','subject.subject_code as subjectcode','schoolclass.schoolclass as schoolclass','schoolclass.arm as arm',
         'schoolterm.term as term','schoolsession.session as session','subjectclass.id as subjectclid','broadsheet.staffid as staffid',
         'broadsheet.termid as termid','broadsheet.session as sessionid','users.id as staffid','schoolclass.id as schoolclassid','subjectclass.id as subjectclassid',
-       'studentPicture.picture as picture','broadsheet.ca1 as ca1','broadsheet.ca2 as ca2','broadsheet.exam as exam','broadsheet.total  as total','broadsheet.grade as grade',
+       'studentpicture.picture as picture','broadsheet.ca1 as ca1','broadsheet.ca2 as ca2','broadsheet.exam as exam','broadsheet.total  as total','broadsheet.grade as grade',
       'broadsheet.subjectpositionclass as position','broadsheet.remark as remark'])->sortBy('admissionno');
 
 
