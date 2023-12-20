@@ -119,7 +119,7 @@ class StudentController extends Controller
         ->leftJoin('schoolsession','schoolsession.id','=','student_batch_upload.session')
         ->leftJoin('schoolterm','schoolterm.id','=','student_batch_upload.termid')
         ->leftJoin('schoolarm','schoolarm.id','=','schoolclass.arm')
-        ->orderBy('upload_date', 'asc')
+        ->orderBy('upload_date', 'desc')
        ->get(['student_batch_upload.id as id','student_batch_upload.title as title','schoolclass.schoolclass as schoolclass',
               'schoolterm.term as term','schoolsession.session as session','schoolarm.arm as arm',
               'student_batch_upload.status as status','student_batch_upload.updated_at as upload_date']);
