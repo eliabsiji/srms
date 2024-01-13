@@ -402,9 +402,7 @@ class MyScoreSheetController extends Controller
 
 
       ->get(['broadsheet.id as bid','subject.subject as subject','subject.subject_code as subjectcode','schoolclass.schoolclass as schoolclass','schoolarm.arm as arm',
-             'schoolterm.term as term','schoolsession.session as session','users.id as userid','users.name as staffname',
-
-           ])->sortBy('fname');
+             'schoolterm.term as term','schoolsession.session as session','users.id as userid','users.name as staffname' ])->sortBy('fname');
 
            foreach($Broadsheets as $r){
                $r->schoolclass;
@@ -451,7 +449,7 @@ class MyScoreSheetController extends Controller
         $file =  $request->file('file');
         Excel::import(new ScoresheetImport(),$file );
         $this->subjectscoresheetpos($schoolclassid,$subjectclassid,$staffid,$termid,$sessionid);
-        
+
         return redirect()->back()->with('success', 'Batch File Imported  Successfully');
 
     }
@@ -482,7 +480,7 @@ class MyScoreSheetController extends Controller
               'subject.subject as subject','subject.subject_code as subjectcode','schoolclass.schoolclass as schoolclass','schoolarm.arm as arm',
               'schoolterm.term as term','schoolsession.session as session','subjectclass.id as subjectclid','broadsheet.staffid as staffid',
               'broadsheet.termid as termid','broadsheet.session as sessionid',
-             'studentPicture.picture as picture','broadsheet.ca1 as ca1','broadsheet.ca2 as ca2','broadsheet.exam as exam',
+             'studentpicture.picture as picture','broadsheet.ca1 as ca1','broadsheet.ca2 as ca2','broadsheet.exam as exam',
              'broadsheet.total  as total','broadsheet.grade as grade',
             'broadsheet.subjectpositionclass as position','broadsheet.remark as remark'])->sortBy('admissionno');
 

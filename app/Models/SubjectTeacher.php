@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class SubjectTeacher extends Model
+class Subjectteacher extends Model
 {
     use HasFactory;
     protected $table = "subjectteacher";
@@ -13,10 +13,10 @@ class SubjectTeacher extends Model
 
     protected $fillable = [
         'userid',
-       'staffid',
-       'subjectid',
-       'termid',
-       'sessionid'
+        'staffid',
+        'subjectid',
+        'termid',
+        'sessionid'
 
     ];
 }
