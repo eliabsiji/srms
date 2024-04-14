@@ -90,6 +90,9 @@
        @if (Route::is('subjectscoresheet*'))
                @include('layouts.pages-assets.css.users-list-css')
        @endif
+       @if (Route::is('studentresults*'))
+               @include('layouts.pages-assets.css.users-list-css')
+       @endif
 
 
 
@@ -316,6 +319,9 @@
         @endif
         @if (Route::is('subjectscoresheet*'))
               @include('layouts.pages-assets.js.subjectscoresheet-list-js')
+        @endif
+        @if (Route::is('studentresults*'))
+            @include('layouts.pages-assets.js.subjectscoresheet-list-js')
         @endif
 
 
