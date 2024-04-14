@@ -257,7 +257,7 @@
        @endif
     <!--begin::Content-->
 
-    <?php use App\Models\subjectRegistrationStatus;?>
+    <?php use App\Models\SubjectRegistrationStatus;?>
     <div id="kt_account_settings_profile_details" class="collapse show">
 
   <!--begin::Card body-->
