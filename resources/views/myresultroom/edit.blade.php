@@ -80,8 +80,6 @@
                                     @else
                                         <option value="{{ $cteachers->userid }}">Select  </option>
                                     @endif
-
-
                                 @foreach ($teachers as $staffname => $name )
                                  <option value="{{$name->userid}}">{{ $name->name }} </option>
                                 @endforeach

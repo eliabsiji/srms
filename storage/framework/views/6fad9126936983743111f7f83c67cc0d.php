@@ -203,18 +203,18 @@ use Spatie\Permission\Models\Role;
                         // }
 
                         ?>
-                        <div class="fw-bold text-gray-600 mb-5">Total users with this role: <?php echo e($roles_num); ?></div>
-                        <!--end::Users-->
-                        <div class="d-flex flex-column text-gray-600">
-                         <!--begin::Permissions-->
-                        <?php $__currentLoopData = $role_permissions; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $role_permission): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <div class="fw-bold text-gray-600 mb-5">Total users with this role: <?php echo e($roles_num); ?></div>
+                            <!--end::Users-->
+                            <div class="d-flex flex-column text-gray-600">
+                            <!--begin::Permissions-->
+                            <?php $__currentLoopData = $role_permissions; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $role_permission): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 
-                        <div class="d-flex align-items-center py-2"><span class="bullet bg-primary me-3"></span> <?php echo e($role_permission); ?></div>
+                            <div class="d-flex align-items-center py-2"><span class="bullet bg-primary me-3"></span> <?php echo e($role_permission); ?></div>
 
-                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                         <div class='d-flex align-items-center py-2'><span class='bullet bg-primary me-3'></span> <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('role-list')): ?><a href="<?php echo e(route('roles.show',$role->id)); ?>" <em>...and more</a><?php endif; ?></em></div>
-                    </div>
-<!--end::Permissions-->
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                            <div class='d-flex align-items-center py-2'><span class='bullet bg-primary me-3'></span> <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('role-list')): ?><a href="<?php echo e(route('roles.show',$role->id)); ?>" <em>...and more</a><?php endif; ?></em></div>
+                            </div>
+                            <!--end::Permissions-->
 
                 
 

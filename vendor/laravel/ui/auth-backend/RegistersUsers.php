@@ -2,10 +2,13 @@
 
 namespace Illuminate\Foundation\Auth;
 
-use Illuminate\Auth\Events\Registered;
-use Illuminate\Http\JsonResponse;
+use App\Models\BioModel;
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
+use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Auth\Events\Registered;
+use Spatie\Permission\Models\Permission;
 
 trait RegistersUsers
 {
@@ -32,6 +35,21 @@ trait RegistersUsers
         $this->validator($request->all())->validate();
 
         event(new Registered($user = $this->create($request->all())));
+        BioModel::updateOrCreate(['user_id'=>$user->id],
+            ['firstname' =>'',
+            'lastname' => '',
+            'othernames' => '',
+            'phone' => '',
+            'address' => '',
+            'gender' =>'',
+            'maritalstatus' =>'',
+            'nationality' =>'',
+            'dob' => '']);
+            $role = Role::find(2);
+            $permissions = Permission::pluck('id', 'id')->all();
+            $role->syncPermissions($permissions);
+            $user->assignRole([$role->id]);
+
 
         $this->guard()->login($user);
 

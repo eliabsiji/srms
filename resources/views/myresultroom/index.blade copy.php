@@ -56,7 +56,6 @@
              <p>{{ \Session::get('danger') }}</p>
          </div>
      @endif
-
     </div>
     <div class="section-body mt-4">
         <div class="container-fluid">

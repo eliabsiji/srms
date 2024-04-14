@@ -451,10 +451,10 @@
                                 <input class="form-check-input" type="checkbox" value="1" />
                             </div>
                         </td>
-                        <td class="schoolhouseid">  <input type="hidden" id="tid"  value="<?php echo e($sc->id); ?>" /><?php echo e(++$i); ?></td>
-                        <td class="schoolhouse"><?php echo e($sc->house); ?> </td>
-                        <td class="housecolour"><?php echo e($sc->housecolour); ?></td>
-                        <td class="housemaster"><input type="hidden" id="housemaster"  value="<?php echo e($sc->name); ?>" /><?php echo e($sc->name); ?>
+                        <td class="schoolhouseid" style="color: rgb(51, 35, 200)">  <input type="hidden" id="tid"  value="<?php echo e($sc->id); ?>" /><?php echo e(++$i); ?></td>
+                        <td class="schoolhouse" style="color: rgb(51, 35, 200)"><?php echo e($sc->house); ?> </td>
+                        <td class="housecolour" style="color: rgb(51, 35, 200)"><?php echo e($sc->housecolour); ?></td>
+                        <td class="housemaster" style="color: rgb(51, 35, 200)"><input type="hidden" id="housemaster"  value="<?php echo e($sc->name); ?>" /><?php echo e($sc->name); ?>
 
 
                                         <!--begin::User details-->
@@ -464,8 +464,8 @@
 
 
                         </td>
-                        <td class="termid"><?php echo e($sc->term); ?></td>
-                        <td class="sessionid"><?php echo e($sc->session); ?></td>
+                        <td class="termid" style="color: rgb(51, 35, 200)"><?php echo e($sc->term); ?></td>
+                        <td class="sessionid" style="color: rgb(51, 35, 200)"><?php echo e($sc->session); ?></td>
                         <td ><?php echo e($sc->updated_at); ?> </td>
                         <td >
                             <a href="#" class="btn btn-light btn-active-light-primary btn-flex btn-center btn-sm" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">

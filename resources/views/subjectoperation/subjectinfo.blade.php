@@ -321,7 +321,7 @@
                             <td >{{ $sc->subjectcode }} </td>
                             <td >
                                 <?php
-                                                              $subRegStatuschk = subjectRegistrationStatus::where('studentid',$student)
+                                                              $subRegStatuschk = SubjectRegistrationStatus::where('studentid',$student)
 
                                                                 ->where('sessionid',$sc->sessionid)
                                                                 ->where('termid',$sc->termid)
@@ -331,7 +331,7 @@
                                                                 ->exists();
 
 
-                                                               $subRegStatus = subjectRegistrationStatus::where('studentid',$student)
+                                                               $subRegStatus = SubjectRegistrationStatus::where('studentid',$student)
 
                                                                             ->where('sessionid',$sc->sessionid)
                                                                             ->where('termid',$sc->termid)
